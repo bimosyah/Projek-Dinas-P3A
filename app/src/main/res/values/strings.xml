@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Aplikasi Pengaduan Kekerasan Perempuan dan Anak</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="title_activity_login">ActivityLogin</string>
+    <string name="no_telp">No Telp</string>
+    <string name="kata_sandi">Kata Sandi</string>
+    <string name="lupa_kata_sandi">Lupa Kata Sandi ?</string>
+    <string name="masuk">Masuk</string>
+    <string name="daftar_pengguna">Daftar Pengguna?</string>
+    <string name="nama">Nama</string>
+    <string name="alamat">Alamat</string>
+    <string name="daftar">Daftar</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="pengaduan">Pengaduan</string>
+    <string name="statistik">Statistik</string>
+    <string name="halaman_utama">Halaman Utama</string>
+    <string name="riwayat">Riwayat</string>
+    <string name="pengguna">Pengguna</string>
+</resources>

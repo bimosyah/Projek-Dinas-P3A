@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#E4017F</color>
+    <color name="colorPrimaryDark">#E4017F</color>
+    <color name="colorAccent">#E4017F</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorGradient1">#EE847E</color>
+    <color name="colorGradient2">#E4017F</color>
+    <color name="semi_transparent">#66000000</color>
+
+</resources>
