@@ -19,14 +19,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import syahputro.bimo.projek.dinas.p3a.R;
 import syahputro.bimo.projek.dinas.p3a.network.ApiClient;
 import syahputro.bimo.projek.dinas.p3a.network.ApiService;
-import syahputro.bimo.projek.dinas.p3a.network.response.ResponseRegister;
+import syahputro.bimo.projek.dinas.p3a.network.response.register.ResponseRegister;
 
 public class ActivityRegister extends AppCompatActivity {
     private static final int REQUEST_LOCATION = 1;
