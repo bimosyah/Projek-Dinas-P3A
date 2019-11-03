@@ -1,3 +1,5 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_view_size_head">25sp</dimen>
+    <dimen name="padding_fragment">16dp</dimen>
 </resources>
