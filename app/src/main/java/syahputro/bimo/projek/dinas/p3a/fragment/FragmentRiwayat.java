@@ -26,6 +26,7 @@ public class FragmentRiwayat extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        getActivity().setTitle("Riwayat Pengaduan");
         return inflater.inflate(R.layout.fragment_riwayat, container, false);
     }
 
