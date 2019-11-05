@@ -9,6 +9,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
+import android.view.Menu;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -26,6 +27,12 @@ public class ActivityMain extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_setting, menu);
+        return true;
     }
 
 }
