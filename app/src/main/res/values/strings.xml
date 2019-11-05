@@ -18,4 +18,8 @@
     <string name="halaman_utama">Halaman Utama</string>
     <string name="riwayat">Riwayat</string>
     <string name="pengguna">Pengguna</string>
+    <string name="belum_direspon">Belum Direspon</string>
+    <string name="sudah_teratasi">Sudah Teratasi</string>
+    <string name="tidak_teratasi">Tidak Teratasi</string>
+    <string name="tidak_bisa_dihubungi">Tidak Bisa Dihubungi</string>
 </resources>
