@@ -1,6 +1,8 @@
 package syahputro.bimo.projek.dinas.p3a.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,29 +39,29 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.Holder>{
         DataRiwayat data = list.get(position);
         holder.tvTanggal.setText(data.getTanggal());
         String status = "";
-        int color = 0;
+        String color = "";
 
         switch (data.getId_status()) {
             case "0":
                 status = context.getResources().getString(R.string.belum_direspon);
-                color = context.getColor(R.color.belum_direspon);
+                color = context.getResources().getString(R.string.color_belum_direspon);
                 break;
             case "1":
                 status = context.getResources().getString(R.string.sudah_teratasi);
-                color = context.getColor(R.color.sudah_teratasi);
+                color = context.getResources().getString(R.string.color_sudah_teratasi);
                 break;
             case "2":
                 status = context.getResources().getString(R.string.tidak_teratasi);
-                color = context.getColor(R.color.tidak_teratasi);
+                color = context.getResources().getString(R.string.color_tidak_teratasi);
                 break;
             case "3":
                 status = context.getResources().getString(R.string.tidak_bisa_dihubungi);
-                color = context.getColor(R.color.tidak_bisa_dihubungi);
+                color = context.getResources().getString(R.string.color_tidak_bisa_dihubungi);
                 break;
         }
 
         holder.tvStatus.setText(status);
-        holder.tvStatus.setBackgroundColor(color);
+        holder.tvStatus.getBackground().setColorFilter(Color.parseColor(color), PorterDuff.Mode.SRC_ATOP);
     }
 
     @Override

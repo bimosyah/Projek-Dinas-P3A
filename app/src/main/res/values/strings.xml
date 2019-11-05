@@ -22,4 +22,9 @@
     <string name="sudah_teratasi">Sudah Teratasi</string>
     <string name="tidak_teratasi">Tidak Teratasi</string>
     <string name="tidak_bisa_dihubungi">Tidak Bisa Dihubungi</string>
+
+    <string name="color_belum_direspon">#FFEB3B</string>
+    <string name="color_sudah_teratasi">#4CAF50</string>
+    <string name="color_tidak_teratasi">#F44336</string>
+    <string name="color_tidak_bisa_dihubungi">#777070</string>
 </resources>
