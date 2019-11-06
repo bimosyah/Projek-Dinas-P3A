@@ -39,7 +39,7 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.Holder>{
         DataRiwayat data = list.get(position);
         holder.tvTanggal.setText(data.getTanggal());
         String status = "";
-        String color = "";
+        String color = context.getResources().getString(R.string.color_belum_direspon);
 
         switch (data.getId_status()) {
             case "0":
