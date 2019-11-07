@@ -71,7 +71,10 @@ public class FragmentHalamanUtama extends Fragment {
         recyclerView_mid.setAdapter(adapter_mid);
 
         recyclerView_top.setNestedScrollingEnabled(false);
+        recyclerView_top.setHasFixedSize(false);
+
         recyclerView_mid.setNestedScrollingEnabled(false);
+        recyclerView_mid.setHasFixedSize(false);
     }
 
     private void addData() {
