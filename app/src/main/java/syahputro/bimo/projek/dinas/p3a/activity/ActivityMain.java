@@ -1,9 +1,11 @@
 package syahputro.bimo.projek.dinas.p3a.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +19,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import syahputro.bimo.projek.dinas.p3a.R;
 
 public class ActivityMain extends AppCompatActivity {
+    boolean doubleBackToExitPressedOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,5 +45,24 @@ public class ActivityMain extends AppCompatActivity {
                 Preference.clearLoggedInUser(getApplicationContext());
         }
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            finish();
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 }
