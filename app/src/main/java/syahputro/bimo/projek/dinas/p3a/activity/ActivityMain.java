@@ -2,7 +2,6 @@ package syahputro.bimo.projek.dinas.p3a.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -12,11 +11,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
-import syahputro.bimo.projek.dinas.p3a.utils.Preference;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-
 import syahputro.bimo.projek.dinas.p3a.R;
+import syahputro.bimo.projek.dinas.p3a.utils.Preference;
 
 public class ActivityMain extends AppCompatActivity {
     boolean doubleBackToExitPressedOnce = false;
@@ -39,10 +38,9 @@ public class ActivityMain extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_logout:
-                Preference.clearLoggedInUser(getApplicationContext());
-                finish();
+        if (item.getItemId() == R.id.action_logout) {
+            Preference.clearLoggedInUser(getApplicationContext());
+            finish();
         }
         return true;
     }
@@ -61,7 +59,7 @@ public class ActivityMain extends AppCompatActivity {
 
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
             }
         }, 2000);
     }

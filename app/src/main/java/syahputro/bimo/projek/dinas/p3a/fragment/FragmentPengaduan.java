@@ -122,6 +122,7 @@ public class FragmentPengaduan extends Fragment {
             getLocation();
         }
 
+        //id kategori belum dinamis
         Call<ResponsePengaduan> pengaduan = service.pengaduan(Integer.parseInt(id_user), 1,
                 et_pengaduan.getText().toString(), latitude, longitude);
         pengaduan.enqueue(new Callback<ResponsePengaduan>() {

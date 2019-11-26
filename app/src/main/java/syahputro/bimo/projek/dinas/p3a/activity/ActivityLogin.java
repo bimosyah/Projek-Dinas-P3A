@@ -45,37 +45,41 @@ public class ActivityLogin extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Call<ResponseLogin> login = service.login(etNoTelp.getText().toString(), etPassword.getText().toString());
-                login.enqueue(new Callback<ResponseLogin>() {
-                    @Override
-                    public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
-                        if (response.isSuccessful()) {
-                            if (response.body() != null) {
-                                if (response.body().getStatus().equals("0")) {
-                                    Preference.setIdUser(getApplicationContext(), response.body().getData().getId());
-                                    Preference.setLoggedInStatus(getApplicationContext(), true);
-                                    startActivity(new Intent(ActivityLogin.this, ActivityMain.class));
-                                } else if (response.body().getStatus().equals("1")) {
-                                    Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseLogin> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(), "error " + t.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
+                login();
             }
         });
     }
 
-    public void init() {
+    private void init() {
         tvDaftar = findViewById(R.id.tvDaftar);
         btn_login = findViewById(R.id.button);
         etNoTelp = findViewById(R.id.etNoTelp);
         etPassword = findViewById(R.id.etPassword);
+    }
+
+    private void login() {
+        Call<ResponseLogin> login = service.login(etNoTelp.getText().toString(), etPassword.getText().toString());
+        login.enqueue(new Callback<ResponseLogin>() {
+            @Override
+            public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        if (response.body().getStatus().equals("0")) {
+                            Preference.setIdUser(getApplicationContext(), response.body().getData().getId());
+                            Preference.setLoggedInStatus(getApplicationContext(), true);
+                            startActivity(new Intent(ActivityLogin.this, ActivityMain.class));
+                        } else if (response.body().getStatus().equals("1")) {
+                            Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseLogin> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "error " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
