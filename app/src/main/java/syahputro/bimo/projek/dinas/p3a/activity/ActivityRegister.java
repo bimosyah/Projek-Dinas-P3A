@@ -19,6 +19,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.kusu.loadingbutton.LoadingButton;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,6 +36,7 @@ public class ActivityRegister extends AppCompatActivity {
     String longitude, latitude;
     EditText etNama,etPassword,etNoTelp,etAlamat,etTanggalLahir;
     ApiService service;
+    LoadingButton loadingButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +49,10 @@ public class ActivityRegister extends AppCompatActivity {
         ActivityCompat.requestPermissions(this, new String[]
                 {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
 
-        btn_register.setOnClickListener(new View.OnClickListener() {
+        loadingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                loadingButton.showLoading();
                 locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
                 if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                     onGPS();
@@ -70,6 +74,7 @@ public class ActivityRegister extends AppCompatActivity {
                     public void onResponse(Call<ResponseRegister> call, Response<ResponseRegister> response) {
                         if (response.isSuccessful()){ // check response suksess or no
                             if (response.body() != null) {
+                                loadingButton.hideLoading();
                                 Toast.makeText(getApplicationContext(),response.body().getMessage(),Toast.LENGTH_LONG).show();
                             }
                         }
@@ -77,6 +82,7 @@ public class ActivityRegister extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<ResponseRegister> call, Throwable t) {
+                        loadingButton.hideLoading();
                         Toast.makeText(getApplicationContext(),"error " + t.getMessage(),Toast.LENGTH_LONG).show();
                     }
                 });
@@ -108,6 +114,7 @@ public class ActivityRegister extends AppCompatActivity {
         etNoTelp= findViewById(R.id.etNoTelp);
         etPassword= findViewById(R.id.etPassword);
         etTanggalLahir= findViewById(R.id.etTanggalLahir);
+        loadingButton = findViewById(R.id.loadingButton);
 
     }
 

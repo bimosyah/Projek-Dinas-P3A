@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -38,6 +37,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="28dp"
             android:background="@drawable/layout_form"
+            android:maxLines="1"
             android:padding="14dp"
             app:layout_constraintStart_toStartOf="@+id/textView4"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -60,6 +60,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="28dp"
             android:background="@drawable/layout_form"
+            android:maxLines="1"
             android:padding="14dp"
             app:layout_constraintStart_toStartOf="@+id/textView5"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -82,6 +83,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="28dp"
             android:background="@drawable/layout_form"
+            android:maxLines="1"
             android:padding="14dp"
             app:layout_constraintStart_toStartOf="@+id/textView6"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -102,9 +104,10 @@
             android:id="@+id/etTanggalLahir"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="contoh : 2019/04/14"
             android:layout_marginTop="28dp"
             android:background="@drawable/layout_form"
+            android:hint="contoh : 2019/04/14"
+            android:maxLines="1"
             android:padding="14dp"
             app:layout_constraintStart_toStartOf="@+id/textView7"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
@@ -127,6 +130,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="28dp"
             android:background="@drawable/layout_form"
+            android:maxLines="1"
             android:padding="14dp"
             app:layout_constraintStart_toStartOf="@+id/textView8"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
@@ -141,7 +145,23 @@
             android:focusable="true"
             android:text="@string/daftar"
             android:textColor="@color/colorWhite"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="@+id/etPassword"
             app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+
+        <com.kusu.loadingbutton.LoadingButton
+            android:id="@+id/loadingButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/layout_button"
+            android:text="@string/masuk"
+            android:textColor="@color/white"
+            app:lb_buttonColor="@color/colorPrimary"
+            app:lb_isCircular="true"
+            app:lb_isShadowEnable="false"
+            app:layout_constraintStart_toStartOf="@+id/etPassword"
+            app:layout_constraintTop_toBottomOf="@+id/etPassword"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
