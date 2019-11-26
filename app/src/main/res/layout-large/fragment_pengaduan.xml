@@ -46,13 +46,15 @@
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonSubmit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:background="@drawable/layout_button"
         android:text="Kirim"
         android:textColor="@color/colorWhite"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
         app:layout_constraintStart_toStartOf="@+id/etPengaduan"
         app:layout_constraintTop_toBottomOf="@+id/etPengaduan" />
 

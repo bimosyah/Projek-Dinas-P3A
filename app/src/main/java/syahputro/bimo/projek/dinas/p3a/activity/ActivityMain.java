@@ -29,7 +29,6 @@ public class ActivityMain extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
-        Log.d("id_user",Preference.getIdUser(getApplicationContext()));
     }
 
     @Override
