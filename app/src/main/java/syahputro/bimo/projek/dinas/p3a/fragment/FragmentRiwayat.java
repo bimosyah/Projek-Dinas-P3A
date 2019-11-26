@@ -2,10 +2,10 @@ package syahputro.bimo.projek.dinas.p3a.fragment;
 
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -35,6 +35,7 @@ public class FragmentRiwayat extends Fragment {
     private AdapterRiwayat adapter;
     private ApiService service;
     private View view;
+    private TextView tv_riwayat;
 
     public FragmentRiwayat() {
         // Required empty public constructor
@@ -69,6 +70,9 @@ public class FragmentRiwayat extends Fragment {
                             recyclerView.setLayoutManager(mLayoutManager);
                             recyclerView.setItemAnimator(new DefaultItemAnimator());
                             recyclerView.setAdapter(adapter);
+                        } else {
+                            recyclerView.setVisibility(View.GONE);
+                            tv_riwayat.setVisibility(View.VISIBLE);
                         }
                     }
                 }
@@ -85,5 +89,6 @@ public class FragmentRiwayat extends Fragment {
         recyclerView = view.findViewById(R.id.rvRiwayat);
         service = ApiClient.getClient().create(ApiService.class);
         list = new ArrayList<>();
+        tv_riwayat = view.findViewById(R.id.tv_riwayat);
     }
 }
