@@ -46,7 +46,7 @@ public class FragmentPengaduan extends Fragment {
     private Button btn_submit;
     private Spinner spinner_kategori;
     private View view;
-    private final ArrayList<String> tes = new ArrayList<String>();
+    private final ArrayList<String> array_kategori = new ArrayList<String>();
     private EditText et_pengaduan;
     LocationManager locationManager;
     String longitude, latitude;
@@ -72,7 +72,6 @@ public class FragmentPengaduan extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         init();
         loadKategori();
-        setSpinner();
 
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,8 +91,9 @@ public class FragmentPengaduan extends Fragment {
                         if (response.body().getStatus().equals("0")) {
                             List<Data> data_kategori = response.body().getData();
                             for (Data data : data_kategori) {
-                                tes.add(data.getNamaKategori());
+                                array_kategori.add(data.getNamaKategori());
                             }
+                            setSpinner();
                         }
                     }
                 }
@@ -147,11 +147,7 @@ public class FragmentPengaduan extends Fragment {
     }
 
     private void setSpinner() {
-        String[] arraySpinner = new String[]{
-                "Pilih Kategori", "KDRT", "ANAK", "WANITA"
-        };
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, tes);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, array_kategori);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_kategori.setAdapter(adapter);
 

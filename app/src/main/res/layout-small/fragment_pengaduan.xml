@@ -40,6 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:hint="aduan"
+        android:lines="4"
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView10"

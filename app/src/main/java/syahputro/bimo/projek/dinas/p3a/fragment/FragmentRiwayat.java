@@ -64,9 +64,6 @@ public class FragmentRiwayat extends Fragment {
                     if (response.body() != null) {
                         if (response.body().getStatus().equals("0")) {
                             List<Data> data_kategori = response.body().getData();
-                            Log.d("Retrofit Get", "Jumlah data Kontak: " +
-                                    String.valueOf(data_kategori.size()));
-
                             adapter = new AdapterRiwayat(data_kategori, getContext());
                             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
                             recyclerView.setLayoutManager(mLayoutManager);

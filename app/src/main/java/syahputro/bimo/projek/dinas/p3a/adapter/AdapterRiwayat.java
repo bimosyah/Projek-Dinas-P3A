@@ -38,27 +38,25 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.Holder>{
     public void onBindViewHolder(@NonNull AdapterRiwayat.Holder holder, int position) {
         Data data = list.get(position);
         holder.tvTanggal.setText(data.getWaktuLapor());
-        String status = "";
+        String status = data.getStatus();
         String color = context.getResources().getString(R.string.color_belum_direspon);
 
         switch (data.getIdPengaduan()) {
             case "0":
-                status = data.getStatus();
                 color = context.getResources().getString(R.string.color_belum_direspon);
                 break;
             case "1":
-                status = data.getStatus();
                 color = context.getResources().getString(R.string.color_sudah_teratasi);
                 break;
             case "2":
-                status = data.getStatus();
                 color = context.getResources().getString(R.string.color_tidak_teratasi);
                 break;
             case "3":
-                status = data.getStatus();
                 color = context.getResources().getString(R.string.color_tidak_bisa_dihubungi);
                 break;
         }
+
+
 
         holder.tvStatus.setText(status);
         holder.tvStatus.getBackground().setColorFilter(Color.parseColor(color), PorterDuff.Mode.SRC_ATOP);
