@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.kusu.loadingbutton.LoadingButton;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,6 +27,7 @@ public class ActivityLogin extends AppCompatActivity {
     Button btn_login;
     EditText etNoTelp, etPassword;
     ApiService service;
+    LoadingButton loadingButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,15 @@ public class ActivityLogin extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                loadingButton.showLoading();
+                login();
+            }
+        });
+
+        loadingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadingButton.showLoading();
                 login();
             }
         });
@@ -55,6 +67,7 @@ public class ActivityLogin extends AppCompatActivity {
         btn_login = findViewById(R.id.button);
         etNoTelp = findViewById(R.id.etNoTelp);
         etPassword = findViewById(R.id.etPassword);
+        loadingButton = findViewById(R.id.loadingButton);
     }
 
     private void login() {
@@ -67,6 +80,7 @@ public class ActivityLogin extends AppCompatActivity {
                         if (response.body().getStatus().equals("0")) {
                             Preference.setIdUser(getApplicationContext(), response.body().getData().getId());
                             Preference.setLoggedInStatus(getApplicationContext(), true);
+                            loadingButton.hideLoading();
                             startActivity(new Intent(ActivityLogin.this, ActivityMain.class));
                         } else if (response.body().getStatus().equals("1")) {
                             Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();
@@ -77,6 +91,7 @@ public class ActivityLogin extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseLogin> call, Throwable t) {
+                loadingButton.hideLoading();
                 Toast.makeText(getApplicationContext(), "error " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
