@@ -14,13 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import syahputro.bimo.projek.dinas.p3a.R;
-import syahputro.bimo.projek.dinas.p3a.model_temp.DataRiwayat;
+import syahputro.bimo.projek.dinas.p3a.network.response.riwayat.Data;
 
 public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.Holder>{
-    public List<DataRiwayat> list;
+    public List<Data> list;
     public Context context;
 
-    public AdapterRiwayat(List<DataRiwayat> list, Context context) {
+    public AdapterRiwayat(List<Data> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -36,26 +36,26 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.Holder>{
 
     @Override
     public void onBindViewHolder(@NonNull AdapterRiwayat.Holder holder, int position) {
-        DataRiwayat data = list.get(position);
-        holder.tvTanggal.setText(data.getTanggal());
+        Data data = list.get(position);
+        holder.tvTanggal.setText(data.getWaktuLapor());
         String status = "";
         String color = context.getResources().getString(R.string.color_belum_direspon);
 
-        switch (data.getId_status()) {
+        switch (data.getIdPengaduan()) {
             case "0":
-                status = context.getResources().getString(R.string.belum_direspon);
+                status = data.getStatus();
                 color = context.getResources().getString(R.string.color_belum_direspon);
                 break;
             case "1":
-                status = context.getResources().getString(R.string.sudah_teratasi);
+                status = data.getStatus();
                 color = context.getResources().getString(R.string.color_sudah_teratasi);
                 break;
             case "2":
-                status = context.getResources().getString(R.string.tidak_teratasi);
+                status = data.getStatus();
                 color = context.getResources().getString(R.string.color_tidak_teratasi);
                 break;
             case "3":
-                status = context.getResources().getString(R.string.tidak_bisa_dihubungi);
+                status = data.getStatus();
                 color = context.getResources().getString(R.string.color_tidak_bisa_dihubungi);
                 break;
         }

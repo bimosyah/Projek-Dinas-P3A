@@ -12,7 +12,7 @@ public class ResponseRiwayat {
     @SerializedName("total")
     private Integer total;
     @SerializedName("data")
-    private List<Data> data = null;
+    private List<Data> data;
 
     public String getStatus() {
         return status;
