@@ -84,6 +84,7 @@
                     android:layout_marginTop="16dp"
                     android:background="@drawable/layout_button"
                     android:clickable="true"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
                     android:focusable="true"
                     android:text="@string/masuk"
                     android:textColor="@color/colorWhite" />

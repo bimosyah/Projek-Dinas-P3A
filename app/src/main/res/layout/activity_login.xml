@@ -84,7 +84,9 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:text="@string/masuk"
-                    android:textColor="@color/colorWhite" />
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:textColor="@color/colorWhite"
+                    />
 
                 <TextView
                     android:id="@+id/tvDaftar"

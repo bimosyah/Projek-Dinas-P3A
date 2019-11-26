@@ -43,6 +43,7 @@ public class ActivityMain extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_logout:
                 Preference.clearLoggedInUser(getApplicationContext());
+                finish();
         }
         return true;
     }

@@ -8,6 +8,11 @@ public class Data {
     @SerializedName("nama_kategori")
     private String namaKategori;
 
+    public Data(String idKategori, String namaKategori) {
+        this.idKategori = idKategori;
+        this.namaKategori = namaKategori;
+    }
+
     public String getIdKategori() {
         return idKategori;
     }
