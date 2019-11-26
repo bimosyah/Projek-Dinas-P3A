@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="40dp">
 
     <Spinner
-        android:layout_marginTop="10dp"
         android:id="@+id/spinnerKategori"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
@@ -40,23 +39,38 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:hint="aduan"
-        android:lines="4"
         android:inputType="textMultiLine"
+        android:lines="4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView10"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <Button
+        android:visibility="gone"
         android:id="@+id/buttonSubmit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:background="@drawable/layout_button"
-        android:text="Kirim"
-        android:textColor="@color/colorWhite"
         android:clickable="true"
         android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:text="Kirim"
+        android:textColor="@color/colorWhite"
         app:layout_constraintStart_toStartOf="@+id/etPengaduan"
         app:layout_constraintTop_toBottomOf="@+id/etPengaduan" />
+
+    <com.kusu.loadingbutton.LoadingButton
+        android:id="@+id/loadingButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/layout_button"
+        android:text="Kirim"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/etPengaduan"
+        app:layout_constraintTop_toBottomOf="@+id/etPengaduan"
+        app:lb_buttonColor="@color/colorPrimary"
+        app:lb_isCircular="true"
+        app:lb_isShadowEnable="false" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

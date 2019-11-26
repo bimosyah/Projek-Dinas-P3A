@@ -26,6 +26,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import com.kusu.loadingbutton.LoadingButton;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +53,7 @@ public class FragmentPengaduan extends Fragment {
     LocationManager locationManager;
     String longitude, latitude;
     private static final int REQUEST_LOCATION = 1;
+    LoadingButton loadingButton;
 
 
     public FragmentPengaduan() {
@@ -73,9 +76,10 @@ public class FragmentPengaduan extends Fragment {
         init();
         loadKategori();
 
-        btn_submit.setOnClickListener(new View.OnClickListener() {
+        loadingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                loadingButton.showLoading();
                 savePengaduan();
             }
         });
@@ -111,6 +115,7 @@ public class FragmentPengaduan extends Fragment {
         spinner_kategori = view.findViewById(R.id.spinnerKategori);
         btn_submit = view.findViewById(R.id.buttonSubmit);
         et_pengaduan = view.findViewById(R.id.etPengaduan);
+        loadingButton = view.findViewById(R.id.loadingButton);
     }
 
     private void savePengaduan() {
@@ -131,8 +136,10 @@ public class FragmentPengaduan extends Fragment {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
                         if (response.body().getStatus().equals("0")) {
+                            loadingButton.hideLoading();
                             Toast.makeText(getActivity(), "Data Tersimpan", Toast.LENGTH_LONG).show();
                         } else if (response.body().getStatus().equals("1")) {
+                            loadingButton.hideLoading();
                             Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_LONG).show();
                         }
                     }
@@ -141,7 +148,8 @@ public class FragmentPengaduan extends Fragment {
 
             @Override
             public void onFailure(Call<ResponsePengaduan> call, Throwable t) {
-
+                loadingButton.hideLoading();
+                Toast.makeText(getActivity(), "error " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
