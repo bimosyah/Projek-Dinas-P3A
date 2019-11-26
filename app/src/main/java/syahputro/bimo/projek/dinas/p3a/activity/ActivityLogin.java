@@ -45,14 +45,6 @@ public class ActivityLogin extends AppCompatActivity {
             }
         });
 
-        btn_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loadingButton.showLoading();
-                login();
-            }
-        });
-
         loadingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,6 +75,7 @@ public class ActivityLogin extends AppCompatActivity {
                             loadingButton.hideLoading();
                             startActivity(new Intent(ActivityLogin.this, ActivityMain.class));
                         } else if (response.body().getStatus().equals("1")) {
+                            loadingButton.hideLoading();
                             Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();
                         }
                     }

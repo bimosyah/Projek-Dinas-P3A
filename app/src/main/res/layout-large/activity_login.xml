@@ -96,6 +96,7 @@
                     android:id="@+id/loadingButton"
                     app:lb_buttonColor="@color/colorPrimary"
                     app:lb_isCircular="true"
+                    app:lb_isShadowEnable="false"
                     android:background="@drawable/layout_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
