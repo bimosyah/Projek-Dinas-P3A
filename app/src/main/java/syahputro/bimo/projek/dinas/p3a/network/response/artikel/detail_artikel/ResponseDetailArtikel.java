@@ -7,7 +7,7 @@ public class ResponseDetailArtikel{
 	@SerializedName("total")
 	private int total;
 
-	@SerializedName("data")
+	@SerializedName("articles")
 	private Data data;
 
 	@SerializedName("status")

@@ -1,8 +1,11 @@
 package syahputro.bimo.projek.dinas.p3a.network.response.artikel.list_slider;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class Data {
+public class Data implements Parcelable {
 
 	@SerializedName("date")
 	private String date;
@@ -80,4 +83,46 @@ public class Data {
 	public String getContent(){
 		return content;
 	}
+
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(this.date);
+		dest.writeString(this.image);
+		dest.writeString(this.categoryId);
+		dest.writeString(this.postCategory);
+		dest.writeString(this.id);
+		dest.writeString(this.title);
+		dest.writeString(this.content);
+	}
+
+	public Data() {
+	}
+
+	protected Data(Parcel in) {
+		this.date = in.readString();
+		this.image = in.readString();
+		this.categoryId = in.readString();
+		this.postCategory = in.readString();
+		this.id = in.readString();
+		this.title = in.readString();
+		this.content = in.readString();
+	}
+
+	public static final Parcelable.Creator<Data> CREATOR = new Parcelable.Creator<Data>() {
+		@Override
+		public Data createFromParcel(Parcel source) {
+			return new Data(source);
+		}
+
+		@Override
+		public Data[] newArray(int size) {
+			return new Data[size];
+		}
+	};
 }

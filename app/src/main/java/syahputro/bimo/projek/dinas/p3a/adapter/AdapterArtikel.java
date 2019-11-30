@@ -1,6 +1,7 @@
 package syahputro.bimo.projek.dinas.p3a.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import syahputro.bimo.projek.dinas.p3a.R;
+import syahputro.bimo.projek.dinas.p3a.activity.ActivityArticleDetail;
 import syahputro.bimo.projek.dinas.p3a.network.response.artikel.list_slider.Data;
 
 public class AdapterArtikel extends RecyclerView.Adapter<AdapterArtikel.Holder> {
@@ -36,12 +38,21 @@ public class AdapterArtikel extends RecyclerView.Adapter<AdapterArtikel.Holder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterArtikel.Holder holder, int position) {
-        Data data = list.get(position);
+    public void onBindViewHolder(@NonNull final AdapterArtikel.Holder holder, int position) {
+        final Data data = list.get(position);
         holder.tv_halaman_utama_artikel_top.setText(data.getTitle());
         Glide.with(context).
                 load(data.getImage()).
                 into(holder.iv_halaman_utama_artikel_top);
+
+        holder.iv_halaman_utama_artikel_top.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ActivityArticleDetail.class);
+                intent.putExtra("id_artikel",data.getId());
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

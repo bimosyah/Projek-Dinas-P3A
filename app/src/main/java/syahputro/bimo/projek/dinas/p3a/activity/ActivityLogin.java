@@ -45,6 +45,10 @@ public class ActivityLogin extends AppCompatActivity {
             }
         });
 
+        if (Preference.getLoggedInStatus(this)){
+            startActivity(new Intent(ActivityLogin.this, ActivityMain.class));
+        }
+
         loadingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
