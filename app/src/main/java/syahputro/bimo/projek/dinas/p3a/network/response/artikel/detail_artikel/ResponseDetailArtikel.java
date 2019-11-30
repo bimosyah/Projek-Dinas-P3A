@@ -1,4 +1,4 @@
-package syahputro.bimo.projek.dinas.p3a.network.response.artikel;
+package syahputro.bimo.projek.dinas.p3a.network.response.artikel.detail_artikel;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -7,8 +7,8 @@ public class ResponseDetailArtikel{
 	@SerializedName("total")
 	private int total;
 
-	@SerializedName("articles")
-	private Articles articles;
+	@SerializedName("data")
+	private Data data;
 
 	@SerializedName("status")
 	private boolean status;
@@ -21,12 +21,12 @@ public class ResponseDetailArtikel{
 		return total;
 	}
 
-	public void setArticles(Articles articles){
-		this.articles = articles;
+	public void setData(Data data){
+		this.data = data;
 	}
 
-	public Articles getArticles(){
-		return articles;
+	public Data getData(){
+		return data;
 	}
 
 	public void setStatus(boolean status){

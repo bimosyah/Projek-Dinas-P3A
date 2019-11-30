@@ -1,8 +1,8 @@
-package syahputro.bimo.projek.dinas.p3a.network.response.artikel;
+package syahputro.bimo.projek.dinas.p3a.network.response.artikel.detail_artikel;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Articles{
+public class Data {
 
 	@SerializedName("date")
 	private String date;
