@@ -12,14 +12,14 @@
             android:id="@+id/rv_halaman_utama_artikel_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" />
+            android:orientation="horizontal"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_halaman_utama_artikel_mid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="250dp"
-            android:orientation="horizontal" />
+            tools:listitem="@layout/item_halaman_utama_artikel_middle"/>
 
     </FrameLayout>
 </androidx.core.widget.NestedScrollView>

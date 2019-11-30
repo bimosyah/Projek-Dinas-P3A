@@ -7,7 +7,7 @@
 
     <ImageView
         android:id="@+id/iv_halaman_utama_artikel_mid"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
@@ -22,7 +22,7 @@
         android:layout_marginStart="20dp"
         android:text="Judul Berita"
         android:textColor="@color/colorBlack"
-        android:textSize="25sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/iv_halaman_utama_artikel_mid"
         app:layout_constraintTop_toTopOf="parent" />
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:text="2019/10/10"
         android:textColor="@color/colorAccent"
-        android:textSize="15sp"
+        android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/tv_halaman_utama_artikel_mid_judul"
         app:layout_constraintTop_toBottomOf="@+id/tv_halaman_utama_artikel_mid_judul" />

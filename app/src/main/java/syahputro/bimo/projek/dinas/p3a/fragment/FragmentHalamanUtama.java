@@ -22,8 +22,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import syahputro.bimo.projek.dinas.p3a.R;
-import syahputro.bimo.projek.dinas.p3a.adapter.AdapterArtikel;
-import syahputro.bimo.projek.dinas.p3a.adapter.AdapterArtikel2;
+import syahputro.bimo.projek.dinas.p3a.adapter.AdapterArtikelBanner;
+import syahputro.bimo.projek.dinas.p3a.adapter.AdapterArtikelMid;
 import syahputro.bimo.projek.dinas.p3a.model_temp.DataArtikel;
 import syahputro.bimo.projek.dinas.p3a.network.ApiClient;
 import syahputro.bimo.projek.dinas.p3a.network.ApiService;
@@ -37,8 +37,8 @@ import syahputro.bimo.projek.dinas.p3a.utils.SnapHelperOneByOne;
 public class FragmentHalamanUtama extends Fragment {
     public List<DataArtikel> list;
     private RecyclerView recyclerView_top, recyclerView_mid;
-    private AdapterArtikel adapter_top;
-    private AdapterArtikel2 adapter_mid;
+    private AdapterArtikelBanner adapter_top;
+    private AdapterArtikelMid adapter_mid;
     private ApiService service;
     private View view;
     public FragmentHalamanUtama() {
@@ -65,7 +65,7 @@ public class FragmentHalamanUtama extends Fragment {
         addData();
         loadData();
 //        //artikel atas
-//        adapter_top = new AdapterArtikel(list, getContext());
+//        adapter_top = new AdapterArtikelBanner(list, getContext());
 //        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(),
 //                LinearLayoutManager.HORIZONTAL, false);
 //        recyclerView_top.setLayoutManager(mLayoutManager);
@@ -74,7 +74,7 @@ public class FragmentHalamanUtama extends Fragment {
 
 
         //artikel tengah
-        adapter_mid = new AdapterArtikel2(list, getContext());
+        adapter_mid = new AdapterArtikelMid(list, getContext());
         RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getContext());
         recyclerView_mid.setLayoutManager(mLayoutManager2);
         recyclerView_mid.setItemAnimator(new DefaultItemAnimator());
@@ -105,7 +105,7 @@ public class FragmentHalamanUtama extends Fragment {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
                         List<Data> data = response.body().getArticles();
-                        adapter_top = new AdapterArtikel(data, getContext());
+                        adapter_top = new AdapterArtikelBanner(data, getContext());
                         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(),
                                 LinearLayoutManager.HORIZONTAL, false);
                         recyclerView_top.setLayoutManager(mLayoutManager);

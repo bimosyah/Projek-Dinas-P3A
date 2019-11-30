@@ -19,26 +19,26 @@ import syahputro.bimo.projek.dinas.p3a.R;
 import syahputro.bimo.projek.dinas.p3a.activity.ActivityArticleDetail;
 import syahputro.bimo.projek.dinas.p3a.network.response.artikel.list_slider.Data;
 
-public class AdapterArtikel extends RecyclerView.Adapter<AdapterArtikel.Holder> {
+public class AdapterArtikelBanner extends RecyclerView.Adapter<AdapterArtikelBanner.Holder> {
     public List<Data> list;
     public Context context;
 
-    public AdapterArtikel(List<Data> list, Context context) {
+    public AdapterArtikelBanner(List<Data> list, Context context) {
         this.list = list;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public AdapterArtikel.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdapterArtikelBanner.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_halaman_utama_artikel_top, parent, false);
 
-        return new AdapterArtikel.Holder(itemView);
+        return new AdapterArtikelBanner.Holder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final AdapterArtikel.Holder holder, int position) {
+    public void onBindViewHolder(@NonNull final AdapterArtikelBanner.Holder holder, int position) {
         final Data data = list.get(position);
         holder.tv_halaman_utama_artikel_top.setText(data.getTitle());
         Glide.with(context).

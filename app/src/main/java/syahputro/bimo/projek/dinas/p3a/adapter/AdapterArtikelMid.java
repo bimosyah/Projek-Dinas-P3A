@@ -17,26 +17,26 @@ import java.util.List;
 import syahputro.bimo.projek.dinas.p3a.R;
 import syahputro.bimo.projek.dinas.p3a.model_temp.DataArtikel;
 
-public class AdapterArtikel2 extends RecyclerView.Adapter<AdapterArtikel2.Holder> {
+public class AdapterArtikelMid extends RecyclerView.Adapter<AdapterArtikelMid.Holder> {
     public List<DataArtikel> list;
     public Context context;
 
-    public AdapterArtikel2(List<DataArtikel> list, Context context) {
+    public AdapterArtikelMid(List<DataArtikel> list, Context context) {
         this.list = list;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public AdapterArtikel2.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdapterArtikelMid.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_halaman_utama_artikel_mid, parent, false);
+                .inflate(R.layout.item_halaman_utama_artikel_vertical, parent, false);
 
-        return new AdapterArtikel2.Holder(itemView);
+        return new AdapterArtikelMid.Holder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterArtikel2.Holder holder, int position) {
+    public void onBindViewHolder(@NonNull AdapterArtikelMid.Holder holder, int position) {
         DataArtikel data = list.get(position);
         holder.tv_halaman_utama_artikel_mid_judul.setText(data.getJudul());
         Glide.with(context).
