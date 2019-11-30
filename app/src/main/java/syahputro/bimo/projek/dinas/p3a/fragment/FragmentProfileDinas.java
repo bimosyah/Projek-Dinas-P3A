@@ -26,14 +26,11 @@ import syahputro.bimo.projek.dinas.p3a.network.ApiClient;
 import syahputro.bimo.projek.dinas.p3a.network.ApiService;
 import syahputro.bimo.projek.dinas.p3a.network.response.profile_dinas.ResponseProfileDinas;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class FragmentProfileDinas extends Fragment {
-    TextView tvCall, tvKonsul,tvNamaDinas,tvAlamat;
-    ImageView imageView;
-    View view;
-    String no_wa,msg,telp,alamat,nama_dinas,logo;
+    private TextView tvCall, tvKonsul, tvNamaDinas, tvAlamat;
+    private ImageView imageView;
+    private View view;
+    private String no_wa, msg, telp, alamat, nama_dinas, logo;
     private ApiService service;
 
     public FragmentProfileDinas() {
@@ -97,8 +94,6 @@ public class FragmentProfileDinas extends Fragment {
                         Glide.with(getActivity())
                                 .load(logo)
                                 .into(imageView);
-                        tvCall.setText(telp);
-                        tvKonsul.setText(no_wa);
                         tvNamaDinas.setText(nama_dinas);
                         tvAlamat.setText(alamat);
                     }

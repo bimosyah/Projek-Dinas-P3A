@@ -27,6 +27,8 @@ public class ActivityArticleDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article_detail);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("");
         init();
 
         String id_artikel = getIntent().getStringExtra("id_artikel");
@@ -73,5 +75,11 @@ public class ActivityArticleDetail extends AppCompatActivity {
         tvTanggal = findViewById(R.id.tvTanggal);
         tvKategori = findViewById(R.id.tvKategori);
         tvContent = findViewById(R.id.tvContent);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }
