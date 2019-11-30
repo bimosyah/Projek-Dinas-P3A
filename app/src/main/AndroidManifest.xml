@@ -16,6 +16,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".activity.ActivityArticleDetail"></activity>
         <activity android:name=".activity.ActivityMain" />
         <activity android:name=".activity.ActivityRegister" />
         <activity
