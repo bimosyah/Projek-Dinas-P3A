@@ -9,8 +9,18 @@ public class Data {
     private String kategori;
     @SerializedName("waktu_lapor")
     private String waktuLapor;
+    @SerializedName("id_status")
+    private String id_status;
     @SerializedName("status")
     private String status;
+
+    public String getId_status() {
+        return id_status;
+    }
+
+    public void setId_status(String id_status) {
+        this.id_status = id_status;
+    }
 
     public String getIdPengaduan() {
         return idPengaduan;
