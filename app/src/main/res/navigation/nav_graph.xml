@@ -21,7 +21,7 @@
         tools:layout="@layout/fragment_pengaduan" />
     <fragment
         android:id="@+id/fragmentPengguna"
-        android:name="syahputro.bimo.projek.dinas.p3a.fragment.FragmentPengguna"
+        android:name="syahputro.bimo.projek.dinas.p3a.fragment.FragmentProfileDinas"
         android:label="fragment_pengguna"
         tools:layout="@layout/fragment_pengguna" />
     <fragment

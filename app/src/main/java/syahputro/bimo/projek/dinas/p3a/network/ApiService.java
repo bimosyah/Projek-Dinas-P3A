@@ -11,6 +11,7 @@ import syahputro.bimo.projek.dinas.p3a.network.response.artikel.list_slider.Resp
 import syahputro.bimo.projek.dinas.p3a.network.response.kategori.ResponseKategori;
 import syahputro.bimo.projek.dinas.p3a.network.response.login.ResponseLogin;
 import syahputro.bimo.projek.dinas.p3a.network.response.pengaduan.ResponsePengaduan;
+import syahputro.bimo.projek.dinas.p3a.network.response.profile_dinas.ResponseProfileDinas;
 import syahputro.bimo.projek.dinas.p3a.network.response.register.ResponseRegister;
 import syahputro.bimo.projek.dinas.p3a.network.response.riwayat.ResponseRiwayat;
 
@@ -55,4 +56,7 @@ public interface ApiService {
 
     @GET("posts/{id}")
     Call<ResponseDetailArtikel> detail_artikel(@Path("id") int id_artikel);
+
+    @GET("profile/dinas")
+    Call<ResponseProfileDinas> dinas();
 }
