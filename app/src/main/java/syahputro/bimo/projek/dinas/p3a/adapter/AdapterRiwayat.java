@@ -42,16 +42,16 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.Holder>{
         String color = context.getResources().getString(R.string.color_belum_direspon);
 
         switch (data.getId_status()) {
-            case "1":
+            case "0":
                 color = context.getResources().getString(R.string.color_belum_direspon);
                 break;
-            case "2":
+            case "1":
                 color = context.getResources().getString(R.string.color_sudah_teratasi);
                 break;
-            case "3":
+            case "2":
                 color = context.getResources().getString(R.string.color_tidak_teratasi);
                 break;
-            case "4":
+            case "3":
                 color = context.getResources().getString(R.string.color_tidak_bisa_dihubungi);
                 break;
         }

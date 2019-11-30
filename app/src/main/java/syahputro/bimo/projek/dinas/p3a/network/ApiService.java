@@ -6,6 +6,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import syahputro.bimo.projek.dinas.p3a.network.response.artikel.list_slider.ResponseSlider;
 import syahputro.bimo.projek.dinas.p3a.network.response.kategori.ResponseKategori;
 import syahputro.bimo.projek.dinas.p3a.network.response.login.ResponseLogin;
 import syahputro.bimo.projek.dinas.p3a.network.response.pengaduan.ResponsePengaduan;
@@ -47,4 +48,7 @@ public interface ApiService {
 
     @GET("history/{id_user}")
     Call<ResponseRiwayat> riwayat(@Path("id_user") int id_user);
+
+    @GET("posts/slider/10")
+    Call<ResponseSlider> slider();
 }

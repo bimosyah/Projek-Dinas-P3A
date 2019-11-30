@@ -15,13 +15,13 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import syahputro.bimo.projek.dinas.p3a.R;
-import syahputro.bimo.projek.dinas.p3a.model_temp.DataArtikel;
+import syahputro.bimo.projek.dinas.p3a.network.response.artikel.list_slider.Data;
 
 public class AdapterArtikel extends RecyclerView.Adapter<AdapterArtikel.Holder> {
-    public List<DataArtikel> list;
+    public List<Data> list;
     public Context context;
 
-    public AdapterArtikel(List<DataArtikel> list, Context context) {
+    public AdapterArtikel(List<Data> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -37,8 +37,8 @@ public class AdapterArtikel extends RecyclerView.Adapter<AdapterArtikel.Holder> 
 
     @Override
     public void onBindViewHolder(@NonNull AdapterArtikel.Holder holder, int position) {
-        DataArtikel data = list.get(position);
-        holder.tv_halaman_utama_artikel_top.setText(data.getJudul());
+        Data data = list.get(position);
+        holder.tv_halaman_utama_artikel_top.setText(data.getTitle());
         Glide.with(context).
                 load(data.getImage()).
                 into(holder.iv_halaman_utama_artikel_top);
@@ -46,14 +46,19 @@ public class AdapterArtikel extends RecyclerView.Adapter<AdapterArtikel.Holder> 
 
     @Override
     public int getItemCount() {
-        return list.size();
+        int limit_data = 4;
+        if (list.size() > limit_data) {
+            return limit_data;
+        } else {
+            return list.size();
+        }
     }
 
-    public class Holder extends RecyclerView.ViewHolder {
-        public ImageView iv_halaman_utama_artikel_top;
-        public TextView tv_halaman_utama_artikel_top;
+    class Holder extends RecyclerView.ViewHolder {
+        ImageView iv_halaman_utama_artikel_top;
+        TextView tv_halaman_utama_artikel_top;
 
-        public Holder(@NonNull View itemView) {
+        Holder(@NonNull View itemView) {
             super(itemView);
             iv_halaman_utama_artikel_top = itemView.findViewById(R.id.iv_halaman_utama_artikel_top);
             tv_halaman_utama_artikel_top = itemView.findViewById(R.id.tv_halaman_utama_artikel_top);
