@@ -57,7 +57,7 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.Holder>{
         }
 
 
-
+        holder.tvKategori.setText(data.getKategori());
         holder.tvStatus.setText(status);
         holder.tvStatus.getBackground().setColorFilter(Color.parseColor(color), PorterDuff.Mode.SRC_ATOP);
     }
@@ -68,9 +68,10 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.Holder>{
     }
 
     public class Holder extends RecyclerView.ViewHolder{
-        public TextView tvTanggal,tvStatus;
+        public TextView tvTanggal,tvStatus, tvKategori;
         public Holder(@NonNull View itemView) {
             super(itemView);
+            tvKategori = itemView.findViewById(R.id.tvKategori);
             tvTanggal = itemView.findViewById(R.id.tvTanggal);
             tvStatus = itemView.findViewById(R.id.tvStatus);
         }
