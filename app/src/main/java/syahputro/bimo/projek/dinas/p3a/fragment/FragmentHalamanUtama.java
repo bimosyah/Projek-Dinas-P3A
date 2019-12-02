@@ -19,8 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,9 +43,10 @@ import syahputro.bimo.projek.dinas.p3a.utils.SnapHelperOneByOne;
 public class FragmentHalamanUtama extends Fragment {
     private RecyclerView recyclerView_top, recyclerView_mid;
     private AdapterArtikelBanner adapter_top;
-    private List<ArticleItemDetail> beritaList = new ArrayList<>();
-    private List<ArticleItemDetail> artikelList = new ArrayList<>();
-    private List<ArticleItemDetail> kegiatanList = new ArrayList<>();
+    private List<ArticleItemDetail> beritaList;
+    private List<ArticleItemDetail> artikelList;
+    private List<ArticleItemDetail> kegiatanList;
+    private List<ArticleItem> itemList;
     private ApiService service;
     private View view;
 
@@ -77,11 +76,15 @@ public class FragmentHalamanUtama extends Fragment {
         recyclerView_top.setHasFixedSize(false);
 
         //artikel middle
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        AdapterArtikelMid adapterArtikelMid = new AdapterArtikelMid(articleList(), getActivity());
-        recyclerView_mid.setAdapter(adapterArtikelMid);
-        recyclerView_mid.setLayoutManager(layoutManager);
-        Log.d("artikel", "artikel: " + loadArtikel());
+        loadBerita();
+        loadArtikel();
+        loadKegiatan();
+        articleList();
+
+        Log.d("List", "onViewCreated: berita " + beritaList.size());
+        Log.d("List", "onViewCreated: artikel " + artikelList.size());
+        Log.d("List", "onViewCreated: kegiatan " + kegiatanList.size());
+
     }
 
     private void loadDataBanner() {
@@ -109,27 +112,31 @@ public class FragmentHalamanUtama extends Fragment {
         });
     }
 
-    private List<ArticleItem> articleList() {
-        List<ArticleItem> itemList = new ArrayList<>();
-        ArticleItem item = new ArticleItem("Berita", loadBerita());
+    private void articleList() {
+        ArticleItem item = new ArticleItem("Berita", beritaList);
         itemList.add(item);
-        item = new ArticleItem("Artikel", loadArtikel());
+        item = new ArticleItem("Artikel", artikelList);
         itemList.add(item);
-        item = new ArticleItem("Kegiatan", loadKegiatan());
+        item = new ArticleItem("Kegiatan", kegiatanList);
         itemList.add(item);
-        return itemList;
     }
 
-    private List<ArticleItemDetail> loadBerita() {
+    private void loadBerita() {
         Call<ResponseBerita> berita = service.berita(4);
         berita.enqueue(new Callback<ResponseBerita>() {
             @Override
             public void onResponse(Call<ResponseBerita> call, Response<ResponseBerita> response) {
                 if (response.isSuccessful()) {
+                    Log.d("berita", "berita is successfull: ");
                     if (response.body() != null) {
-                        beritaList = response.body().getArticles();
-                        Log.d("berita", "berita error: " + beritaList);
-                    }else {
+                        Log.d("berita", "berita not null: ");
+                        beritaList.addAll(response.body().getArticles());
+                        Log.d("berita", "berita jumlah: " + beritaList.size());
+                        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+                        AdapterArtikelMid adapterArtikelMid = new AdapterArtikelMid(itemList, getActivity());
+                        recyclerView_mid.setHasFixedSize(true);
+                        recyclerView_mid.setAdapter(adapterArtikelMid);
+                        recyclerView_mid.setLayoutManager(layoutManager);
                     }
                 }
             }
@@ -139,18 +146,24 @@ public class FragmentHalamanUtama extends Fragment {
                 Toast.makeText(getContext(), "error " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-        return beritaList;
     }
 
-    private List<ArticleItemDetail> loadArtikel() {
+    private void loadArtikel() {
         Call<ResponseArtikel> berita = service.artikel(4);
         berita.enqueue(new Callback<ResponseArtikel>() {
             @Override
             public void onResponse(Call<ResponseArtikel> call, Response<ResponseArtikel> response) {
                 if (response.isSuccessful()) {
+                    Log.d("artikel", "artikel is successfull: ");
                     if (response.body() != null) {
-                        artikelList = response.body().getArticles();
-                        Log.d("artikel", "artikel error: " + beritaList);
+                        Log.d("artikel", "artikel is not null: ");
+                        artikelList.addAll(response.body().getArticles());
+                        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+                        AdapterArtikelMid adapterArtikelMid = new AdapterArtikelMid(itemList, getActivity());
+                        recyclerView_mid.setHasFixedSize(true);
+                        recyclerView_mid.setAdapter(adapterArtikelMid);
+                        recyclerView_mid.setLayoutManager(layoutManager);
+                        Log.d("artikel", "artikel jumlah: " + artikelList.size());
                     }
                 }
             }
@@ -161,18 +174,24 @@ public class FragmentHalamanUtama extends Fragment {
                 Toast.makeText(getContext(), "error " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-        return artikelList;
     }
 
-    private List<ArticleItemDetail> loadKegiatan() {
+    private void loadKegiatan() {
         Call<ResponseKegiatan> berita = service.kegiatan(4);
         berita.enqueue(new Callback<ResponseKegiatan>() {
             @Override
             public void onResponse(Call<ResponseKegiatan> call, Response<ResponseKegiatan> response) {
                 if (response.isSuccessful()) {
+                    Log.d("kegiatan", "kegiatan is successfull: ");
                     if (response.body() != null) {
-                        kegiatanList = response.body().getArticles();
-                    }else {
+                        Log.d("kegiatan", "kegiatan is not null: ");
+                        kegiatanList.addAll(response.body().getArticles());
+                        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+                        AdapterArtikelMid adapterArtikelMid = new AdapterArtikelMid(itemList, getActivity());
+                        recyclerView_mid.setHasFixedSize(true);
+                        recyclerView_mid.setAdapter(adapterArtikelMid);
+                        recyclerView_mid.setLayoutManager(layoutManager);
+                        Log.d("kegiatan", "kegiatan jumlah: " + kegiatanList.size());
                     }
                 }
             }
@@ -182,11 +201,14 @@ public class FragmentHalamanUtama extends Fragment {
                 Toast.makeText(getContext(), "error " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-        return kegiatanList;
     }
 
 
     private void init() {
+        itemList = new ArrayList<>();
+        beritaList = new ArrayList<>();
+        artikelList = new ArrayList<>();
+        kegiatanList = new ArrayList<>();
         recyclerView_top = view.findViewById(R.id.rv_halaman_utama_artikel_top);
         recyclerView_mid = view.findViewById(R.id.rv_halaman_utama_artikel_mid);
         service = ApiClient.getClient().create(ApiService.class);

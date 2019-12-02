@@ -2,12 +2,14 @@ package syahputro.bimo.projek.dinas.p3a.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,15 +44,7 @@ public class AdapterArtikelMid extends RecyclerView.Adapter<AdapterArtikelMid.Ho
         final ArticleItem item = list.get(position);
         holder.tvArticleTitle.setText(item.getItemTitle());
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(
-                holder.rv.getContext(),
-                LinearLayoutManager.VERTICAL,
-                false
-        );
-        layoutManager.setInitialPrefetchItemCount(item.getDetailList().size());
-
         AdapterArtikel artikelVertical = new AdapterArtikel(item.getDetailList(), context);
-        holder.rv.setLayoutManager(layoutManager);
         holder.rv.setAdapter(artikelVertical);
         holder.rv.setRecycledViewPool(viewPool);
 
@@ -58,7 +52,7 @@ public class AdapterArtikelMid extends RecyclerView.Adapter<AdapterArtikelMid.Ho
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, ActivityArticle.class);
-                intent.putExtra("jenis",item.getItemTitle());
+                intent.putExtra("jenis", item.getItemTitle());
                 context.startActivity(intent);
             }
         });
@@ -69,14 +63,23 @@ public class AdapterArtikelMid extends RecyclerView.Adapter<AdapterArtikelMid.Ho
         return list.size();
     }
 
-    public class Holder extends RecyclerView.ViewHolder {
+    class Holder extends RecyclerView.ViewHolder {
         private TextView tvArticleTitle;
         private RecyclerView rv;
+        LinearLayoutManager layoutManager = new LinearLayoutManager(
+                context,
+                LinearLayoutManager.VERTICAL,
+                false
+        );
 
-        public Holder(@NonNull View itemView) {
+        Holder(@NonNull View itemView) {
             super(itemView);
             tvArticleTitle = itemView.findViewById(R.id.tvArticleTitle);
             rv = itemView.findViewById(R.id.rvArtikel);
+            rv.setHasFixedSize(true);
+            rv.setNestedScrollingEnabled(false);
+            rv.setLayoutManager(layoutManager);
+            rv.setItemAnimator(new DefaultItemAnimator());
         }
     }
 }

@@ -2,6 +2,7 @@ package syahputro.bimo.projek.dinas.p3a.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import java.util.List;
 
 import syahputro.bimo.projek.dinas.p3a.R;
 import syahputro.bimo.projek.dinas.p3a.activity.ActivityArticleDetail;
+import syahputro.bimo.projek.dinas.p3a.model.ArticleItem;
 import syahputro.bimo.projek.dinas.p3a.model.ArticleItemDetail;
 
 public class AdapterArtikel extends RecyclerView.Adapter<AdapterArtikel.Holder> {
@@ -47,7 +49,9 @@ public class AdapterArtikel extends RecyclerView.Adapter<AdapterArtikel.Holder> 
     @Override
     public void onBindViewHolder(@NonNull AdapterArtikel.Holder holder, int position) {
         final ArticleItemDetail itemDetail = list.get(position);
-
+        for (ArticleItemDetail item1 : list){
+            Log.d("LIST", "onBindViewHolder: list" + item1.getTitle());
+        }
         Glide.with(context)
                 .load(itemDetail.getImage())
                 .into(holder.imageView);
@@ -67,11 +71,12 @@ public class AdapterArtikel extends RecyclerView.Adapter<AdapterArtikel.Holder> 
 
     @Override
     public int getItemCount() {
-        if (list.size() > jumlah_tampil) {
-            return jumlah_tampil;
-        } else {
-            return list.size();
-        }
+//        if (list.size() > jumlah_tampil) {
+//            return jumlah_tampil;
+//        } else {
+//            return list.size();
+//        }
+        return list.size();
     }
 
     class Holder extends RecyclerView.ViewHolder {

@@ -1,6 +1,7 @@
 package syahputro.bimo.projek.dinas.p3a.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -27,7 +29,7 @@ public class ActivityArticle extends AppCompatActivity {
     private RecyclerView rv;
     private ApiService service;
     private AdapterArtikel adapter;
-
+    List<ArticleItemDetail> list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,9 +40,11 @@ public class ActivityArticle extends AppCompatActivity {
 
         init();
         loadArtikel();
+        Log.d("TAG", "onCreate: jumlah list = " + list.size());
     }
 
     private void init() {
+        list = new ArrayList<>();
         rv = findViewById(R.id.rvArtikel);
         service = ApiClient.getClient().create(ApiService.class);
     }
@@ -60,7 +64,7 @@ public class ActivityArticle extends AppCompatActivity {
                     public void onResponse(Call<ResponseBerita> call, Response<ResponseBerita> response) {
                         if (response.isSuccessful()) {
                             if (response.body() != null) {
-                                List<ArticleItemDetail> list = response.body().getArticles();
+                                list = response.body().getArticles();
                                 adapter = new AdapterArtikel(list, getApplicationContext());
                                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
                                 rv.setLayoutManager(mLayoutManager);
