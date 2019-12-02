@@ -143,11 +143,6 @@ public class FragmentHalamanUtama extends Fragment {
     }
 
     private List<ArticleItemDetail> loadArtikel() {
-        OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        okBuilder.addInterceptor(loggingInterceptor);
-
         Call<ResponseArtikel> berita = service.artikel(4);
         berita.enqueue(new Callback<ResponseArtikel>() {
             @Override
