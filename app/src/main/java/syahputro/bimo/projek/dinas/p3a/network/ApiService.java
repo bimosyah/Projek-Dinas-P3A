@@ -54,8 +54,8 @@ public interface ApiService {
     @GET("history/{id_user}")
     Call<ResponseRiwayat> riwayat(@Path("id_user") int id_user);
 
-    @GET("posts/slider/10")
-    Call<ResponseSlider> slider();
+    @GET("posts/slider/{jumlah}")
+    Call<ResponseSlider> slider(@Path("jumlah") int jumlah);
 
     @GET("posts/berita/{jumlah}")
     Call<ResponseBerita> berita(@Path("jumlah") int jumlah);

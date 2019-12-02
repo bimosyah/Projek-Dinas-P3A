@@ -88,7 +88,7 @@ public class FragmentHalamanUtama extends Fragment {
     }
 
     private void loadDataBanner() {
-        Call<ResponseSlider> riwayat = service.slider();
+        Call<ResponseSlider> riwayat = service.slider(4);
         riwayat.enqueue(new Callback<ResponseSlider>() {
             @Override
             public void onResponse(Call<ResponseSlider> call, Response<ResponseSlider> response) {
