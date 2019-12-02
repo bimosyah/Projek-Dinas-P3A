@@ -12,7 +12,7 @@ public class ResponseKategori {
     @SerializedName("total")
     private Integer total;
     @SerializedName("data")
-    private List<Data> data;
+    private List<DataKategori> data;
 
     public String getStatus() {
         return status;
@@ -38,11 +38,11 @@ public class ResponseKategori {
         this.total = total;
     }
 
-    public List<Data> getData() {
+    public List<DataKategori> getData() {
         return data;
     }
 
-    public void setData(List<Data> data) {
+    public void setData(List<DataKategori> data) {
         this.data = data;
     }
 }

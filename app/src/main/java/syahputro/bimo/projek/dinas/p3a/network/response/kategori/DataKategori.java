@@ -2,13 +2,13 @@ package syahputro.bimo.projek.dinas.p3a.network.response.kategori;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Data {
+public class DataKategori {
     @SerializedName("id_kategori")
     private String idKategori;
     @SerializedName("nama_kategori")
     private String namaKategori;
 
-    public Data(String idKategori, String namaKategori) {
+    public DataKategori(String idKategori, String namaKategori) {
         this.idKategori = idKategori;
         this.namaKategori = namaKategori;
     }

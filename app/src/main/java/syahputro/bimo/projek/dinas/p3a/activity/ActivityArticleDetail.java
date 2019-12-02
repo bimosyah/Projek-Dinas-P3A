@@ -45,12 +45,12 @@ public class ActivityArticleDetail extends AppCompatActivity {
                     if (response.body() != null) {
                         Log.d("Respone", "onResponse: " + response.body().getTotal());
                         Glide.with(getApplicationContext())
-                                .load(response.body().getData().getImage())
+                                .load(response.body().getDataDetailArtikel().getImage())
                                 .into(imageView);
-                        tvTitle.setText(response.body().getData().getTitle());
-                        tvTanggal.setText(response.body().getData().getDate());
-                        tvKategori.setText(response.body().getData().getPostCategory());
-                        tvContent.setText(response.body().getData().getContent());
+                        tvTitle.setText(response.body().getDataDetailArtikel().getTitle());
+                        tvTanggal.setText(response.body().getDataDetailArtikel().getDate());
+                        tvKategori.setText(response.body().getDataDetailArtikel().getPostCategory());
+                        tvContent.setText(response.body().getDataDetailArtikel().getContent());
                     } else {
                         Toast.makeText(getApplicationContext(), "error body" + response.body(), Toast.LENGTH_LONG).show();
                         Log.d("error body", "onResponse: " + response.body());

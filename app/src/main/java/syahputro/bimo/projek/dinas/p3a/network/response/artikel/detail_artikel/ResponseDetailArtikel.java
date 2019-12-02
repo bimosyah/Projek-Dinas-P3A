@@ -8,7 +8,7 @@ public class ResponseDetailArtikel{
 	private int total;
 
 	@SerializedName("articles")
-	private Data data;
+	private DataDetailArtikel dataDetailArtikel;
 
 	@SerializedName("status")
 	private boolean status;
@@ -21,12 +21,12 @@ public class ResponseDetailArtikel{
 		return total;
 	}
 
-	public void setData(Data data){
-		this.data = data;
+	public void setDataDetailArtikel(DataDetailArtikel dataDetailArtikel){
+		this.dataDetailArtikel = dataDetailArtikel;
 	}
 
-	public Data getData(){
-		return data;
+	public DataDetailArtikel getDataDetailArtikel(){
+		return dataDetailArtikel;
 	}
 
 	public void setStatus(boolean status){

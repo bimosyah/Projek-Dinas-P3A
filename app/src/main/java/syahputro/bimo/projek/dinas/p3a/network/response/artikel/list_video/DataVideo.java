@@ -1,8 +1,8 @@
-package syahputro.bimo.projek.dinas.p3a.network.response.artikel.list_artikel;
+package syahputro.bimo.projek.dinas.p3a.network.response.artikel.list_video;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Data {
+public class DataVideo {
 
 	@SerializedName("date")
 	private String date;

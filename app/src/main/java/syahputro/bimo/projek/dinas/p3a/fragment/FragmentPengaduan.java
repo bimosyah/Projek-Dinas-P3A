@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,7 +38,7 @@ import retrofit2.Response;
 import syahputro.bimo.projek.dinas.p3a.R;
 import syahputro.bimo.projek.dinas.p3a.network.ApiClient;
 import syahputro.bimo.projek.dinas.p3a.network.ApiService;
-import syahputro.bimo.projek.dinas.p3a.network.response.kategori.Data;
+import syahputro.bimo.projek.dinas.p3a.network.response.kategori.DataKategori;
 import syahputro.bimo.projek.dinas.p3a.network.response.kategori.ResponseKategori;
 import syahputro.bimo.projek.dinas.p3a.network.response.pengaduan.ResponsePengaduan;
 import syahputro.bimo.projek.dinas.p3a.utils.Preference;
@@ -49,12 +50,13 @@ public class FragmentPengaduan extends Fragment {
     private Spinner spinner_kategori;
     private View view;
     private final ArrayList<String> array_kategori = new ArrayList<String>();
+    private final ArrayList<String> array_id_kategori = new ArrayList<String>();
     private EditText et_pengaduan;
-    LocationManager locationManager;
-    String longitude, latitude;
+    private LocationManager locationManager;
+    private String longitude, latitude;
     private static final int REQUEST_LOCATION = 1;
-    LoadingButton loadingButton;
-
+    private LoadingButton loadingButton;
+    private int id_kategori;
 
     public FragmentPengaduan() {
         // Required empty public constructor
@@ -76,6 +78,18 @@ public class FragmentPengaduan extends Fragment {
         init();
         loadKategori();
 
+        spinner_kategori.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                id_kategori = Integer.parseInt(array_id_kategori.get(i));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         loadingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,9 +107,10 @@ public class FragmentPengaduan extends Fragment {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
                         if (response.body().getStatus().equals("0")) {
-                            List<Data> data_kategori = response.body().getData();
-                            for (Data data : data_kategori) {
-                                array_kategori.add(data.getNamaKategori());
+                            List<DataKategori> data_Kategori_kategori = response.body().getData();
+                            for (DataKategori dataKategori : data_Kategori_kategori) {
+                                array_id_kategori.add(dataKategori.getIdKategori());
+                                array_kategori.add(dataKategori.getNamaKategori());
                             }
                             setSpinner();
                         }
@@ -128,7 +143,7 @@ public class FragmentPengaduan extends Fragment {
         }
 
         //id kategori belum dinamis
-        Call<ResponsePengaduan> pengaduan = service.pengaduan(Integer.parseInt(id_user), 1,
+        Call<ResponsePengaduan> pengaduan = service.pengaduan(Integer.parseInt(id_user), id_kategori,
                 et_pengaduan.getText().toString(), latitude, longitude);
         pengaduan.enqueue(new Callback<ResponsePengaduan>() {
             @Override
@@ -137,7 +152,7 @@ public class FragmentPengaduan extends Fragment {
                     if (response.body() != null) {
                         if (response.body().getStatus().equals("0")) {
                             loadingButton.hideLoading();
-                            Toast.makeText(getActivity(), "Data Tersimpan", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), "DataDetailArtikel Tersimpan", Toast.LENGTH_LONG).show();
                         } else if (response.body().getStatus().equals("1")) {
                             loadingButton.hideLoading();
                             Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_LONG).show();
@@ -158,7 +173,6 @@ public class FragmentPengaduan extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, array_kategori);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_kategori.setAdapter(adapter);
-
     }
 
     private void onGPS() {

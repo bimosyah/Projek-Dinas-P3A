@@ -1,17 +1,15 @@
-package syahputro.bimo.projek.dinas.p3a.network.response.artikel.list_kegiatan;
+package syahputro.bimo.projek.dinas.p3a.network.response.artikel.list_video;
 
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-import syahputro.bimo.projek.dinas.p3a.model.ArticleItemDetail;
-
-public class ResponseKegiatan {
+public class ResponseVideo {
 
 	@SerializedName("total")
 	private int total;
 
 	@SerializedName("articles")
-	private List<ArticleItemDetail> articles;
+	private List<DataVideo> articles;
 
 	@SerializedName("status")
 	private boolean status;
@@ -24,11 +22,11 @@ public class ResponseKegiatan {
 		return total;
 	}
 
-	public void setArticles(List<ArticleItemDetail> articles){
+	public void setArticles(List<DataVideo> articles){
 		this.articles = articles;
 	}
 
-	public List<ArticleItemDetail> getArticles(){
+	public List<DataVideo> getArticles(){
 		return articles;
 	}
 

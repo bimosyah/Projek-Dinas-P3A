@@ -4,13 +4,15 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+import syahputro.bimo.projek.dinas.p3a.model.ArticleItemDetail;
+
 public class ResponseArtikel {
 
     @SerializedName("total")
     private int total;
 
     @SerializedName("articles")
-    private List<Data> articles;
+    private List<ArticleItemDetail> articles;
 
     @SerializedName("status")
     private boolean status;
@@ -23,11 +25,11 @@ public class ResponseArtikel {
         return total;
     }
 
-    public void setArticles(List<Data> articles) {
+    public void setArticles(List<ArticleItemDetail> articles) {
         this.articles = articles;
     }
 
-    public List<Data> getArticles() {
+    public List<ArticleItemDetail> getArticles() {
         return articles;
     }
 

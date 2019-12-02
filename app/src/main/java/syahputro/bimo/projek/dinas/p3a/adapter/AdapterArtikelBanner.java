@@ -17,13 +17,13 @@ import java.util.List;
 
 import syahputro.bimo.projek.dinas.p3a.R;
 import syahputro.bimo.projek.dinas.p3a.activity.ActivityArticleDetail;
-import syahputro.bimo.projek.dinas.p3a.network.response.artikel.list_slider.Data;
+import syahputro.bimo.projek.dinas.p3a.network.response.artikel.list_slider.DataSlider;
 
 public class AdapterArtikelBanner extends RecyclerView.Adapter<AdapterArtikelBanner.Holder> {
-    public List<Data> list;
+    public List<DataSlider> list;
     public Context context;
 
-    public AdapterArtikelBanner(List<Data> list, Context context) {
+    public AdapterArtikelBanner(List<DataSlider> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -39,17 +39,17 @@ public class AdapterArtikelBanner extends RecyclerView.Adapter<AdapterArtikelBan
 
     @Override
     public void onBindViewHolder(@NonNull final AdapterArtikelBanner.Holder holder, int position) {
-        final Data data = list.get(position);
-        holder.tv_halaman_utama_artikel_top.setText(data.getTitle());
+        final DataSlider dataSlider = list.get(position);
+        holder.tv_halaman_utama_artikel_top.setText(dataSlider.getTitle());
         Glide.with(context).
-                load(data.getImage()).
+                load(dataSlider.getImage()).
                 into(holder.iv_halaman_utama_artikel_top);
 
         holder.iv_halaman_utama_artikel_top.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, ActivityArticleDetail.class);
-                intent.putExtra("id_artikel",data.getId());
+                intent.putExtra("id_artikel", dataSlider.getId());
                 view.getContext().startActivity(intent);
             }
         });

@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Data implements Parcelable {
+public class DataSlider implements Parcelable {
 
 	@SerializedName("date")
 	private String date;
@@ -101,10 +101,10 @@ public class Data implements Parcelable {
 		dest.writeString(this.content);
 	}
 
-	public Data() {
+	public DataSlider() {
 	}
 
-	protected Data(Parcel in) {
+	protected DataSlider(Parcel in) {
 		this.date = in.readString();
 		this.image = in.readString();
 		this.categoryId = in.readString();
@@ -114,15 +114,15 @@ public class Data implements Parcelable {
 		this.content = in.readString();
 	}
 
-	public static final Parcelable.Creator<Data> CREATOR = new Parcelable.Creator<Data>() {
+	public static final Parcelable.Creator<DataSlider> CREATOR = new Parcelable.Creator<DataSlider>() {
 		@Override
-		public Data createFromParcel(Parcel source) {
-			return new Data(source);
+		public DataSlider createFromParcel(Parcel source) {
+			return new DataSlider(source);
 		}
 
 		@Override
-		public Data[] newArray(int size) {
-			return new Data[size];
+		public DataSlider[] newArray(int size) {
+			return new DataSlider[size];
 		}
 	};
 }

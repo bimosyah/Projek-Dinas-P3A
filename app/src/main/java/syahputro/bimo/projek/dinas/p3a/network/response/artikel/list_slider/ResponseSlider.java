@@ -9,7 +9,7 @@ public class ResponseSlider{
 	private int total;
 
 	@SerializedName("articles")
-	private List<Data> articles;
+	private List<DataSlider> articles;
 
 	@SerializedName("status")
 	private boolean status;
@@ -22,11 +22,11 @@ public class ResponseSlider{
 		return total;
 	}
 
-	public void setArticles(List<Data> articles){
+	public void setArticles(List<DataSlider> articles){
 		this.articles = articles;
 	}
 
-	public List<Data> getArticles(){
+	public List<DataSlider> getArticles(){
 		return articles;
 	}
 

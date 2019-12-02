@@ -69,7 +69,7 @@ public class FragmentProfileDinas extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_DIAL); // Action for what intent called for
-                intent.setData(Uri.parse("tel: " + telp)); // Data with intent respective action on intent
+                intent.setData(Uri.parse("tel: " + telp)); // DataDetailArtikel with intent respective action on intent
                 startActivity(intent);
             }
         });

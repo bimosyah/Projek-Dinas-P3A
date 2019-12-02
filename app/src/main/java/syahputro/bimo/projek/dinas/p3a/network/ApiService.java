@@ -7,6 +7,9 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import syahputro.bimo.projek.dinas.p3a.network.response.artikel.detail_artikel.ResponseDetailArtikel;
+import syahputro.bimo.projek.dinas.p3a.network.response.artikel.list_artikel.ResponseArtikel;
+import syahputro.bimo.projek.dinas.p3a.network.response.artikel.list_berita.ResponseBerita;
+import syahputro.bimo.projek.dinas.p3a.network.response.artikel.list_kegiatan.ResponseKegiatan;
 import syahputro.bimo.projek.dinas.p3a.network.response.artikel.list_slider.ResponseSlider;
 import syahputro.bimo.projek.dinas.p3a.network.response.kategori.ResponseKategori;
 import syahputro.bimo.projek.dinas.p3a.network.response.login.ResponseLogin;
@@ -53,6 +56,15 @@ public interface ApiService {
 
     @GET("posts/slider/10")
     Call<ResponseSlider> slider();
+
+    @GET("posts/berita/{jumlah}")
+    Call<ResponseBerita> berita(@Path("jumlah") int jumlah);
+
+    @GET("posts/artikel/{jumlah}")
+    Call<ResponseArtikel> artikel(@Path("jumlah") int jumlah);
+
+    @GET("posts/kegiatan/{jumlah}")
+    Call<ResponseKegiatan> kegiatan(@Path("jumlah") int jumlah);
 
     @GET("posts/{id}")
     Call<ResponseDetailArtikel> detail_artikel(@Path("id") int id_artikel);

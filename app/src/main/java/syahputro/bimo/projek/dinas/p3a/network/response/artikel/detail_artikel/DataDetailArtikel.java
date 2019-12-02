@@ -2,7 +2,7 @@ package syahputro.bimo.projek.dinas.p3a.network.response.artikel.detail_artikel;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Data {
+public class DataDetailArtikel {
 
 	@SerializedName("date")
 	private String date;

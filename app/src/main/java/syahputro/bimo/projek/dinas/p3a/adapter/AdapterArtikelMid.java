@@ -4,24 +4,23 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
 
 import java.util.List;
 
 import syahputro.bimo.projek.dinas.p3a.R;
-import syahputro.bimo.projek.dinas.p3a.model_temp.DataArtikel;
+import syahputro.bimo.projek.dinas.p3a.model.ArticleItem;
 
 public class AdapterArtikelMid extends RecyclerView.Adapter<AdapterArtikelMid.Holder> {
-    public List<DataArtikel> list;
+    private RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
+    public List<ArticleItem> list;
     public Context context;
 
-    public AdapterArtikelMid(List<DataArtikel> list, Context context) {
+    public AdapterArtikelMid(List<ArticleItem> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -30,19 +29,27 @@ public class AdapterArtikelMid extends RecyclerView.Adapter<AdapterArtikelMid.Ho
     @Override
     public AdapterArtikelMid.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_halaman_utama_artikel_vertical, parent, false);
+                .inflate(R.layout.item_halaman_utama_artikel_middle, parent, false);
 
         return new AdapterArtikelMid.Holder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull AdapterArtikelMid.Holder holder, int position) {
-        DataArtikel data = list.get(position);
-        holder.tv_halaman_utama_artikel_mid_judul.setText(data.getJudul());
-        Glide.with(context).
-                load(data.getImage()).
-                into(holder.iv_halaman_utama_artikel_mid);
+        ArticleItem item = list.get(position);
+        holder.tvArticleTitle.setText(item.getItemTitle());
 
+        LinearLayoutManager layoutManager = new LinearLayoutManager(
+                holder.rv.getContext(),
+                LinearLayoutManager.VERTICAL,
+                false
+        );
+        layoutManager.setInitialPrefetchItemCount(item.getDetailList().size());
+
+        AdapterArtikelVertical artikelVertical = new AdapterArtikelVertical(item.getDetailList(), context);
+        holder.rv.setLayoutManager(layoutManager);
+        holder.rv.setAdapter(artikelVertical);
+        holder.rv.setRecycledViewPool(viewPool);
     }
 
     @Override
@@ -51,15 +58,13 @@ public class AdapterArtikelMid extends RecyclerView.Adapter<AdapterArtikelMid.Ho
     }
 
     public class Holder extends RecyclerView.ViewHolder {
-        public ImageView iv_halaman_utama_artikel_mid;
-        public TextView tv_halaman_utama_artikel_mid_judul;
-        public TextView tv_halaman_utama_artikel_mid_tanggal;
+        private TextView tvArticleTitle;
+        private RecyclerView rv;
 
         public Holder(@NonNull View itemView) {
             super(itemView);
-            iv_halaman_utama_artikel_mid = itemView.findViewById(R.id.iv_halaman_utama_artikel_mid);
-            tv_halaman_utama_artikel_mid_judul = itemView.findViewById(R.id.tv_halaman_utama_artikel_mid_judul);
-            tv_halaman_utama_artikel_mid_tanggal = itemView.findViewById(R.id.tv_halaman_utama_artikel_mid_tanggal);
+            tvArticleTitle = itemView.findViewById(R.id.tvArticleTitle);
+            rv = itemView.findViewById(R.id.rvArtikel);
         }
     }
 }
