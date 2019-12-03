@@ -16,6 +16,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import syahputro.bimo.projek.dinas.p3a.R;
+import syahputro.bimo.projek.dinas.p3a.activity.activity_baru.ActivityHalamanUtama;
 import syahputro.bimo.projek.dinas.p3a.network.ApiClient;
 import syahputro.bimo.projek.dinas.p3a.network.ApiService;
 import syahputro.bimo.projek.dinas.p3a.network.response.login.ResponseLogin;
@@ -46,7 +47,7 @@ public class ActivityLogin extends AppCompatActivity {
         });
 
         if (Preference.getLoggedInStatus(this)){
-            startActivity(new Intent(ActivityLogin.this, ActivityMain.class));
+            startActivity(new Intent(ActivityLogin.this, ActivityHalamanUtama.class));
         }
 
         loadingButton.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +78,7 @@ public class ActivityLogin extends AppCompatActivity {
                             Preference.setIdUser(getApplicationContext(), response.body().getData().getId());
                             Preference.setLoggedInStatus(getApplicationContext(), true);
                             loadingButton.hideLoading();
-                            startActivity(new Intent(ActivityLogin.this, ActivityMain.class));
+                            startActivity(new Intent(ActivityLogin.this, ActivityHalamanUtama.class));
                         } else if (response.body().getStatus().equals("1")) {
                             loadingButton.hideLoading();
                             Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();

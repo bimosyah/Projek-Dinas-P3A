@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.activity_baru.ActivityArtikel"></activity>
+        <activity android:name=".activity.activity_baru.ActivityArtikelAll"></activity>
         <activity android:name=".activity.activity_baru.ActivityStatistik" />
         <activity android:name=".activity.activity_baru.ActivityRiwayat" />
         <activity android:name=".activity.activity_baru.ActivityProfilDinas" />
