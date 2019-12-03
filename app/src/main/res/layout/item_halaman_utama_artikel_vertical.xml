@@ -1,52 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layoutArtikel"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="150dp"
-    android:padding="10dp">
-
+    android:orientation="horizontal"
+    android:padding="10dp"
+    android:id="@+id/linearlayout">
     <ImageView
+        android:layout_weight="1"
         android:id="@+id/iv_halaman_utama_artikel_mid"
         android:layout_width="130dp"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:scaleType="centerCrop"/>
 
-    <TextView
-        android:id="@+id/tv_halaman_utama_artikel_mid_judul"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:text="Judul Berita"
-        android:textColor="@color/colorBlack"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/iv_halaman_utama_artikel_mid"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_weight="8"
+        android:orientation="vertical"
+        android:layout_marginStart="10dp">
+        <TextView
+            android:id="@+id/tv_halaman_utama_artikel_mid_judul"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
 
-    <TextView
-        android:id="@+id/tv_halaman_utama_artikel_mid_tanggal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2019/10/10"
-        android:textColor="@color/colorAccent"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/tv_halaman_utama_artikel_mid_judul"
-        app:layout_constraintTop_toBottomOf="@+id/tv_halaman_utama_artikel_mid_judul" />
+        <TextView
+            android:id="@+id/tv_halaman_utama_artikel_mid_tanggal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"
+            android:textSize="12sp"
+            android:textStyle="bold"/>
 
-    <TextView
-        android:id="@+id/tv_halaman_utama_artikel_mid_content"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Content"
-        android:textColor="@color/Black"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/tv_halaman_utama_artikel_mid_tanggal"
-        app:layout_constraintTop_toBottomOf="@+id/tv_halaman_utama_artikel_mid_tanggal" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_halaman_utama_artikel_mid_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/Black"
+            android:textSize="12sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+</LinearLayout>

@@ -7,12 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.anychart.core.annotations.Line;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -60,14 +62,14 @@ public class AdapterArtikel extends RecyclerView.Adapter<AdapterArtikel.Holder> 
         holder.tvTanggal.setText(itemDetail.getDate());
         holder.tvContent.setText(itemDetail.getContent());
 
-        holder.layout.setOnClickListener(new View.OnClickListener() {
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, ActivityArticleDetail.class);
                 intent.putExtra("id_artikel", itemDetail.getId());
                 view.getContext().startActivity(intent);
             }
-        });
+        });;
     }
 
     @Override
@@ -84,10 +86,11 @@ public class AdapterArtikel extends RecyclerView.Adapter<AdapterArtikel.Holder> 
         ImageView imageView;
         TextView tvTitle, tvTanggal, tvContent;
         ConstraintLayout layout;
-
+        LinearLayout linearLayout;
         Holder(@NonNull View itemView) {
             super(itemView);
-            layout = itemView.findViewById(R.id.layoutArtikel);
+//            layout = itemView.findViewById(R.id.layoutArtikel);
+            linearLayout = itemView.findViewById(R.id.linearlayout);
             imageView = itemView.findViewById(R.id.iv_halaman_utama_artikel_mid);
             tvTitle = itemView.findViewById(R.id.tv_halaman_utama_artikel_mid_judul);
             tvTanggal = itemView.findViewById(R.id.tv_halaman_utama_artikel_mid_tanggal);
