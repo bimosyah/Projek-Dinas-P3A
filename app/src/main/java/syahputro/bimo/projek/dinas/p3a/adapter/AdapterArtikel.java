@@ -14,14 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.anychart.core.annotations.Line;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
 
 import syahputro.bimo.projek.dinas.p3a.R;
 import syahputro.bimo.projek.dinas.p3a.activity.ActivityArticleDetail;
-import syahputro.bimo.projek.dinas.p3a.model.ArticleItem;
 import syahputro.bimo.projek.dinas.p3a.model.ArticleItemDetail;
 
 public class AdapterArtikel extends RecyclerView.Adapter<AdapterArtikel.Holder> {
@@ -51,7 +49,7 @@ public class AdapterArtikel extends RecyclerView.Adapter<AdapterArtikel.Holder> 
     @Override
     public void onBindViewHolder(@NonNull AdapterArtikel.Holder holder, int position) {
         final ArticleItemDetail itemDetail = list.get(position);
-        for (ArticleItemDetail item1 : list){
+        for (ArticleItemDetail item1 : list) {
             Log.d("LIST", "onBindViewHolder: list" + item1.getTitle());
         }
         Glide.with(context)
@@ -69,7 +67,8 @@ public class AdapterArtikel extends RecyclerView.Adapter<AdapterArtikel.Holder> 
                 intent.putExtra("id_artikel", itemDetail.getId());
                 view.getContext().startActivity(intent);
             }
-        });;
+        });
+        ;
     }
 
     @Override
@@ -87,6 +86,7 @@ public class AdapterArtikel extends RecyclerView.Adapter<AdapterArtikel.Holder> 
         TextView tvTitle, tvTanggal, tvContent;
         ConstraintLayout layout;
         LinearLayout linearLayout;
+
         Holder(@NonNull View itemView) {
             super(itemView);
 //            layout = itemView.findViewById(R.id.layoutArtikel);
@@ -94,7 +94,7 @@ public class AdapterArtikel extends RecyclerView.Adapter<AdapterArtikel.Holder> 
             imageView = itemView.findViewById(R.id.iv_halaman_utama_artikel_mid);
             tvTitle = itemView.findViewById(R.id.tv_halaman_utama_artikel_mid_judul);
             tvTanggal = itemView.findViewById(R.id.tv_halaman_utama_artikel_mid_tanggal);
-            tvContent= itemView.findViewById(R.id.tv_halaman_utama_artikel_mid_content);
+            tvContent = itemView.findViewById(R.id.tv_halaman_utama_artikel_mid_content);
         }
     }
 }
