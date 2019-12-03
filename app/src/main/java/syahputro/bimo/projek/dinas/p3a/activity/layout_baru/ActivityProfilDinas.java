@@ -1,4 +1,4 @@
-package syahputro.bimo.projek.dinas.p3a.activity.activity_baru;
+package syahputro.bimo.projek.dinas.p3a.activity.layout_baru;
 
 import androidx.appcompat.app.AppCompatActivity;
 

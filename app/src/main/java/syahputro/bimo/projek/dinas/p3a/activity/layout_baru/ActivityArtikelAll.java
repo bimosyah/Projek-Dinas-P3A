@@ -1,13 +1,10 @@
-package syahputro.bimo.projek.dinas.p3a.activity.activity_baru;
+package syahputro.bimo.projek.dinas.p3a.activity.layout_baru;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import syahputro.bimo.projek.dinas.p3a.R;
-import syahputro.bimo.projek.dinas.p3a.adapter.AdapterArtikelBanner;
-import syahputro.bimo.projek.dinas.p3a.network.ApiService;
 
 public class ActivityArtikelAll extends AppCompatActivity {
     @Override
