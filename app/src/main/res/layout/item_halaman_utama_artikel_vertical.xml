@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:text="Judul Berita"
+        android:text="Judul Berita "
         android:textColor="@color/colorBlack"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -40,7 +40,7 @@
 
     <TextView
         android:id="@+id/tv_halaman_utama_artikel_mid_content"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="Content"
