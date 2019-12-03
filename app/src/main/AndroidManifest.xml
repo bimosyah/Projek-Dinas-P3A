@@ -16,7 +16,12 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.ActivityUser"></activity>
+        <activity android:name=".activity.activity_baru.ActivityStatistik"></activity>
+        <activity android:name=".activity.activity_baru.ActivityRiwayat" />
+        <activity android:name=".activity.activity_baru.ActivityProfilDinas" />
+        <activity android:name=".activity.activity_baru.ActivityPengaduan" />
+        <activity android:name=".activity.activity_baru.ActivityHalamanUtama" />
+        <activity android:name=".activity.ActivityUser" />
         <activity android:name=".activity.ActivityArticle" />
         <activity android:name=".activity.ActivityArticleDetailVideo" />
         <activity android:name=".activity.ActivityArticleDetail" />
