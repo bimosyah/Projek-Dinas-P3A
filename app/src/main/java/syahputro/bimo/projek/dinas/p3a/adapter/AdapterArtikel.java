@@ -58,6 +58,7 @@ public class AdapterArtikel extends RecyclerView.Adapter<AdapterArtikel.Holder> 
 
         holder.tvTitle.setText(itemDetail.getTitle());
         holder.tvTanggal.setText(itemDetail.getDate());
+        holder.tvContent.setText(itemDetail.getContent());
 
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +82,7 @@ public class AdapterArtikel extends RecyclerView.Adapter<AdapterArtikel.Holder> 
 
     class Holder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView tvTitle, tvTanggal;
+        TextView tvTitle, tvTanggal, tvContent;
         ConstraintLayout layout;
 
         Holder(@NonNull View itemView) {
@@ -90,6 +91,7 @@ public class AdapterArtikel extends RecyclerView.Adapter<AdapterArtikel.Holder> 
             imageView = itemView.findViewById(R.id.iv_halaman_utama_artikel_mid);
             tvTitle = itemView.findViewById(R.id.tv_halaman_utama_artikel_mid_judul);
             tvTanggal = itemView.findViewById(R.id.tv_halaman_utama_artikel_mid_tanggal);
+            tvContent= itemView.findViewById(R.id.tv_halaman_utama_artikel_mid_content);
         }
     }
 }

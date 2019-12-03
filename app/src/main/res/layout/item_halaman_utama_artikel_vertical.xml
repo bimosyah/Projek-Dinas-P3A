@@ -37,4 +37,16 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/tv_halaman_utama_artikel_mid_judul"
         app:layout_constraintTop_toBottomOf="@+id/tv_halaman_utama_artikel_mid_judul" />
+
+    <TextView
+        android:id="@+id/tv_halaman_utama_artikel_mid_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Content"
+        android:textColor="@color/Black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/tv_halaman_utama_artikel_mid_tanggal"
+        app:layout_constraintTop_toBottomOf="@+id/tv_halaman_utama_artikel_mid_tanggal" />
 </androidx.constraintlayout.widget.ConstraintLayout>
