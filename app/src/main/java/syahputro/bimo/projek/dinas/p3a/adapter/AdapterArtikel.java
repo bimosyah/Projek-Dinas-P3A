@@ -68,7 +68,6 @@ public class AdapterArtikel extends RecyclerView.Adapter<AdapterArtikel.Holder> 
                 view.getContext().startActivity(intent);
             }
         });
-        ;
     }
 
     @Override

@@ -58,7 +58,7 @@ public class FragmentHalamanUtama extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        getActivity().setTitle("Halaman Utama");
+        getActivity().setTitle("Dinas Pemberdayaan Perempuan dan Perlindungan Anak Kab Malang");
         view = inflater.inflate(R.layout.fragment_halaman_utama, container, false);
         return view;
     }
