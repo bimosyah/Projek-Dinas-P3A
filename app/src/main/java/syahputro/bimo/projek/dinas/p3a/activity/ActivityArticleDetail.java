@@ -2,11 +2,14 @@ package syahputro.bimo.projek.dinas.p3a.activity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bumptech.glide.Glide;
 
@@ -22,7 +25,8 @@ public class ActivityArticleDetail extends AppCompatActivity {
     ImageView imageView;
     ApiService service;
     TextView tvContent, tvTitle, tvTanggal, tvKategori;
-
+    ProgressBar loadingArtikel;
+    ConstraintLayout container_artikel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +55,8 @@ public class ActivityArticleDetail extends AppCompatActivity {
                         tvTanggal.setText(response.body().getDataDetailArtikel().getDate());
                         tvKategori.setText(response.body().getDataDetailArtikel().getPostCategory());
                         tvContent.setText(response.body().getDataDetailArtikel().getContent());
+                        container_artikel.setVisibility(View.VISIBLE);
+                        loadingArtikel.setVisibility(View.GONE);
                     } else {
                         Toast.makeText(getApplicationContext(), "error body" + response.body(), Toast.LENGTH_LONG).show();
                         Log.d("error body", "onResponse: " + response.body());
@@ -69,6 +75,8 @@ public class ActivityArticleDetail extends AppCompatActivity {
     }
 
     private void init() {
+        container_artikel = findViewById(R.id.container_artikel);
+        loadingArtikel = findViewById(R.id.loadingArtikel);
         service = ApiClient.getClient().create(ApiService.class);
         imageView = findViewById(R.id.ivArtikel);
         tvTitle = findViewById(R.id.tvTitle);
