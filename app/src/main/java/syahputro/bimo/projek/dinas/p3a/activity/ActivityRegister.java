@@ -1,6 +1,7 @@
 package syahputro.bimo.projek.dinas.p3a.activity;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -20,6 +22,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.kusu.loadingbutton.LoadingButton;
+
+import java.util.Calendar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,7 +38,8 @@ public class ActivityRegister extends AppCompatActivity {
     Button btn_register;
     LocationManager locationManager;
     String longitude, latitude;
-    EditText etNama,etPassword,etNoTelp,etAlamat,etTanggalLahir;
+    EditText etNama, etPassword, etNoTelp, etAlamat;
+    EditText etTanggalLahir;
     ApiService service;
     LoadingButton loadingButton;
 
@@ -49,6 +54,37 @@ public class ActivityRegister extends AppCompatActivity {
         ActivityCompat.requestPermissions(this, new String[]
                 {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
 
+        etTanggalLahir.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b) {
+                    DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+                            String tanggal = year + "/" + month + "/" + dayOfMonth;
+                            etTanggalLahir.setText(tanggal);
+                        }
+                    };
+
+                    // Get current year, month and day.
+                    Calendar now = Calendar.getInstance();
+                    int year = now.get(java.util.Calendar.YEAR);
+                    int month = now.get(java.util.Calendar.MONTH);
+                    int day = now.get(java.util.Calendar.DAY_OF_MONTH);
+
+                    // Create the new DatePickerDialog instance.
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(ActivityRegister.this, android.R.style.Theme_Holo_Dialog, onDateSetListener, year, month, day);
+
+                    // Set dialog icon and title.
+                    datePickerDialog.setTitle("Please select date.");
+
+                    // Popup the dialog.
+                    datePickerDialog.show();
+                } else {
+
+                }
+            }
+        });
         loadingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,17 +101,17 @@ public class ActivityRegister extends AppCompatActivity {
                         etPassword.getText().toString(),
                         etNoTelp.getText().toString(),
                         etAlamat.getText().toString(),
-                        etTanggalLahir.getText().toString(),
+                        etAlamat.getText().toString(),
                         latitude,
                         longitude
                 );
                 registrasi.enqueue(new Callback<ResponseRegister>() {
                     @Override
                     public void onResponse(Call<ResponseRegister> call, Response<ResponseRegister> response) {
-                        if (response.isSuccessful()){ // check response suksess or no
+                        if (response.isSuccessful()) { // check response suksess or no
                             if (response.body() != null) {
                                 loadingButton.hideLoading();
-                                Toast.makeText(getApplicationContext(),response.body().getMessage(),Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();
                             }
                         }
                     }
@@ -83,7 +119,7 @@ public class ActivityRegister extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<ResponseRegister> call, Throwable t) {
                         loadingButton.hideLoading();
-                        Toast.makeText(getApplicationContext(),"error " + t.getMessage(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "error " + t.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -110,10 +146,10 @@ public class ActivityRegister extends AppCompatActivity {
     private void init() {
         btn_register = findViewById(R.id.btn_register);
         etAlamat = findViewById(R.id.etAlamat);
-        etNama= findViewById(R.id.etNama);
-        etNoTelp= findViewById(R.id.etNoTelp);
-        etPassword= findViewById(R.id.etPassword);
-        etTanggalLahir= findViewById(R.id.etTanggalLahir);
+        etNama = findViewById(R.id.etNama);
+        etNoTelp = findViewById(R.id.etNoTelp);
+        etPassword = findViewById(R.id.etPassword);
+        etTanggalLahir = findViewById(R.id.etTanggalLahir);
         loadingButton = findViewById(R.id.loadingButton);
 
     }

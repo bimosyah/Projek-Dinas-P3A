@@ -2,10 +2,14 @@ package syahputro.bimo.projek.dinas.p3a.activity.layout_baru;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,6 +27,7 @@ import syahputro.bimo.projek.dinas.p3a.network.ApiClient;
 import syahputro.bimo.projek.dinas.p3a.network.ApiService;
 import syahputro.bimo.projek.dinas.p3a.network.response.artikel.list_slider.DataSlider;
 import syahputro.bimo.projek.dinas.p3a.network.response.artikel.list_slider.ResponseSlider;
+import syahputro.bimo.projek.dinas.p3a.utils.Preference;
 import syahputro.bimo.projek.dinas.p3a.utils.SnapHelperOneByOne;
 
 public class ActivityHalamanUtama extends AppCompatActivity {
@@ -30,6 +35,7 @@ public class ActivityHalamanUtama extends AppCompatActivity {
     private AdapterArtikelBanner adapter_top;
     private ApiService service;
     private RelativeLayout menu1, menu2, menu3, menu4, menu5, menu6;
+    boolean doubleBackToExitPressedOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,5 +129,40 @@ public class ActivityHalamanUtama extends AppCompatActivity {
         menu5 = findViewById(R.id.menu5);
         menu6 = findViewById(R.id.menu6);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_setting, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_logout) {
+            Preference.clearLoggedInUser(getApplicationContext());
+            finish();
+        }
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            finish();
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
+    }
+
 
 }
