@@ -1,17 +1,19 @@
 package syahputro.bimo.projek.dinas.p3a.activity.layout_baru;
 
-import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
 
 import syahputro.bimo.projek.dinas.p3a.R;
 
-public class ActivityArtikelAll extends AppCompatActivity {
+public class ActivityBantuan extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_bantuan);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Berita");
+        getSupportActionBar().setTitle("Bantuan");
     }
 
     @Override

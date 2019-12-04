@@ -1,16 +1,16 @@
 package syahputro.bimo.projek.dinas.p3a.activity.layout_baru;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.LinearSnapHelper;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class ActivityHalamanUtama extends AppCompatActivity {
     private RecyclerView recyclerView_top;
     private AdapterArtikelBanner adapter_top;
     private ApiService service;
-    private RelativeLayout menu1,menu2,menu3,menu4,menu5,menu6;
+    private RelativeLayout menu1, menu2, menu3, menu4, menu5, menu6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +51,38 @@ public class ActivityHalamanUtama extends AppCompatActivity {
             }
         });
 
+        menu2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ActivityHalamanUtama.this, ActivityStatistik.class);
+                startActivity(intent);
+            }
+        });
+        menu3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ActivityHalamanUtama.this, ActivityArtikelAll.class);
+                startActivity(intent);
+            }
+        });
         menu4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ActivityHalamanUtama.this, ActivityRiwayat.class);
+                startActivity(intent);
+            }
+        });
+        menu5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ActivityHalamanUtama.this, ActivityProfilDinas.class);
+                startActivity(intent);
+            }
+        });
+        menu6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ActivityHalamanUtama.this, ActivityBantuan.class);
                 startActivity(intent);
             }
         });
