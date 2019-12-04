@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.List;
@@ -26,6 +29,7 @@ public class ActivityHalamanUtama extends AppCompatActivity {
     private RecyclerView recyclerView_top;
     private AdapterArtikelBanner adapter_top;
     private ApiService service;
+    private RelativeLayout menu1,menu2,menu3,menu4,menu5,menu6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,21 @@ public class ActivityHalamanUtama extends AppCompatActivity {
         recyclerView_top.setNestedScrollingEnabled(false);
         recyclerView_top.setHasFixedSize(false);
 
+        menu1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ActivityHalamanUtama.this, ActivityPengaduan.class);
+                startActivity(intent);
+            }
+        });
+
+        menu4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ActivityHalamanUtama.this, ActivityRiwayat.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void loadDataBanner() {
@@ -69,6 +88,12 @@ public class ActivityHalamanUtama extends AppCompatActivity {
     private void init() {
         recyclerView_top = findViewById(R.id.rv_halaman_utama_artikel_top);
         service = ApiClient.getClient().create(ApiService.class);
+        menu1 = findViewById(R.id.menu1);
+        menu2 = findViewById(R.id.menu2);
+        menu3 = findViewById(R.id.menu3);
+        menu4 = findViewById(R.id.menu4);
+        menu5 = findViewById(R.id.menu5);
+        menu6 = findViewById(R.id.menu6);
     }
 
 }
