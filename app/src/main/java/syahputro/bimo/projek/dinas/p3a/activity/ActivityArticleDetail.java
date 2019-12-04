@@ -3,6 +3,7 @@ package syahputro.bimo.projek.dinas.p3a.activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ public class ActivityArticleDetail extends AppCompatActivity {
     TextView tvContent, tvTitle, tvTanggal, tvKategori;
     ProgressBar loadingArtikel;
     ConstraintLayout container_artikel;
+    WebView wvContent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +56,7 @@ public class ActivityArticleDetail extends AppCompatActivity {
                         tvTitle.setText(response.body().getDataDetailArtikel().getTitle());
                         tvTanggal.setText(response.body().getDataDetailArtikel().getDate());
                         tvKategori.setText(response.body().getDataDetailArtikel().getPostCategory());
-                        tvContent.setText(response.body().getDataDetailArtikel().getContent());
+                        wvContent.loadData(response.body().getDataDetailArtikel().getContent(), "text/html; charset=utf-8", "UTF-8");
                         container_artikel.setVisibility(View.VISIBLE);
                         loadingArtikel.setVisibility(View.GONE);
                     } else {
@@ -82,7 +84,8 @@ public class ActivityArticleDetail extends AppCompatActivity {
         tvTitle = findViewById(R.id.tvTitle);
         tvTanggal = findViewById(R.id.tvTanggal);
         tvKategori = findViewById(R.id.tvKategori);
-        tvContent = findViewById(R.id.tvContent);
+        //tvContent = findViewById(R.id.tvContent);
+        wvContent = findViewById(R.id.wvContent);
     }
 
     @Override

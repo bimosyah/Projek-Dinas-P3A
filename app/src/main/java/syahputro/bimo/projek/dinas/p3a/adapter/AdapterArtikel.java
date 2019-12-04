@@ -2,6 +2,7 @@ package syahputro.bimo.projek.dinas.p3a.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,7 +59,7 @@ public class AdapterArtikel extends RecyclerView.Adapter<AdapterArtikel.Holder> 
 
         holder.tvTitle.setText(itemDetail.getTitle());
         holder.tvTanggal.setText(itemDetail.getDate());
-        holder.tvContent.setText(itemDetail.getContent());
+        holder.tvContent.setText(Html.fromHtml(itemDetail.getContent()).toString());
 
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override

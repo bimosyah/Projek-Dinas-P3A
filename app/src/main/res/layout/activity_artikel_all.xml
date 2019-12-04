@@ -6,4 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".activity.layout_baru.ActivityArtikelAll">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_halaman_utama_artikel_mid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/item_halaman_utama_artikel_middle" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

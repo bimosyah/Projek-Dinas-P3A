@@ -53,6 +53,7 @@ public class AdapterArtikelMid extends RecyclerView.Adapter<AdapterArtikelMid.Ho
             public void onClick(View view) {
                 Intent intent = new Intent(context, ActivityArticle.class);
                 intent.putExtra("jenis", item.getItemTitle());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
         });
