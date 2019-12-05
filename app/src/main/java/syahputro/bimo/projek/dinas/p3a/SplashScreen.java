@@ -20,6 +20,10 @@ public class SplashScreen extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         getSupportActionBar().hide();
 
+        if (getIntent().getBooleanExtra("EXIT", false)) {
+            finish();
+        }
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

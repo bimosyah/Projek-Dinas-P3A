@@ -16,6 +16,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import syahputro.bimo.projek.dinas.p3a.R;
+import syahputro.bimo.projek.dinas.p3a.SplashScreen;
 import syahputro.bimo.projek.dinas.p3a.activity.layout_baru.ActivityHalamanUtama;
 import syahputro.bimo.projek.dinas.p3a.activity.layout_baru.ActivityLupaSandi;
 import syahputro.bimo.projek.dinas.p3a.network.ApiClient;
@@ -49,7 +50,10 @@ public class ActivityLogin extends AppCompatActivity {
 
         if (Preference.getLoggedInStatus(this)){
             if (getIntent().getBooleanExtra("EXIT", false)) {
-                finish();
+                Intent intent = new Intent(ActivityLogin.this, SplashScreen.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("EXIT", true);
+                startActivity(intent);
             }else{
                 startActivity(new Intent(ActivityLogin.this, ActivityHalamanUtama.class));
             }
