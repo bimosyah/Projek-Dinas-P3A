@@ -73,6 +73,7 @@ public interface ApiService {
     @GET("profile/dinas")
     Call<ResponseProfileDinas> dinas();
 
+    @FormUrlEncoded
     @POST("profile")
     Call<ResponseUser> user(@Field("id") int id);
 }
