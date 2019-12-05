@@ -17,6 +17,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import syahputro.bimo.projek.dinas.p3a.R;
 import syahputro.bimo.projek.dinas.p3a.activity.layout_baru.ActivityHalamanUtama;
+import syahputro.bimo.projek.dinas.p3a.activity.layout_baru.ActivityLupaSandi;
 import syahputro.bimo.projek.dinas.p3a.network.ApiClient;
 import syahputro.bimo.projek.dinas.p3a.network.ApiService;
 import syahputro.bimo.projek.dinas.p3a.network.response.login.ResponseLogin;
@@ -24,7 +25,7 @@ import syahputro.bimo.projek.dinas.p3a.utils.Preference;
 
 
 public class ActivityLogin extends AppCompatActivity {
-    TextView tvDaftar;
+    TextView tvDaftar,tvLupaKataSandi;
     Button btn_login;
     EditText etNoTelp, etPassword;
     ApiService service;
@@ -47,19 +48,30 @@ public class ActivityLogin extends AppCompatActivity {
         });
 
         if (Preference.getLoggedInStatus(this)){
-            startActivity(new Intent(ActivityLogin.this, ActivityHalamanUtama.class));
+            if (getIntent().getBooleanExtra("EXIT", false)) {
+                finish();
+            }else{
+                startActivity(new Intent(ActivityLogin.this, ActivityHalamanUtama.class));
+            }
         }
 
         loadingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadingButton.showLoading();
-                login();
+                login(etNoTelp.getText().toString(),etPassword.getText().toString());
+            }
+        });
+
+        tvLupaKataSandi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ActivityLogin.this, ActivityLupaSandi.class));
             }
         });
     }
 
     private void init() {
+        tvLupaKataSandi = findViewById(R.id.textView3);
         tvDaftar = findViewById(R.id.tvDaftar);
         btn_login = findViewById(R.id.button);
         etNoTelp = findViewById(R.id.etNoTelp);
@@ -67,32 +79,37 @@ public class ActivityLogin extends AppCompatActivity {
         loadingButton = findViewById(R.id.loadingButton);
     }
 
-    private void login() {
-        Call<ResponseLogin> login = service.login(etNoTelp.getText().toString(), etPassword.getText().toString());
-        login.enqueue(new Callback<ResponseLogin>() {
-            @Override
-            public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
-                if (response.isSuccessful()) {
-                    if (response.body() != null) {
-                        if (response.body().getStatus().equals("0")) {
-                            Preference.setIdUser(getApplicationContext(), response.body().getData().getId());
-                            Preference.setLoggedInStatus(getApplicationContext(), true);
-                            loadingButton.hideLoading();
-                            startActivity(new Intent(ActivityLogin.this, ActivityHalamanUtama.class));
-                        } else if (response.body().getStatus().equals("1")) {
-                            loadingButton.hideLoading();
-                            Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();
+    private void login(String no_telp, String password) {
+        if (no_telp.equals("") || password.equals("")){
+            Toast.makeText(getApplicationContext(), "No Telp dan Password harus diisi", Toast.LENGTH_LONG).show();
+            loadingButton.hideLoading();
+        }else {
+            Call<ResponseLogin> login = service.login(etNoTelp.getText().toString(), etPassword.getText().toString());
+            login.enqueue(new Callback<ResponseLogin>() {
+                @Override
+                public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
+                    if (response.isSuccessful()) {
+                        if (response.body() != null) {
+                            if (response.body().getStatus().equals("0")) {
+                                Preference.setIdUser(getApplicationContext(), response.body().getData().getId());
+                                Preference.setLoggedInStatus(getApplicationContext(), true);
+                                loadingButton.hideLoading();
+                                startActivity(new Intent(ActivityLogin.this, ActivityHalamanUtama.class));
+                            } else if (response.body().getStatus().equals("1")) {
+                                loadingButton.hideLoading();
+                                Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();
+                            }
                         }
                     }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<ResponseLogin> call, Throwable t) {
-                loadingButton.hideLoading();
-                Toast.makeText(getApplicationContext(), "error " + t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
+                @Override
+                public void onFailure(Call<ResponseLogin> call, Throwable t) {
+                    loadingButton.hideLoading();
+                    Toast.makeText(getApplicationContext(), "error " + t.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+        }
     }
 
     @Override

@@ -16,7 +16,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.layout_baru.ActivityBantuan"></activity>
+        <activity android:name=".activity.layout_baru.ActivityLupaSandi"></activity>
+        <activity android:name=".activity.layout_baru.ActivityBantuan" />
         <activity android:name=".activity.layout_baru.ActivityArtikelAll" />
         <activity android:name=".activity.layout_baru.ActivityStatistik" />
         <activity android:name=".activity.layout_baru.ActivityRiwayat" />

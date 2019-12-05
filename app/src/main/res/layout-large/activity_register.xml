@@ -106,7 +106,6 @@
             android:layout_height="50dp"
             android:layout_marginTop="28dp"
             android:background="@drawable/layout_form"
-            android:hint="contoh : 2019/04/14"
             android:maxLines="1"
             android:padding="14dp"
             app:layout_constraintStart_toStartOf="@+id/textView7"
@@ -126,6 +125,7 @@
 
         <EditText
             android:id="@+id/etPassword"
+            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="28dp"
