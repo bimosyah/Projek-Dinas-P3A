@@ -119,6 +119,9 @@ public class ActivityRegister extends AppCompatActivity {
                                 if (response.body() != null) {
                                     loadingButton.hideLoading();
                                     Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();
+                                    if (!response.body().getStatus().equals("1")){
+                                        startActivity(new Intent(ActivityRegister.this,ActivityLogin.class));
+                                    }
                                 }
                             }
                         }
