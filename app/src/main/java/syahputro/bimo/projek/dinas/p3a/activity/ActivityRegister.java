@@ -80,8 +80,6 @@ public class ActivityRegister extends AppCompatActivity {
 
                     // Popup the dialog.
                     datePickerDialog.show();
-                } else {
-
                 }
             }
         });
@@ -89,39 +87,49 @@ public class ActivityRegister extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 loadingButton.showLoading();
-                locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                    onGPS();
+                String nama = etNama.getText().toString();
+                String password = etPassword.getText().toString();
+                String notelp = etNoTelp.getText().toString();
+                String alamat = etAlamat.getText().toString();
+                String tglLahir = etTanggalLahir.getText().toString();
+                if (nama.equals("") || password.equals("") || notelp.equals("") || alamat.equals("") || tglLahir.equals("")) {
+                    Toast.makeText(getApplicationContext(), "Semua form harus diisi", Toast.LENGTH_LONG).show();
+                    loadingButton.hideLoading();
                 } else {
-                    getLocation();
-                }
+                    locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                    if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                        onGPS();
+                    } else {
+                        getLocation();
+                    }
 
-                Call<ResponseRegister> registrasi = service.register(
-                        etNama.getText().toString(),
-                        etPassword.getText().toString(),
-                        etNoTelp.getText().toString(),
-                        etAlamat.getText().toString(),
-                        etAlamat.getText().toString(),
-                        latitude,
-                        longitude
-                );
-                registrasi.enqueue(new Callback<ResponseRegister>() {
-                    @Override
-                    public void onResponse(Call<ResponseRegister> call, Response<ResponseRegister> response) {
-                        if (response.isSuccessful()) { // check response suksess or no
-                            if (response.body() != null) {
-                                loadingButton.hideLoading();
-                                Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();
+                    Call<ResponseRegister> registrasi = service.register(
+                            nama,
+                            password,
+                            notelp,
+                            alamat,
+                            tglLahir,
+                            latitude,
+                            longitude
+                    );
+                    registrasi.enqueue(new Callback<ResponseRegister>() {
+                        @Override
+                        public void onResponse(Call<ResponseRegister> call, Response<ResponseRegister> response) {
+                            if (response.isSuccessful()) { // check response suksess or no
+                                if (response.body() != null) {
+                                    loadingButton.hideLoading();
+                                    Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();
+                                }
                             }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<ResponseRegister> call, Throwable t) {
-                        loadingButton.hideLoading();
-                        Toast.makeText(getApplicationContext(), "error " + t.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<ResponseRegister> call, Throwable t) {
+                            loadingButton.hideLoading();
+                            Toast.makeText(getApplicationContext(), "error " + t.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
             }
         });
     }
