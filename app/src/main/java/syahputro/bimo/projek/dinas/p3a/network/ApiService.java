@@ -17,6 +17,7 @@ import syahputro.bimo.projek.dinas.p3a.network.response.pengaduan.ResponsePengad
 import syahputro.bimo.projek.dinas.p3a.network.response.profile_dinas.ResponseProfileDinas;
 import syahputro.bimo.projek.dinas.p3a.network.response.register.ResponseRegister;
 import syahputro.bimo.projek.dinas.p3a.network.response.riwayat.ResponseRiwayat;
+import syahputro.bimo.projek.dinas.p3a.network.response.user.ResponseUser;
 
 public interface ApiService {
     @FormUrlEncoded
@@ -71,4 +72,7 @@ public interface ApiService {
 
     @GET("profile/dinas")
     Call<ResponseProfileDinas> dinas();
+
+    @POST("profile")
+    Call<ResponseUser> user(@Field("id") int id);
 }
