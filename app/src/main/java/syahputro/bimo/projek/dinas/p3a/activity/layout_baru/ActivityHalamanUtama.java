@@ -23,6 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import syahputro.bimo.projek.dinas.p3a.R;
 import syahputro.bimo.projek.dinas.p3a.activity.ActivityLogin;
+import syahputro.bimo.projek.dinas.p3a.activity.ActivityUser;
 import syahputro.bimo.projek.dinas.p3a.adapter.AdapterArtikelBanner;
 import syahputro.bimo.projek.dinas.p3a.network.ApiClient;
 import syahputro.bimo.projek.dinas.p3a.network.ApiService;
@@ -142,6 +143,8 @@ public class ActivityHalamanUtama extends AppCompatActivity {
         if (item.getItemId() == R.id.action_logout) {
             Preference.clearLoggedInUser(getApplicationContext());
             finish();
+        }else if (item.getItemId() == R.id.action_profile){
+            startActivity(new Intent(ActivityHalamanUtama.this, ActivityUser.class));
         }
         return true;
     }
