@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +31,7 @@ public class ActivityRiwayat extends AppCompatActivity {
     private AdapterRiwayat adapter;
     private ApiService service;
     private TextView tv_riwayat;
-
+    private ProgressBar loadingRiwayat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +41,7 @@ public class ActivityRiwayat extends AppCompatActivity {
 
         init();
         loadData();
+        loadingRiwayat.setVisibility(View.VISIBLE);
     }
 
     private void loadData() {
@@ -56,9 +58,11 @@ public class ActivityRiwayat extends AppCompatActivity {
                             recyclerView.setLayoutManager(mLayoutManager);
                             recyclerView.setItemAnimator(new DefaultItemAnimator());
                             recyclerView.setAdapter(adapter);
+                            loadingRiwayat.setVisibility(View.GONE);
                         } else {
                             recyclerView.setVisibility(View.GONE);
                             tv_riwayat.setVisibility(View.VISIBLE);
+                            loadingRiwayat.setVisibility(View.GONE);
                         }
                     }
                 }
@@ -67,11 +71,13 @@ public class ActivityRiwayat extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponseRiwayat> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "error " + t.getMessage(), Toast.LENGTH_LONG).show();
+                loadingRiwayat.setVisibility(View.GONE);
             }
         });
     }
 
     private void init() {
+        loadingRiwayat = findViewById(R.id.loadingRiwayat);
         recyclerView = findViewById(R.id.rvRiwayat);
         service = ApiClient.getClient().create(ApiService.class);
         list = new ArrayList<>();

@@ -58,6 +58,7 @@ public class ActivityLogin extends AppCompatActivity {
         loadingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                loadingButton.showLoading();
                 login(etNoTelp.getText().toString(),etPassword.getText().toString());
             }
         });

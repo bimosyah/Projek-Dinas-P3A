@@ -22,6 +22,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import syahputro.bimo.projek.dinas.p3a.R;
+import syahputro.bimo.projek.dinas.p3a.activity.ActivityLogin;
 import syahputro.bimo.projek.dinas.p3a.adapter.AdapterArtikelBanner;
 import syahputro.bimo.projek.dinas.p3a.network.ApiClient;
 import syahputro.bimo.projek.dinas.p3a.network.ApiService;
@@ -149,7 +150,10 @@ public class ActivityHalamanUtama extends AppCompatActivity {
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
-            finish();
+            Intent intent = new Intent(ActivityHalamanUtama.this, ActivityLogin.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("EXIT", true);
+            startActivity(intent);
         }
 
         this.doubleBackToExitPressedOnce = true;
