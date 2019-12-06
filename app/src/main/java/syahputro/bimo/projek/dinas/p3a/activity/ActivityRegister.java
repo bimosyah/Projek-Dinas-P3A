@@ -61,7 +61,7 @@ public class ActivityRegister extends AppCompatActivity {
                     DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                            String tanggal = year + "/" + month + "/" + dayOfMonth;
+                            String tanggal = year + "/" + (month + 1) + "/" + dayOfMonth;
                             etTanggalLahir.setText(tanggal);
                         }
                     };
@@ -73,7 +73,7 @@ public class ActivityRegister extends AppCompatActivity {
                     int day = now.get(java.util.Calendar.DAY_OF_MONTH);
 
                     // Create the new DatePickerDialog instance.
-                    DatePickerDialog datePickerDialog = new DatePickerDialog(ActivityRegister.this, android.R.style.Theme_Holo_Dialog, onDateSetListener, year, month, day);
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(ActivityRegister.this, android.R.style.Theme_Dialog, onDateSetListener, year, month, day);
 
                     // Set dialog icon and title.
                     datePickerDialog.setTitle("Please select date.");
@@ -119,8 +119,8 @@ public class ActivityRegister extends AppCompatActivity {
                                 if (response.body() != null) {
                                     loadingButton.hideLoading();
                                     Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();
-                                    if (!response.body().getStatus().equals("1")){
-                                        startActivity(new Intent(ActivityRegister.this,ActivityLogin.class));
+                                    if (!response.body().getStatus().equals("1")) {
+                                        startActivity(new Intent(ActivityRegister.this, ActivityLogin.class));
                                     }
                                 }
                             }

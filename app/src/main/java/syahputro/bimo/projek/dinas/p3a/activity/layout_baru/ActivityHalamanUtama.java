@@ -1,5 +1,6 @@
 package syahputro.bimo.projek.dinas.p3a.activity.layout_baru;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -143,7 +144,7 @@ public class ActivityHalamanUtama extends AppCompatActivity {
         if (item.getItemId() == R.id.action_logout) {
             Preference.clearLoggedInUser(getApplicationContext());
             finish();
-        }else if (item.getItemId() == R.id.action_profile){
+        } else if (item.getItemId() == R.id.action_profile) {
             startActivity(new Intent(ActivityHalamanUtama.this, ActivityUser.class));
         }
         return true;
@@ -154,7 +155,7 @@ public class ActivityHalamanUtama extends AppCompatActivity {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
             Intent intent = new Intent(ActivityHalamanUtama.this, ActivityLogin.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.putExtra("EXIT", true);
             startActivity(intent);
         }

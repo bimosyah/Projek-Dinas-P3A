@@ -51,7 +51,7 @@ public class ActivityLogin extends AppCompatActivity {
         if (Preference.getLoggedInStatus(this)){
             if (getIntent().getBooleanExtra("EXIT", false)) {
                 Intent intent = new Intent(ActivityLogin.this, SplashScreen.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("EXIT", true);
                 startActivity(intent);
             }else{
@@ -120,7 +120,6 @@ public class ActivityLogin extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finishAffinity();
         finish();
     }
 }

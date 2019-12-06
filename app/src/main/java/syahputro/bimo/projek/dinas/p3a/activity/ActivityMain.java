@@ -1,6 +1,5 @@
 package syahputro.bimo.projek.dinas.p3a.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
@@ -50,10 +49,7 @@ public class ActivityMain extends AppCompatActivity {
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
-            Intent intent = new Intent(ActivityMain.this, ActivityLogin.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.putExtra("EXIT", true);
-            startActivity(intent);
+            finish();
         }
 
         this.doubleBackToExitPressedOnce = true;
