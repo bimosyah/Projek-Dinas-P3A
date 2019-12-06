@@ -1,9 +1,9 @@
 package syahputro.bimo.projek.dinas.p3a.activity.layout_baru;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -26,8 +27,13 @@ import syahputro.bimo.projek.dinas.p3a.R;
 import syahputro.bimo.projek.dinas.p3a.activity.ActivityLogin;
 import syahputro.bimo.projek.dinas.p3a.activity.ActivityUser;
 import syahputro.bimo.projek.dinas.p3a.adapter.AdapterArtikelBanner;
+import syahputro.bimo.projek.dinas.p3a.adapter.AdapterArtikelMid;
+import syahputro.bimo.projek.dinas.p3a.adapter.AdapterHome;
+import syahputro.bimo.projek.dinas.p3a.model.ArticleItem;
+import syahputro.bimo.projek.dinas.p3a.model.ArticleItemDetail;
 import syahputro.bimo.projek.dinas.p3a.network.ApiClient;
 import syahputro.bimo.projek.dinas.p3a.network.ApiService;
+import syahputro.bimo.projek.dinas.p3a.network.response.artikel.list_kegiatan.ResponseKegiatan;
 import syahputro.bimo.projek.dinas.p3a.network.response.artikel.list_slider.DataSlider;
 import syahputro.bimo.projek.dinas.p3a.network.response.artikel.list_slider.ResponseSlider;
 import syahputro.bimo.projek.dinas.p3a.utils.Preference;
@@ -35,6 +41,9 @@ import syahputro.bimo.projek.dinas.p3a.utils.SnapHelperOneByOne;
 
 public class ActivityHalamanUtama extends AppCompatActivity {
     private RecyclerView recyclerView_top;
+    private RecyclerView recyclerView_bottom;
+    private List<ArticleItemDetail> kegiatanList;
+    private List<ArticleItem> itemList;
     private AdapterArtikelBanner adapter_top;
     private ApiService service;
     private RelativeLayout menu1, menu2, menu3, menu4, menu5, menu6;
@@ -95,6 +104,8 @@ public class ActivityHalamanUtama extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        loadKegiatan();
     }
 
     private void loadDataBanner() {
@@ -131,6 +142,9 @@ public class ActivityHalamanUtama extends AppCompatActivity {
         menu4 = findViewById(R.id.menu4);
         menu5 = findViewById(R.id.menu5);
         menu6 = findViewById(R.id.menu6);
+        recyclerView_bottom = findViewById(R.id.recyclerView_bottom);
+        kegiatanList = new ArrayList<>();
+        itemList = new ArrayList<>();
     }
 
     @Override
@@ -172,5 +186,30 @@ public class ActivityHalamanUtama extends AppCompatActivity {
         }, 2000);
     }
 
+    private void loadKegiatan() {
+        Call<ResponseKegiatan> berita = service.kegiatan(4);
+        berita.enqueue(new Callback<ResponseKegiatan>() {
+            @Override
+            public void onResponse(Call<ResponseKegiatan> call, Response<ResponseKegiatan> response) {
+                if (response.isSuccessful()) {
+                    Log.d("kegiatan", "kegiatan is successfull: ");
+                    if (response.body() != null) {
+                        Log.d("kegiatan", "kegiatan is not null: ");
+                        kegiatanList = response.body().getArticles();
+                        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+                        AdapterHome adapterHome= new AdapterHome(kegiatanList, getApplicationContext());
+                        recyclerView_bottom.setHasFixedSize(true);
+                        recyclerView_bottom.setAdapter(adapterHome);
+                        recyclerView_bottom.setLayoutManager(layoutManager);
+                        Log.d("kegiatan", "kegiatan jumlah: " + kegiatanList.size());
+                    }
+                }
+            }
 
+            @Override
+            public void onFailure(Call<ResponseKegiatan> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "error " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 }
