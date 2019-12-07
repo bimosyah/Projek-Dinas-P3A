@@ -1,6 +1,8 @@
 package syahputro.bimo.projek.dinas.p3a.activity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,6 +14,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import syahputro.bimo.projek.dinas.p3a.R;
+import syahputro.bimo.projek.dinas.p3a.activity.layout_baru.DialogPassword;
 import syahputro.bimo.projek.dinas.p3a.network.ApiClient;
 import syahputro.bimo.projek.dinas.p3a.network.ApiService;
 import syahputro.bimo.projek.dinas.p3a.network.response.user.DataUser;
@@ -21,6 +24,7 @@ import syahputro.bimo.projek.dinas.p3a.utils.Preference;
 public class ActivityUser extends AppCompatActivity {
     ApiService service;
     TextView nama1, nama2, notelp, alamat, tgl_lahir;
+    Button gantiPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +35,16 @@ public class ActivityUser extends AppCompatActivity {
 
         init();
         loadData();
+        gantiPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDialog();
+            }
+        });
     }
 
     private void init() {
+        gantiPassword = findViewById(R.id.btn_ganti_password);
         service = ApiClient.getClient().create(ApiService.class);
         nama1 = findViewById(R.id.tvNama1);
         nama2 = findViewById(R.id.tvNama2);
@@ -55,13 +66,6 @@ public class ActivityUser extends AppCompatActivity {
                         notelp.setText(user.get(0).getNomorTelp());
                         alamat.setText(user.get(0).getAlamat());
                         tgl_lahir.setText(user.get(0).getTanggalLahir());
-//                        for (DataUser n : user){
-//                            nama1.setText(n.getNama());
-//                            nama2.setText(n.getNama());
-//                            notelp.setText(n.getNomorTelp());
-//                            alamat.setText(n.getAlamat());
-//                            tgl_lahir.setText(n.getTanggalLahir());
-//                        }
                     }
                 }
             }
@@ -78,4 +82,10 @@ public class ActivityUser extends AppCompatActivity {
         onBackPressed();
         return true;
     }
+
+    public void openDialog(){
+        DialogPassword dialogPassword = new DialogPassword();
+        dialogPassword.show(getSupportFragmentManager(),"dialog password");
+    }
+
 }

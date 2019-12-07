@@ -7,6 +7,7 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorGradient1">#EE847E</color>
     <color name="colorGradient2">#E4017F</color>
+    <color name="colorGradient3">#009BDD</color>
     <color name="semi_transparent">#66000000</color>
     <color name="belum_direspon">#FFEB3B</color>
     <color name="sudah_teratasi">#4CAF50</color>
