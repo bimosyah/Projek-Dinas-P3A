@@ -136,7 +136,10 @@ public class ActivityPengaduan extends AppCompatActivity {
                     if (response.body() != null) {
                         if (response.body().getStatus().equals("0")) {
                             loadingButton.hideLoading();
-                            Toast.makeText(getApplicationContext(), "DataDetailArtikel Tersimpan", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(ActivityPengaduan.this, ActivityRiwayat.class);
+                            intent.putExtra("EXIT",true);
+                            startActivity(intent);
+                            Toast.makeText(getApplicationContext(), "Pengaduan Tersimpan", Toast.LENGTH_LONG).show();
                         } else if (response.body().getStatus().equals("1")) {
                             loadingButton.hideLoading();
                             Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();

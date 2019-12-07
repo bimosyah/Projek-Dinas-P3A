@@ -120,6 +120,9 @@ public class ActivityLogin extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
+        Intent intent = new Intent(ActivityLogin.this, SplashScreen.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("EXIT", true);
+        startActivity(intent);
     }
 }

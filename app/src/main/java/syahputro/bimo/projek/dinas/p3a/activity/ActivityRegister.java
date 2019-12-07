@@ -73,7 +73,7 @@ public class ActivityRegister extends AppCompatActivity {
                     int day = now.get(java.util.Calendar.DAY_OF_MONTH);
 
                     // Create the new DatePickerDialog instance.
-                    DatePickerDialog datePickerDialog = new DatePickerDialog(ActivityRegister.this, android.R.style.Theme_Dialog, onDateSetListener, year, month, day);
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(ActivityRegister.this, android.R.style.Theme_Holo_Dialog, onDateSetListener, year, month, day);
 
                     // Set dialog icon and title.
                     datePickerDialog.setTitle("Please select date.");

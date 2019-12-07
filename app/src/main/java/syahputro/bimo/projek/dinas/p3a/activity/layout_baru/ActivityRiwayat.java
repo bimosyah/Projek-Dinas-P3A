@@ -1,15 +1,16 @@
 package syahputro.bimo.projek.dinas.p3a.activity.layout_baru;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import syahputro.bimo.projek.dinas.p3a.R;
+import syahputro.bimo.projek.dinas.p3a.SplashScreen;
+import syahputro.bimo.projek.dinas.p3a.activity.ActivityLogin;
 import syahputro.bimo.projek.dinas.p3a.adapter.AdapterRiwayat;
 import syahputro.bimo.projek.dinas.p3a.network.ApiClient;
 import syahputro.bimo.projek.dinas.p3a.network.ApiService;
@@ -32,6 +35,7 @@ public class ActivityRiwayat extends AppCompatActivity {
     private ApiService service;
     private TextView tv_riwayat;
     private ProgressBar loadingRiwayat;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,8 +89,14 @@ public class ActivityRiwayat extends AppCompatActivity {
     }
 
     @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
+    public void onBackPressed() {
+        if (getIntent().getBooleanExtra("EXIT", false)) {
+            Intent intent = new Intent(ActivityRiwayat.this, ActivityHalamanUtama.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("EXIT", true);
+            startActivity(intent);
+        } else {
+            finish();
+        }
     }
 }
