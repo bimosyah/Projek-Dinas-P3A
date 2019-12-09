@@ -12,7 +12,7 @@ public class ResponseYear {
 	private List<String> data;
 
 	@SerializedName("status")
-	private int status;
+	private String status;
 
 	public void setTotal(int total){
 		this.total = total;
@@ -30,11 +30,11 @@ public class ResponseYear {
 		return data;
 	}
 
-	public void setStatus(int status){
+	public void setStatus(String status){
 		this.status = status;
 	}
 
-	public int getStatus(){
+	public String getStatus(){
 		return status;
 	}
 
