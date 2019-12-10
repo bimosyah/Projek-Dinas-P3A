@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.layout_baru.ActivityArtikelAll">
+    tools:context=".activity.ActivityArtikelAll">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_halaman_utama_artikel_mid"

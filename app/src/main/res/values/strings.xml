@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Aplikasi Pengaduan Kekerasan Perempuan</string>
+    <string name="app_name">Sambat DP3A</string>
     <string name="title_activity_splash_screen">SplashScreen</string>
     <string name="title_activity_login">ActivityLogin</string>
     <string name="no_telp">No Telp</string>

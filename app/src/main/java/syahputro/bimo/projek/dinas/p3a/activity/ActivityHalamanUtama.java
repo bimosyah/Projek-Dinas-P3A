@@ -1,4 +1,4 @@
-package syahputro.bimo.projek.dinas.p3a.activity.layout_baru;
+package syahputro.bimo.projek.dinas.p3a.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,10 +24,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import syahputro.bimo.projek.dinas.p3a.R;
-import syahputro.bimo.projek.dinas.p3a.activity.ActivityLogin;
-import syahputro.bimo.projek.dinas.p3a.activity.ActivityUser;
 import syahputro.bimo.projek.dinas.p3a.adapter.AdapterArtikelBanner;
-import syahputro.bimo.projek.dinas.p3a.adapter.AdapterArtikelMid;
 import syahputro.bimo.projek.dinas.p3a.adapter.AdapterHome;
 import syahputro.bimo.projek.dinas.p3a.model.ArticleItem;
 import syahputro.bimo.projek.dinas.p3a.model.ArticleItemDetail;

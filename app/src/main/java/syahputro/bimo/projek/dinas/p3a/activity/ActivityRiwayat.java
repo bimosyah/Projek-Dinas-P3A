@@ -1,4 +1,4 @@
-package syahputro.bimo.projek.dinas.p3a.activity.layout_baru;
+package syahputro.bimo.projek.dinas.p3a.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,8 +19,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import syahputro.bimo.projek.dinas.p3a.R;
-import syahputro.bimo.projek.dinas.p3a.SplashScreen;
-import syahputro.bimo.projek.dinas.p3a.activity.ActivityLogin;
 import syahputro.bimo.projek.dinas.p3a.adapter.AdapterRiwayat;
 import syahputro.bimo.projek.dinas.p3a.network.ApiClient;
 import syahputro.bimo.projek.dinas.p3a.network.ApiService;
