@@ -201,7 +201,7 @@ public class ActivityHalamanUtama extends AppCompatActivity {
                         recyclerView_bottom.setHasFixedSize(true);
                         recyclerView_bottom.setAdapter(adapterHome);
                         recyclerView_bottom.setLayoutManager(layoutManager);
-                        Log.d("kegiatan", "kegiatan jumlah: " + kegiatanList.size());
+//                        Log.d("kegiatan", "kegiatan jumlah: " + kegiatanList.size());
                     }
                 }
             }

@@ -1,6 +1,7 @@
 package syahputro.bimo.projek.dinas.p3a.activity.layout_baru;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -24,6 +25,8 @@ import retrofit2.Response;
 import syahputro.bimo.projek.dinas.p3a.R;
 import syahputro.bimo.projek.dinas.p3a.network.ApiClient;
 import syahputro.bimo.projek.dinas.p3a.network.ApiService;
+import syahputro.bimo.projek.dinas.p3a.network.response.statistik.bentuk.GrafikItem;
+import syahputro.bimo.projek.dinas.p3a.network.response.statistik.bentuk.ResponseBentuk;
 import syahputro.bimo.projek.dinas.p3a.network.response.statistik.year.ResponseYear;
 
 public class ActivityStatistik extends AppCompatActivity {
@@ -31,7 +34,8 @@ public class ActivityStatistik extends AppCompatActivity {
     private ApiService service;
     LoadingButton loadingButton;
     ArrayList<String> array_tahun = new ArrayList<String>();
-    List<DataEntry> data = new ArrayList<>();
+    List<DataEntry> data_chart = new ArrayList<>();
+    String selected_tahun;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,8 @@ public class ActivityStatistik extends AppCompatActivity {
         setSpinnerBerdasarkan();
         setSpinnerTahun();
 
+        Log.d("tag", "onResponse: array_tahun " + array_tahun);
+        getDataBerdasarkanBentuk(2018);
         loadingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,20 +57,6 @@ public class ActivityStatistik extends AppCompatActivity {
 
             }
         });
-
-
-
-
-        Pie pie = AnyChart.pie();
-
-        data.add(new ValueDataEntry("John", 10000));
-        data.add(new ValueDataEntry("Jake", 12000));
-        data.add(new ValueDataEntry("Peter", 18000));
-
-        pie.data(data);
-
-        AnyChartView anyChartView = findViewById(R.id.any_chart_view);
-        anyChartView.setChart(pie);
     }
 
     @Override
@@ -80,16 +72,53 @@ public class ActivityStatistik extends AppCompatActivity {
         spinnerBerdasarkan.setAdapter(adapter);
     }
 
+    private void getDataBerdasarkanBentuk(int tahun) {
+        final Call<ResponseBentuk> data = service.statistik_bentuk(2018);
+        data.enqueue(new Callback<ResponseBentuk>() {
+            @Override
+            public void onResponse(Call<ResponseBentuk> call, Response<ResponseBentuk> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        Pie pie = AnyChart.pie();
+                        List<GrafikItem> grafikItems = response.body().getGrafik();
+
+                        for (GrafikItem item : grafikItems) {
+                            data_chart.add(new ValueDataEntry("Fisik", Integer.parseInt(item.getFisik())));
+                            data_chart.add(new ValueDataEntry("Psikologi", Integer.parseInt(item.getPsikologi())));
+                            data_chart.add(new ValueDataEntry("Seksual", Integer.parseInt(item.getSeksual())));
+                            data_chart.add(new ValueDataEntry("Exploitasi", Integer.parseInt(item.getEksploitasi())));
+                            data_chart.add(new ValueDataEntry("Penelantaran", Integer.parseInt(item.getPenelantaran())));
+                            data_chart.add(new ValueDataEntry("Lain", Integer.parseInt(item.getLain())));
+                        }
+
+                        pie.data(data_chart);
+                        AnyChartView anyChartView = findViewById(R.id.any_chart_view);
+                        anyChartView.setChart(pie);
+                        pie.legend().position("top");
+                        pie.legend().itemsLayout("horizontalExpandable");
+                        pie.legend().padding(20);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBentuk> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "error " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
     private void setSpinnerTahun() {
-        Call<ResponseYear> kategori = service.statistik_tahun();
-        kategori.enqueue(new Callback<ResponseYear>() {
+        Call<ResponseYear> tahun = service.statistik_tahun();
+        tahun.enqueue(new Callback<ResponseYear>() {
             @Override
             public void onResponse(Call<ResponseYear> call, Response<ResponseYear> response) {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
                         if (response.body().getStatus().equals("0")) {
-                            List<String> tahun = response.body().getData();
-                            array_tahun.addAll(tahun);
+//                            List<String> tahun = response.body().getData();
+                            array_tahun.addAll(response.body().getData());
+//                            Log.d("tag", "onResponse: array_tahun " + array_tahun);
                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, array_tahun);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             spinnerTahun.setAdapter(adapter);
