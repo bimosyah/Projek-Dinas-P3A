@@ -12,7 +12,7 @@ public class ResponseBentuk{
 	private List<DataItem> data;
 
 	@SerializedName("grafik")
-	private List<GrafikItem> grafik;
+	private List<GrafikItemBentuk> grafik;
 
 	@SerializedName("status")
 	private boolean status;
@@ -33,11 +33,11 @@ public class ResponseBentuk{
 		return data;
 	}
 
-	public void setGrafik(List<GrafikItem> grafik){
+	public void setGrafik(List<GrafikItemBentuk> grafik){
 		this.grafik = grafik;
 	}
 
-	public List<GrafikItem> getGrafik(){
+	public List<GrafikItemBentuk> getGrafik(){
 		return grafik;
 	}
 

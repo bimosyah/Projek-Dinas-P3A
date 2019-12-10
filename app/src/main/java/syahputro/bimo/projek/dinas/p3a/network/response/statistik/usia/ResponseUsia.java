@@ -12,7 +12,7 @@ public class ResponseUsia{
 	private List<DataItem> data;
 
 	@SerializedName("grafik")
-	private List<GrafikItem> grafik;
+	private List<GrafikItemUsia> grafik;
 
 	@SerializedName("status")
 	private boolean status;
@@ -33,11 +33,11 @@ public class ResponseUsia{
 		return data;
 	}
 
-	public void setGrafik(List<GrafikItem> grafik){
+	public void setGrafik(List<GrafikItemUsia> grafik){
 		this.grafik = grafik;
 	}
 
-	public List<GrafikItem> getGrafik(){
+	public List<GrafikItemUsia> getGrafik(){
 		return grafik;
 	}
 

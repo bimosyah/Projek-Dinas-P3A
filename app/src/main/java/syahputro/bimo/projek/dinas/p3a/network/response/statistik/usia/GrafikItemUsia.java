@@ -2,7 +2,7 @@ package syahputro.bimo.projek.dinas.p3a.network.response.statistik.usia;
 
 import com.google.gson.annotations.SerializedName;
 
-public class GrafikItem{
+public class GrafikItemUsia {
 
 	@SerializedName("usia_1")
 	private String usia1;

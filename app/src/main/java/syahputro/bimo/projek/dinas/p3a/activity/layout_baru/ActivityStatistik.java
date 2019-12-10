@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TableLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,8 +26,10 @@ import retrofit2.Response;
 import syahputro.bimo.projek.dinas.p3a.R;
 import syahputro.bimo.projek.dinas.p3a.network.ApiClient;
 import syahputro.bimo.projek.dinas.p3a.network.ApiService;
-import syahputro.bimo.projek.dinas.p3a.network.response.statistik.bentuk.GrafikItem;
+import syahputro.bimo.projek.dinas.p3a.network.response.statistik.bentuk.GrafikItemBentuk;
 import syahputro.bimo.projek.dinas.p3a.network.response.statistik.bentuk.ResponseBentuk;
+import syahputro.bimo.projek.dinas.p3a.network.response.statistik.usia.GrafikItemUsia;
+import syahputro.bimo.projek.dinas.p3a.network.response.statistik.usia.ResponseUsia;
 import syahputro.bimo.projek.dinas.p3a.network.response.statistik.year.ResponseYear;
 
 public class ActivityStatistik extends AppCompatActivity {
@@ -36,6 +39,9 @@ public class ActivityStatistik extends AppCompatActivity {
     ArrayList<String> array_tahun = new ArrayList<String>();
     List<DataEntry> data_chart = new ArrayList<>();
     String selected_tahun;
+    AnyChartView anyChartView;
+    TableLayout tableLayout;
+    AnyChartView chart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +55,17 @@ public class ActivityStatistik extends AppCompatActivity {
         setSpinnerTahun();
 
         Log.d("tag", "onResponse: array_tahun " + array_tahun);
-        getDataBerdasarkanBentuk(2018);
         loadingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 loadingButton.showLoading();
+                if (spinnerBerdasarkan.getSelectedItemId() == 0) {
+//                    anyChartView.clear();
+                    getDataBerdasarkanBentuk(2018);
+                } else {
+//                    anyChartView.clear();
+                    getDataBerdasarkanUsia(2018);
+                }
 
             }
         });
@@ -80,9 +92,9 @@ public class ActivityStatistik extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
                         Pie pie = AnyChart.pie();
-                        List<GrafikItem> grafikItems = response.body().getGrafik();
+                        List<GrafikItemBentuk> grafikItemBentuks = response.body().getGrafik();
 
-                        for (GrafikItem item : grafikItems) {
+                        for (GrafikItemBentuk item : grafikItemBentuks) {
                             data_chart.add(new ValueDataEntry("Fisik", Integer.parseInt(item.getFisik())));
                             data_chart.add(new ValueDataEntry("Psikologi", Integer.parseInt(item.getPsikologi())));
                             data_chart.add(new ValueDataEntry("Seksual", Integer.parseInt(item.getSeksual())));
@@ -92,17 +104,57 @@ public class ActivityStatistik extends AppCompatActivity {
                         }
 
                         pie.data(data_chart);
-                        AnyChartView anyChartView = findViewById(R.id.any_chart_view);
                         anyChartView.setChart(pie);
+
                         pie.legend().position("top");
                         pie.legend().itemsLayout("horizontalExpandable");
                         pie.legend().padding(20);
+                        loadingButton.hideLoading();
+
+                        tableLayout.setVisibility(View.VISIBLE);
+                        chart.setVisibility(View.VISIBLE);
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBentuk> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "error " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void getDataBerdasarkanUsia(int tahun) {
+        final Call<ResponseUsia> data = service.statistik_usia(2018);
+        data.enqueue(new Callback<ResponseUsia>() {
+            @Override
+            public void onResponse(Call<ResponseUsia> call, Response<ResponseUsia> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        Pie pie = AnyChart.pie();
+                        List<GrafikItemUsia> grafikItemUsia = response.body().getGrafik();
+
+                        for (GrafikItemUsia item : grafikItemUsia) {
+                            data_chart.add(new ValueDataEntry("Usia 1", Integer.parseInt(item.getUsia1())));
+                            data_chart.add(new ValueDataEntry("Usia 2", Integer.parseInt(item.getUsia2())));
+                            data_chart.add(new ValueDataEntry("Usia 3", Integer.parseInt(item.getUsia3())));
+                        }
+
+                        pie.data(data_chart);
+                        anyChartView.setChart(pie);
+                        pie.legend().position("top");
+                        pie.legend().itemsLayout("horizontalExpandable");
+                        pie.legend().padding(20);
+                        loadingButton.hideLoading();
+
+                        tableLayout.setVisibility(View.VISIBLE);
+                        chart.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseUsia> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "error " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
@@ -135,6 +187,9 @@ public class ActivityStatistik extends AppCompatActivity {
     }
 
     private void init() {
+        anyChartView = findViewById(R.id.any_chart_view);
+        chart = findViewById(R.id.any_chart_view);
+        tableLayout = findViewById(R.id.table_statistik);
         loadingButton = findViewById(R.id.loadingButton);
         service = ApiClient.getClient().create(ApiService.class);
         spinnerBerdasarkan = findViewById(R.id.spinnerBerdasarkan);

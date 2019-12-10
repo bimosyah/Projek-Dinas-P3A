@@ -18,6 +18,7 @@ import syahputro.bimo.projek.dinas.p3a.network.response.profile_dinas.ResponsePr
 import syahputro.bimo.projek.dinas.p3a.network.response.register.ResponseRegister;
 import syahputro.bimo.projek.dinas.p3a.network.response.riwayat.ResponseRiwayat;
 import syahputro.bimo.projek.dinas.p3a.network.response.statistik.bentuk.ResponseBentuk;
+import syahputro.bimo.projek.dinas.p3a.network.response.statistik.usia.ResponseUsia;
 import syahputro.bimo.projek.dinas.p3a.network.response.statistik.year.ResponseYear;
 import syahputro.bimo.projek.dinas.p3a.network.response.user.ResponseUser;
 
@@ -84,4 +85,7 @@ public interface ApiService {
 
     @GET("laporan/bentuk/{tahun}")
     Call<ResponseBentuk> statistik_bentuk(@Path("tahun") int tahun);
+
+    @GET("laporan/usia/{tahun}")
+    Call<ResponseUsia> statistik_usia(@Path("tahun") int tahun);
 }

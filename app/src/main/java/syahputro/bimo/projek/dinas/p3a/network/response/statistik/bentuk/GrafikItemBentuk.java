@@ -2,7 +2,7 @@ package syahputro.bimo.projek.dinas.p3a.network.response.statistik.bentuk;
 
 import com.google.gson.annotations.SerializedName;
 
-public class GrafikItem{
+public class GrafikItemBentuk {
 
 	@SerializedName("eksploitasi")
 	private String eksploitasi;
