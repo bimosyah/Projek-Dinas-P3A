@@ -26,7 +26,6 @@
         <activity android:name=".activity.ActivityHalamanUtama" />
         <activity android:name=".activity.ActivityUser" />
         <activity android:name=".activity.ActivityArticle" />
-        <activity android:name=".activity.ActivityArticleDetailVideo" />
         <activity android:name=".activity.ActivityArticleDetail" />
         <activity android:name=".activity.ActivityRegister" />
         <activity

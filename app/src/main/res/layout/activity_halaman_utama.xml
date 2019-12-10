@@ -184,7 +184,7 @@
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
-        
+
         <TextView
             android:id="@+id/tvArticleTitle"
             android:layout_width="match_parent"
