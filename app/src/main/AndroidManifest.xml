@@ -16,7 +16,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.ActivityLupaSandi"></activity>
+        <activity android:name=".activity.ActivityStatistikDetail"></activity>
+        <activity android:name=".activity.ActivityLupaSandi" />
         <activity android:name=".activity.ActivityBantuan" />
         <activity android:name=".activity.ActivityArtikelAll" />
         <activity android:name=".activity.ActivityStatistik" />

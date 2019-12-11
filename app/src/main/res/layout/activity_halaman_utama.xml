@@ -43,12 +43,14 @@
 
                     <ImageView
                         android:id="@+id/iv_menu1"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_centerHorizontal="true"
                         android:src="@drawable/icpengaduan" />
 
                     <TextView
+                        android:textColor="@color/Black"
+                        android:layout_marginTop="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/iv_menu1"
@@ -67,12 +69,14 @@
 
                     <ImageView
                         android:id="@+id/iv_menu2"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_centerHorizontal="true"
                         android:src="@drawable/icstatistik" />
 
                     <TextView
+                        android:textColor="@color/Black"
+                        android:layout_marginTop="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/iv_menu2"
@@ -91,12 +95,14 @@
 
                     <ImageView
                         android:id="@+id/iv_menu3"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_centerHorizontal="true"
                         android:src="@drawable/icberita" />
 
                     <TextView
+                        android:textColor="@color/Black"
+                        android:layout_marginTop="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/iv_menu3"
@@ -122,17 +128,19 @@
 
                     <ImageView
                         android:id="@+id/iv_menu4"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_centerHorizontal="true"
                         android:src="@drawable/ichistory" />
 
                     <TextView
+                        android:textColor="@color/Black"
+                        android:layout_marginTop="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/iv_menu4"
                         android:layout_centerHorizontal="true"
-                        android:text="Histori" />
+                        android:text="Riwayat" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -146,12 +154,14 @@
 
                     <ImageView
                         android:id="@+id/iv_menu5"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_centerHorizontal="true"
                         android:src="@drawable/icprofdinas" />
 
                     <TextView
+                        android:textColor="@color/Black"
+                        android:layout_marginTop="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/iv_menu5"
@@ -170,12 +180,14 @@
 
                     <ImageView
                         android:id="@+id/iv_menu6"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_centerHorizontal="true"
                         android:src="@drawable/icbantuan" />
 
                     <TextView
+                        android:textColor="@color/Black"
+                        android:layout_marginTop="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/iv_menu6"
@@ -192,7 +204,8 @@
             android:layout_marginTop="20dp"
             android:padding="10dp"
             android:text="Kegiatan"
-            android:textSize="15sp"
+            android:textColor="@color/Black"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
