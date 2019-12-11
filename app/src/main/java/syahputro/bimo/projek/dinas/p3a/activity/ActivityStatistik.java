@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ import com.anychart.AnyChartView;
 import com.kusu.loadingbutton.LoadingButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,9 +30,8 @@ public class ActivityStatistik extends AppCompatActivity {
     private ApiService service;
     LoadingButton loadingButton;
     ArrayList<String> array_tahun = new ArrayList<String>();
-    String selected_tahun;
-    //    TableLayout tableLayout;
     AnyChartView chart_bentuk, chart_usia;
+    private int tahun;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,17 @@ public class ActivityStatistik extends AppCompatActivity {
         setSpinnerTahun();
 
         Log.d("tag", "onResponse: array_tahun " + array_tahun);
+        spinnerTahun.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                tahun = Integer.parseInt(array_tahun.get(i));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         loadingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,12 +64,14 @@ public class ActivityStatistik extends AppCompatActivity {
 //                    getDataBerdasarkanBentuk(2018);
                     Intent intent = new Intent(ActivityStatistik.this, ActivityStatistikDetail.class);
                     intent.putExtra("asal", "0");
+                    intent.putExtra("tahun", tahun);
                     startActivity(intent);
                 }
                 if (spinnerBerdasarkan.getSelectedItemId() == 1) {
 //                    getDataBerdasarkanUsia(2018);
                     Intent intent = new Intent(ActivityStatistik.this, ActivityStatistikDetail.class);
                     intent.putExtra("asal", "1");
+                    intent.putExtra("tahun", tahun);
                     startActivity(intent);
                 }
                 loadingButton.hideLoading();
@@ -79,15 +93,17 @@ public class ActivityStatistik extends AppCompatActivity {
     }
 
     private void setSpinnerTahun() {
-        Call<ResponseYear> tahun = service.statistik_tahun();
+        final Call<ResponseYear> tahun = service.statistik_tahun();
         tahun.enqueue(new Callback<ResponseYear>() {
             @Override
             public void onResponse(Call<ResponseYear> call, Response<ResponseYear> response) {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
                         if (response.body().getStatus().equals("0")) {
-//                            List<String> tahun = response.body().getData();
-                            array_tahun.addAll(response.body().getData());
+                            List<String> data_tahun = response.body().getData();
+                            for (String s : data_tahun) {
+                                array_tahun.add(s);
+                            }
 //                            Log.d("tag", "onResponse: array_tahun " + array_tahun);
                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, array_tahun);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

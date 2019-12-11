@@ -31,6 +31,7 @@ import syahputro.bimo.projek.dinas.p3a.network.response.statistik.usia.ResponseU
 public class ActivityStatistikDetail extends AppCompatActivity {
     private ApiService service;
     AnyChartView chart_usia;
+    String tahun;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,14 +42,16 @@ public class ActivityStatistikDetail extends AppCompatActivity {
 
         service = ApiClient.getClient().create(ApiService.class);
         if (getIntent().getStringExtra("asal").equals("0")){
-            getDataBerdasarkanBentuk(2018);
+            tahun = String.valueOf(getIntent().getIntExtra("tahun",0));
+            getDataBerdasarkanBentuk(tahun);
         }else {
-            getDataBerdasarkanUsia(2018);
+            tahun = String.valueOf(getIntent().getIntExtra("tahun",0));
+            getDataBerdasarkanUsia(tahun);
         }
     }
 
-    private void getDataBerdasarkanBentuk(int tahun) {
-        final Call<ResponseBentuk> data = service.statistik_bentuk(2018);
+    private void getDataBerdasarkanBentuk(String tahun) {
+        final Call<ResponseBentuk> data = service.statistik_bentuk(Integer.parseInt(tahun));
         data.enqueue(new Callback<ResponseBentuk>() {
             @Override
             public void onResponse(Call<ResponseBentuk> call, Response<ResponseBentuk> response) {
@@ -85,8 +88,8 @@ public class ActivityStatistikDetail extends AppCompatActivity {
         });
     }
 
-    private void getDataBerdasarkanUsia(int tahun) {
-        final Call<ResponseUsia> data = service.statistik_usia(2018);
+    private void getDataBerdasarkanUsia(String tahun) {
+        final Call<ResponseUsia> data = service.statistik_usia(Integer.parseInt(tahun));
         data.enqueue(new Callback<ResponseUsia>() {
             @Override
             public void onResponse(Call<ResponseUsia> call, Response<ResponseUsia> response) {
