@@ -65,16 +65,24 @@
             tools:layout_editor_absoluteX="16dp" />
 
         <com.anychart.AnyChartView
-            android:visibility="gone"
             android:id="@+id/any_chart_view"
             android:layout_width="match_parent"
             android:layout_height="300dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.093"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loadingButton"
-            app:layout_constraintVertical_bias="0.082" />
+            app:layout_constraintTop_toBottomOf="@+id/loadingButton" />
+
+        <com.anychart.AnyChartView
+            android:id="@+id/any_chart_view2"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loadingButton" />
 
         <HorizontalScrollView
             android:layout_width="wrap_content"
@@ -84,10 +92,10 @@
             app:layout_constraintTop_toBottomOf="@+id/any_chart_view">
 
             <TableLayout
-                android:visibility="gone"
                 android:id="@+id/table_statistik"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/any_chart_view">

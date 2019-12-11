@@ -12,7 +12,7 @@ public class ResponseSlider{
 	private List<DataSlider> articles;
 
 	@SerializedName("status")
-	private boolean status;
+	private int status;
 
 	public void setTotal(int total){
 		this.total = total;
@@ -30,11 +30,11 @@ public class ResponseSlider{
 		return articles;
 	}
 
-	public void setStatus(boolean status){
+	public void setStatus(int status){
 		this.status = status;
 	}
 
-	public boolean isStatus(){
+	public int isStatus(){
 		return status;
 	}
 }
