@@ -11,7 +11,7 @@ public class ResponseDetailArtikel{
 	private DataDetailArtikel dataDetailArtikel;
 
 	@SerializedName("status")
-	private boolean status;
+	private int status;
 
 	public void setTotal(int total){
 		this.total = total;
@@ -29,11 +29,11 @@ public class ResponseDetailArtikel{
 		return dataDetailArtikel;
 	}
 
-	public void setStatus(boolean status){
+	public void setStatus(int status){
 		this.status = status;
 	}
 
-	public boolean isStatus(){
+	public int isStatus(){
 		return status;
 	}
 }
