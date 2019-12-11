@@ -35,6 +35,8 @@ public class ActivityStatistikDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistik_detail);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         chart_usia = findViewById(R.id.any_chart_view_usia);
 
         service = ApiClient.getClient().create(ApiService.class);
@@ -116,5 +118,11 @@ public class ActivityStatistikDetail extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "error " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }
