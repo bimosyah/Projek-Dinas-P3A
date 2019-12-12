@@ -16,6 +16,7 @@ import retrofit2.Response;
 import syahputro.bimo.projek.dinas.p3a.R;
 import syahputro.bimo.projek.dinas.p3a.network.ApiClient;
 import syahputro.bimo.projek.dinas.p3a.network.ApiService;
+import syahputro.bimo.projek.dinas.p3a.network.response.login.ResponseLogin;
 import syahputro.bimo.projek.dinas.p3a.network.response.user.DataUser;
 import syahputro.bimo.projek.dinas.p3a.network.response.user.ResponseUser;
 import syahputro.bimo.projek.dinas.p3a.utils.Preference;
@@ -82,9 +83,9 @@ public class ActivityUser extends AppCompatActivity {
         return true;
     }
 
-    public void openDialog(){
+    public void openDialog() {
         DialogPassword dialogPassword = new DialogPassword();
-        dialogPassword.show(getSupportFragmentManager(),"dialog password");
+        dialogPassword.show(getSupportFragmentManager(), "dialog password");
     }
 
 }

@@ -1,6 +1,7 @@
 package syahputro.bimo.projek.dinas.p3a.network;
 
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -20,6 +21,7 @@ import syahputro.bimo.projek.dinas.p3a.network.response.riwayat.ResponseRiwayat;
 import syahputro.bimo.projek.dinas.p3a.network.response.statistik.bentuk.ResponseBentuk;
 import syahputro.bimo.projek.dinas.p3a.network.response.statistik.usia.ResponseUsia;
 import syahputro.bimo.projek.dinas.p3a.network.response.statistik.year.ResponseYear;
+import syahputro.bimo.projek.dinas.p3a.network.response.user.ResponseUpdate;
 import syahputro.bimo.projek.dinas.p3a.network.response.user.ResponseUser;
 
 public interface ApiService {
@@ -79,6 +81,12 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("profile")
     Call<ResponseUser> user(@Field("id") int id);
+
+    @FormUrlEncoded
+    @POST("api/profile/update")
+    Call<ResponseUpdate> update_password(
+            @Field("id") int id,
+            @Field("password") String password);
 
     @GET("laporan/tahun/5")
     Call<ResponseYear> statistik_tahun();

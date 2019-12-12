@@ -13,4 +13,5 @@
     <color name="sudah_teratasi">#4CAF50</color>
     <color name="tidak_teratasi">#F44336</color>
     <color name="tidak_bisa_dihubungi">#777070</color>
+    <color name="table_header">#00CBDD</color>
 </resources>
