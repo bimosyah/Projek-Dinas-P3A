@@ -9,7 +9,7 @@ public class ResponseBentuk{
 	private int total;
 
 	@SerializedName("data")
-	private List<DataItem> data;
+	private List<DataItemBentuk> data;
 
 	@SerializedName("grafik")
 	private List<GrafikItemBentuk> grafik;
@@ -25,11 +25,11 @@ public class ResponseBentuk{
 		return total;
 	}
 
-	public void setData(List<DataItem> data){
+	public void setData(List<DataItemBentuk> data){
 		this.data = data;
 	}
 
-	public List<DataItem> getData(){
+	public List<DataItemBentuk> getData(){
 		return data;
 	}
 

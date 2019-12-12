@@ -9,7 +9,7 @@ public class ResponseUsia{
 	private int total;
 
 	@SerializedName("data")
-	private List<DataItem> data;
+	private List<DataItemUsia> data;
 
 	@SerializedName("grafik")
 	private List<GrafikItemUsia> grafik;
@@ -25,11 +25,11 @@ public class ResponseUsia{
 		return total;
 	}
 
-	public void setData(List<DataItem> data){
+	public void setData(List<DataItemUsia> data){
 		this.data = data;
 	}
 
-	public List<DataItem> getData(){
+	public List<DataItemUsia> getData(){
 		return data;
 	}
 

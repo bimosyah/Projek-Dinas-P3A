@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.anychart.AnyChartView;
 import com.kusu.loadingbutton.LoadingButton;
 
 import java.util.ArrayList;
@@ -30,7 +29,6 @@ public class ActivityStatistik extends AppCompatActivity {
     private ApiService service;
     LoadingButton loadingButton;
     ArrayList<String> array_tahun = new ArrayList<String>();
-    AnyChartView chart_bentuk, chart_usia;
     private int tahun;
 
     @Override
@@ -61,14 +59,12 @@ public class ActivityStatistik extends AppCompatActivity {
             public void onClick(View view) {
                 loadingButton.showLoading();
                 if (spinnerBerdasarkan.getSelectedItemId() == 0) {
-//                    getDataBerdasarkanBentuk(2018);
                     Intent intent = new Intent(ActivityStatistik.this, ActivityStatistikDetail.class);
                     intent.putExtra("asal", "0");
                     intent.putExtra("tahun", tahun);
                     startActivity(intent);
                 }
                 if (spinnerBerdasarkan.getSelectedItemId() == 1) {
-//                    getDataBerdasarkanUsia(2018);
                     Intent intent = new Intent(ActivityStatistik.this, ActivityStatistikDetail.class);
                     intent.putExtra("asal", "1");
                     intent.putExtra("tahun", tahun);
@@ -104,7 +100,6 @@ public class ActivityStatistik extends AppCompatActivity {
                             for (String s : data_tahun) {
                                 array_tahun.add(s);
                             }
-//                            Log.d("tag", "onResponse: array_tahun " + array_tahun);
                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, array_tahun);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             spinnerTahun.setAdapter(adapter);
@@ -121,9 +116,6 @@ public class ActivityStatistik extends AppCompatActivity {
     }
 
     private void init() {
-        chart_bentuk = findViewById(R.id.any_chart_view);
-        chart_usia = findViewById(R.id.any_chart_view_usia);
-//        tableLayout = findViewById(R.id.table_statistik);
         loadingButton = findViewById(R.id.loadingButton);
         service = ApiClient.getClient().create(ApiService.class);
         spinnerBerdasarkan = findViewById(R.id.spinnerBerdasarkan);
