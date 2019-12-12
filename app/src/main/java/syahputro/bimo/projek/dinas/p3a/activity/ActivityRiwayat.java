@@ -97,4 +97,10 @@ public class ActivityRiwayat extends AppCompatActivity {
             finish();
         }
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 }
