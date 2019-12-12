@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
             android:background="@drawable/layout_button"
-            android:text="Cari Data"
+            android:text="Tampilkan Data"
             android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@+id/textView16"
             app:lb_buttonColor="@color/colorPrimary"

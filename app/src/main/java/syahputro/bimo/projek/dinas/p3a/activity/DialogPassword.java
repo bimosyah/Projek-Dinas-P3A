@@ -2,6 +2,7 @@ package syahputro.bimo.projek.dinas.p3a.activity;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import syahputro.bimo.projek.dinas.p3a.utils.Preference;
 public class DialogPassword extends AppCompatDialogFragment {
     EditText etPassword1,etPassword2;
     ApiService service;
+    private DialogListener listener;
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -52,7 +54,7 @@ public class DialogPassword extends AppCompatDialogFragment {
                         String password1 = etPassword1.getText().toString();
                         String password2 = etPassword2.getText().toString();
                         if (password1.equals(password2)){
-                            update_password(password1);
+                            listener.getPassword(password1);
                         }else {
                             Toast.makeText(getContext(), "Password tidak cocok ", Toast.LENGTH_LONG).show();
                         }
@@ -62,24 +64,17 @@ public class DialogPassword extends AppCompatDialogFragment {
         return builder.create();
     }
 
-    private void update_password(String pass) {
-        Call<ResponseUpdate> update = service.update_password(Integer.parseInt(Preference.getIdUser(getActivity())),pass);
-        update.enqueue(new Callback<ResponseUpdate>() {
-            @Override
-            public void onResponse(Call<ResponseUpdate> call, Response<ResponseUpdate> response) {
-                if (response.isSuccessful()) {
-                    if (response.body() != null) {
-                        if (response.body().getStatus() == 0){
-                            Toast.makeText(getContext(), "Password berhasil diubah", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                }
-            }
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        try {
+            listener = (DialogListener) context;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-            @Override
-            public void onFailure(Call<ResponseUpdate> call, Throwable t) {
-                Toast.makeText(getContext(), "error " + t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
+    public interface DialogListener{
+        void getPassword(String password);
     }
 }

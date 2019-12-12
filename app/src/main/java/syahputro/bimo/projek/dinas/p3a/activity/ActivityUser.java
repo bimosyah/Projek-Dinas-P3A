@@ -1,5 +1,6 @@
 package syahputro.bimo.projek.dinas.p3a.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,12 +17,13 @@ import retrofit2.Response;
 import syahputro.bimo.projek.dinas.p3a.R;
 import syahputro.bimo.projek.dinas.p3a.network.ApiClient;
 import syahputro.bimo.projek.dinas.p3a.network.ApiService;
-import syahputro.bimo.projek.dinas.p3a.network.response.login.ResponseLogin;
+import syahputro.bimo.projek.dinas.p3a.network.response.pengaduan.ResponsePengaduan;
 import syahputro.bimo.projek.dinas.p3a.network.response.user.DataUser;
+import syahputro.bimo.projek.dinas.p3a.network.response.user.ResponseUpdate;
 import syahputro.bimo.projek.dinas.p3a.network.response.user.ResponseUser;
 import syahputro.bimo.projek.dinas.p3a.utils.Preference;
 
-public class ActivityUser extends AppCompatActivity {
+public class ActivityUser extends AppCompatActivity implements DialogPassword.DialogListener {
     ApiService service;
     TextView nama1, nama2, notelp, alamat, tgl_lahir;
     Button gantiPassword;
@@ -88,4 +90,32 @@ public class ActivityUser extends AppCompatActivity {
         dialogPassword.show(getSupportFragmentManager(), "dialog password");
     }
 
+    private void update_password(String pass) {
+        String id_user = Preference.getIdUser(getApplicationContext());
+        service = ApiClient.getClient().create(ApiService.class);
+        Call<ResponseUpdate> pengaduan = service.update_password(Integer.parseInt(id_user),pass);
+        pengaduan.enqueue(new Callback<ResponseUpdate>() {
+            @Override
+            public void onResponse(Call<ResponseUpdate> call, Response<ResponseUpdate> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        if (response.body().getStatus() == 0) {
+                            Toast.makeText(getApplicationContext(), "Berhasil di update", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseUpdate> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "error " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    @Override
+    public void getPassword(String password) {
+        update_password(password);
+        Toast.makeText(getApplicationContext(), password, Toast.LENGTH_LONG).show();
+    }
 }

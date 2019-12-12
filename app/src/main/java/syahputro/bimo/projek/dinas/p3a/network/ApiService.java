@@ -1,7 +1,6 @@
 package syahputro.bimo.projek.dinas.p3a.network;
 
 import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -83,10 +82,8 @@ public interface ApiService {
     Call<ResponseUser> user(@Field("id") int id);
 
     @FormUrlEncoded
-    @POST("api/profile/update")
-    Call<ResponseUpdate> update_password(
-            @Field("id") int id,
-            @Field("password") String password);
+    @POST("profile/update")
+    Call<ResponseUpdate> update_password(@Field("id") int id, @Field("password") String password);
 
     @GET("laporan/tahun/5")
     Call<ResponseYear> statistik_tahun();
