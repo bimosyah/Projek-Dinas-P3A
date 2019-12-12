@@ -29,6 +29,7 @@ import syahputro.bimo.projek.dinas.p3a.network.ApiService;
 import syahputro.bimo.projek.dinas.p3a.network.response.statistik.bentuk.DataItemBentuk;
 import syahputro.bimo.projek.dinas.p3a.network.response.statistik.bentuk.GrafikItemBentuk;
 import syahputro.bimo.projek.dinas.p3a.network.response.statistik.bentuk.ResponseBentuk;
+import syahputro.bimo.projek.dinas.p3a.network.response.statistik.usia.DataItemUsia;
 import syahputro.bimo.projek.dinas.p3a.network.response.statistik.usia.GrafikItemUsia;
 import syahputro.bimo.projek.dinas.p3a.network.response.statistik.usia.ResponseUsia;
 
@@ -83,6 +84,7 @@ public class ActivityStatistikDetail extends AppCompatActivity {
                         TextView tv1 = new TextView(getApplicationContext());
                         tv1.setText(" Bulan ");
                         tv1.setTextColor(Color.BLACK);
+                        tv1.setGravity(Gravity.CENTER);
                         tbrow0.addView(tv1);
                         TextView tv2 = new TextView(getApplicationContext());
                         tv2.setText(" Fisik ");
@@ -177,11 +179,58 @@ public class ActivityStatistikDetail extends AppCompatActivity {
                     if (response.body() != null) {
                         Pie pie = AnyChart.pie();
                         List<GrafikItemUsia> grafikItemUsia = response.body().getGrafik();
+                        List<DataItemUsia> dataItem = response.body().getData();
                         List<DataEntry> data_chart = new ArrayList<>();
                         for (GrafikItemUsia item : grafikItemUsia) {
                             data_chart.add(new ValueDataEntry("Usia 19 - 24", Integer.parseInt(item.getUsia1())));
                             data_chart.add(new ValueDataEntry("Usia 25 - 44", Integer.parseInt(item.getUsia2())));
                             data_chart.add(new ValueDataEntry("Usia 45+", Integer.parseInt(item.getUsia3())));
+                        }
+
+                        TableLayout stk = findViewById(R.id.table_statistik);
+                        TableRow tbrow0 = new TableRow(getApplicationContext());
+                        TextView tv1 = new TextView(getApplicationContext());
+                        tv1.setText(" Bulan ");
+                        tv1.setTextColor(Color.BLACK);
+                        tv1.setGravity(Gravity.CENTER);
+                        tbrow0.addView(tv1);
+                        TextView tv2 = new TextView(getApplicationContext());
+                        tv2.setText(" 19 - 24 ");
+                        tv2.setTextColor(Color.BLACK);
+                        tbrow0.addView(tv2);
+                        TextView tv3 = new TextView(getApplicationContext());
+                        tv3.setText(" 25 - 45");
+                        tv3.setTextColor(Color.BLACK);
+                        tbrow0.addView(tv3);
+                        TextView tv4 = new TextView(getApplicationContext());
+                        tv4.setText(" 45+ ");
+                        tv4.setTextColor(Color.BLACK);
+                        tbrow0.addView(tv4);
+                        stk.addView(tbrow0);
+
+                        for (DataItemUsia item : dataItem){
+                            TableRow tbrow = new TableRow(getApplicationContext());
+                            TextView t1v = new TextView(getApplicationContext());
+                            t1v.setText("" + item.getBulan());
+                            t1v.setTextColor(Color.BLACK);
+                            t1v.setGravity(Gravity.CENTER);
+                            tbrow.addView(t1v);
+                            TextView t2v = new TextView(getApplicationContext());
+                            t2v.setText("" + item.getUsia1());
+                            t2v.setTextColor(Color.BLACK);
+                            t2v.setGravity(Gravity.CENTER);
+                            tbrow.addView(t2v);
+                            TextView t3v = new TextView(getApplicationContext());
+                            t3v.setText("" + item.getUsia2());
+                            t3v.setTextColor(Color.BLACK);
+                            t3v.setGravity(Gravity.CENTER);
+                            tbrow.addView(t3v);
+                            TextView t4v = new TextView(getApplicationContext());
+                            t4v.setText("" + item.getUsia3());
+                            t4v.setTextColor(Color.BLACK);
+                            t4v.setGravity(Gravity.CENTER);
+                            tbrow.addView(t4v);
+                            stk.addView(tbrow);
                         }
 
                         pie.data(data_chart);

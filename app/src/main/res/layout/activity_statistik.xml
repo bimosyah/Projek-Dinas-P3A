@@ -47,7 +47,6 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/textView16"
             app:layout_constraintEnd_toEndOf="@+id/spinnerBerdasarkan"
-            app:layout_constraintStart_toStartOf="@+id/spinnerBerdasarkan"
             app:layout_constraintTop_toTopOf="@+id/textView16" />
 
         <com.kusu.loadingbutton.LoadingButton
