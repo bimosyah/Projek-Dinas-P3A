@@ -197,14 +197,17 @@ public class ActivityStatistikDetail extends AppCompatActivity {
                         TextView tv2 = new TextView(getApplicationContext());
                         tv2.setText(" 19 - 24 ");
                         tv2.setTextColor(Color.BLACK);
+                        tv2.setGravity(Gravity.CENTER);
                         tbrow0.addView(tv2);
                         TextView tv3 = new TextView(getApplicationContext());
                         tv3.setText(" 25 - 45");
                         tv3.setTextColor(Color.BLACK);
+                        tv3.setGravity(Gravity.CENTER);
                         tbrow0.addView(tv3);
                         TextView tv4 = new TextView(getApplicationContext());
                         tv4.setText(" 45+ ");
                         tv4.setTextColor(Color.BLACK);
+                        tv4.setGravity(Gravity.CENTER);
                         tbrow0.addView(tv4);
                         stk.addView(tbrow0);
 
