@@ -48,13 +48,14 @@ public class ActivityPengaduan extends AppCompatActivity {
     private final ArrayList<String> array_kecamatan = new ArrayList<String>();
     private final ArrayList<String> array_id_kecamatan = new ArrayList<String>();
     private final ArrayList<String> array_id_kategori = new ArrayList<String>();
-    private EditText et_pengaduan;
+    private EditText et_pengaduan, et_desa, et_dusun, et_usia;
     private LocationManager locationManager;
     private String longitude, latitude;
     private static final int REQUEST_LOCATION = 1;
     private LoadingButton loadingButton;
     private int id_kategori;
     private int id_kecamatan;
+    private String jenkel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,23 @@ public class ActivityPengaduan extends AppCompatActivity {
         loadKategori();
         loadKecamatan();
         setSpinnerJenkel();
+
+        spinner_jenkel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == 0) {
+                    jenkel = "L";
+                } else {
+                    jenkel = "P";
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         spinner_kategori.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -160,6 +178,9 @@ public class ActivityPengaduan extends AppCompatActivity {
         spinner_kecamatan = findViewById(R.id.spinnerKecamatan);
         btn_submit = findViewById(R.id.buttonSubmit);
         et_pengaduan = findViewById(R.id.etPengaduan);
+        et_usia = findViewById(R.id.etUsia);
+        et_desa = findViewById(R.id.etDesa);
+        et_dusun = findViewById(R.id.etDusun);
         loadingButton = findViewById(R.id.loadingButton);
     }
 
@@ -172,8 +193,17 @@ public class ActivityPengaduan extends AppCompatActivity {
             getLocation();
         }
 
-        Call<ResponsePengaduan> pengaduan = service.pengaduan(Integer.parseInt(id_user), id_kategori,
-                et_pengaduan.getText().toString(), latitude, longitude);
+        Call<ResponsePengaduan> pengaduan = service.pengaduan(
+                Integer.parseInt(id_user),
+                id_kategori,
+                et_pengaduan.getText().toString(),
+                jenkel,
+                Integer.parseInt(et_usia.getText().toString()),
+                id_kecamatan,
+                et_desa.getText().toString(),
+                et_dusun.getText().toString(),
+                latitude,
+                longitude);
         pengaduan.enqueue(new Callback<ResponsePengaduan>() {
             @Override
             public void onResponse(Call<ResponsePengaduan> call, Response<ResponsePengaduan> response) {

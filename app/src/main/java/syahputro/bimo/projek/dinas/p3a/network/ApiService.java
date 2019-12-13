@@ -50,6 +50,11 @@ public interface ApiService {
             @Field("id_user") int id_user,
             @Field("id_kategori") int id_kategori,
             @Field("isi_laporan") String isi_laporan,
+            @Field("jenis_kelamin") String jenis_kelamin,
+            @Field("usia") int usia,
+            @Field("kecamatan") int kecamatan,
+            @Field("desa") String desa,
+            @Field("dusun") String dusun,
             @Field("lat") String lat,
             @Field("long") String lon
     );

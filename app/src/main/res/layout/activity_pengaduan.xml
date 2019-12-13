@@ -111,6 +111,7 @@
                     android:id="@+id/etUsia"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:inputType="number"
                     app:layout_constraintBottom_toBottomOf="@+id/textView2"
                     app:layout_constraintEnd_toEndOf="@+id/spinnerJenkel"
                     app:layout_constraintStart_toStartOf="@+id/spinnerJenkel"
@@ -146,7 +147,7 @@
                     app:layout_constraintTop_toTopOf="@+id/textView3" />
 
                 <EditText
-                    android:id="@+id/etKecamatan"
+                    android:id="@+id/etDesa"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="@+id/textView4"
@@ -165,12 +166,12 @@
                     app:layout_constraintTop_toTopOf="@+id/textView4" />
 
                 <EditText
-                    android:id="@+id/editText5"
+                    android:id="@+id/etDusun"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="@+id/textView5"
-                    app:layout_constraintEnd_toEndOf="@+id/etKecamatan"
-                    app:layout_constraintStart_toStartOf="@+id/etKecamatan"
+                    app:layout_constraintEnd_toEndOf="@+id/etDesa"
+                    app:layout_constraintStart_toStartOf="@+id/etDesa"
                     app:layout_constraintTop_toTopOf="@+id/textView5" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
