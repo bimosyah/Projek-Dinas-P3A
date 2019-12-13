@@ -2,71 +2,82 @@ package syahputro.bimo.projek.dinas.p3a.network.response.profile_dinas;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Data{
+public class Data {
 
-	@SerializedName("template_wa")
-	private String templateWa;
+    @SerializedName("template_wa")
+    private String templateWa;
 
-	@SerializedName("logo")
-	private String logo;
+    @SerializedName("logo")
+    private String logo;
 
-	@SerializedName("no_wa")
-	private String noWa;
+    @SerializedName("no_wa")
+    private String noWa;
 
-	@SerializedName("nama_dinas")
-	private String namaDinas;
+    @SerializedName("nama_dinas")
+    private String namaDinas;
 
-	@SerializedName("no_telp")
-	private String noTelp;
+    @SerializedName("nama_kabupaten")
+    private String namaKabupaten;
 
-	@SerializedName("alamat")
-	private String alamat;
+    public String getNamaKabupaten() {
+        return namaKabupaten;
+    }
 
-	public void setTemplateWa(String templateWa){
-		this.templateWa = templateWa;
-	}
+    public void setNamaKabupaten(String namaKabupaten) {
+        this.namaKabupaten = namaKabupaten;
+    }
 
-	public String getTemplateWa(){
-		return templateWa;
-	}
+    @SerializedName("no_telp")
+    private String noTelp;
 
-	public void setLogo(String logo){
-		this.logo = logo;
-	}
+    @SerializedName("alamat")
+    private String alamat;
 
-	public String getLogo(){
-		return logo;
-	}
+    public void setTemplateWa(String templateWa) {
+        this.templateWa = templateWa;
+    }
 
-	public void setNoWa(String noWa){
-		this.noWa = noWa;
-	}
+    public String getTemplateWa() {
+        return templateWa;
+    }
 
-	public String getNoWa(){
-		return noWa;
-	}
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
 
-	public void setNamaDinas(String namaDinas){
-		this.namaDinas = namaDinas;
-	}
+    public String getLogo() {
+        return logo;
+    }
 
-	public String getNamaDinas(){
-		return namaDinas;
-	}
+    public void setNoWa(String noWa) {
+        this.noWa = noWa;
+    }
 
-	public void setNoTelp(String noTelp){
-		this.noTelp = noTelp;
-	}
+    public String getNoWa() {
+        return noWa;
+    }
 
-	public String getNoTelp(){
-		return noTelp;
-	}
+    public void setNamaDinas(String namaDinas) {
+        this.namaDinas = namaDinas;
+    }
 
-	public void setAlamat(String alamat){
-		this.alamat = alamat;
-	}
+    public String getNamaDinas() {
+        return namaDinas;
+    }
 
-	public String getAlamat(){
-		return alamat;
-	}
+    public void setNoTelp(String noTelp) {
+        this.noTelp = noTelp;
+    }
+
+    public String getNoTelp() {
+        return noTelp;
+    }
+
+    public void setAlamat(String alamat) {
+        this.alamat = alamat;
+    }
+
+    public String getAlamat() {
+        return alamat;
+    }
 }

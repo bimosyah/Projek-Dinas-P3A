@@ -1,7 +1,5 @@
 package syahputro.bimo.projek.dinas.p3a.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +8,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 
@@ -22,9 +22,9 @@ import syahputro.bimo.projek.dinas.p3a.network.ApiService;
 import syahputro.bimo.projek.dinas.p3a.network.response.profile_dinas.ResponseProfileDinas;
 
 public class ActivityProfilDinas extends AppCompatActivity {
-    private TextView tvCall, tvKonsul, tvNamaDinas, tvAlamat;
+    private TextView tvCall, tvKonsul, tvNamaDinas, tvAlamat, tvKab;
     private ImageView imageView;
-    private String no_wa, msg, telp, alamat, nama_dinas, logo;
+    private String no_wa, msg, telp, alamat, nama_dinas, logo, kabupaten;
     private ApiService service;
 
     @Override
@@ -73,6 +73,7 @@ public class ActivityProfilDinas extends AppCompatActivity {
                         telp = response.body().getData().getNoTelp();
                         alamat = response.body().getData().getAlamat();
                         nama_dinas = response.body().getData().getNamaDinas();
+                        kabupaten = response.body().getData().getNamaKabupaten();
                         logo = response.body().getData().getLogo();
 
                         Glide.with(getApplicationContext())
@@ -80,6 +81,7 @@ public class ActivityProfilDinas extends AppCompatActivity {
                                 .into(imageView);
                         tvNamaDinas.setText(nama_dinas);
                         tvAlamat.setText(alamat);
+                        tvKab.setText(kabupaten);
                     }
                 }
             }
@@ -92,6 +94,7 @@ public class ActivityProfilDinas extends AppCompatActivity {
     }
 
     private void init() {
+        tvKab = findViewById(R.id.textView10);
         tvCall = findViewById(R.id.tvCall);
         tvKonsul = findViewById(R.id.tvKonsul);
         imageView = findViewById(R.id.ivDinas);
