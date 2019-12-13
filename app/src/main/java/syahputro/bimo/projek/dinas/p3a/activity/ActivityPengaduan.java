@@ -33,6 +33,8 @@ import retrofit2.Response;
 import syahputro.bimo.projek.dinas.p3a.R;
 import syahputro.bimo.projek.dinas.p3a.network.ApiClient;
 import syahputro.bimo.projek.dinas.p3a.network.ApiService;
+import syahputro.bimo.projek.dinas.p3a.network.response.DataItemKecamatan;
+import syahputro.bimo.projek.dinas.p3a.network.response.ResponseKecamatan;
 import syahputro.bimo.projek.dinas.p3a.network.response.kategori.DataKategori;
 import syahputro.bimo.projek.dinas.p3a.network.response.kategori.ResponseKategori;
 import syahputro.bimo.projek.dinas.p3a.network.response.pengaduan.ResponsePengaduan;
@@ -41,8 +43,10 @@ import syahputro.bimo.projek.dinas.p3a.utils.Preference;
 public class ActivityPengaduan extends AppCompatActivity {
     private ApiService service;
     private Button btn_submit;
-    private Spinner spinner_kategori;
+    private Spinner spinner_kategori, spinner_jenkel, spinner_kecamatan;
     private final ArrayList<String> array_kategori = new ArrayList<String>();
+    private final ArrayList<String> array_kecamatan = new ArrayList<String>();
+    private final ArrayList<String> array_id_kecamatan = new ArrayList<String>();
     private final ArrayList<String> array_id_kategori = new ArrayList<String>();
     private EditText et_pengaduan;
     private LocationManager locationManager;
@@ -50,6 +54,7 @@ public class ActivityPengaduan extends AppCompatActivity {
     private static final int REQUEST_LOCATION = 1;
     private LoadingButton loadingButton;
     private int id_kategori;
+    private int id_kecamatan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +65,24 @@ public class ActivityPengaduan extends AppCompatActivity {
 
         init();
         loadKategori();
-
+        loadKecamatan();
+        setSpinnerJenkel();
         spinner_kategori.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 id_kategori = Integer.parseInt(array_id_kategori.get(i));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        spinner_kecamatan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                id_kecamatan = Integer.parseInt(array_id_kecamatan.get(i));
             }
 
             @Override
@@ -109,9 +127,37 @@ public class ActivityPengaduan extends AppCompatActivity {
         });
     }
 
+    private void loadKecamatan() {
+        Call<ResponseKecamatan> kecamatan = service.kecamatan();
+        kecamatan.enqueue(new Callback<ResponseKecamatan>() {
+            @Override
+            public void onResponse(Call<ResponseKecamatan> call, Response<ResponseKecamatan> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        if (response.body().getStatus().equals("0")) {
+                            List<DataItemKecamatan> data = response.body().getData();
+                            for (DataItemKecamatan data_kecamatan : data) {
+                                array_id_kecamatan.add(data_kecamatan.getIdKecamatan());
+                                array_kecamatan.add(data_kecamatan.getNamaKecamatan());
+                            }
+                            setSpinnerKecamatan();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseKecamatan> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "error " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
     private void init() {
         service = ApiClient.getClient().create(ApiService.class);
         spinner_kategori = findViewById(R.id.spinnerKategori);
+        spinner_jenkel = findViewById(R.id.spinnerJenkel);
+        spinner_kecamatan = findViewById(R.id.spinnerKecamatan);
         btn_submit = findViewById(R.id.buttonSubmit);
         et_pengaduan = findViewById(R.id.etPengaduan);
         loadingButton = findViewById(R.id.loadingButton);
@@ -126,7 +172,6 @@ public class ActivityPengaduan extends AppCompatActivity {
             getLocation();
         }
 
-        //id kategori belum dinamis
         Call<ResponsePengaduan> pengaduan = service.pengaduan(Integer.parseInt(id_user), id_kategori,
                 et_pengaduan.getText().toString(), latitude, longitude);
         pengaduan.enqueue(new Callback<ResponsePengaduan>() {
@@ -137,7 +182,7 @@ public class ActivityPengaduan extends AppCompatActivity {
                         if (response.body().getStatus().equals("0")) {
                             loadingButton.hideLoading();
                             Intent intent = new Intent(ActivityPengaduan.this, ActivityRiwayat.class);
-                            intent.putExtra("EXIT",true);
+                            intent.putExtra("EXIT", true);
                             startActivity(intent);
                             Toast.makeText(getApplicationContext(), "Pengaduan Tersimpan", Toast.LENGTH_LONG).show();
                         } else if (response.body().getStatus().equals("1")) {
@@ -160,6 +205,19 @@ public class ActivityPengaduan extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, array_kategori);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_kategori.setAdapter(adapter);
+    }
+
+    private void setSpinnerKecamatan() {
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, array_kecamatan);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_kecamatan.setAdapter(adapter);
+    }
+
+    private void setSpinnerJenkel() {
+        String[] items = new String[]{"Laki-Laki", "Perempuan"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, items);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_jenkel.setAdapter(adapter);
     }
 
     private void onGPS() {

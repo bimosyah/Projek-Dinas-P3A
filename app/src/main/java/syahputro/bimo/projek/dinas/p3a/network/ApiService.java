@@ -6,6 +6,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import syahputro.bimo.projek.dinas.p3a.network.response.ResponseKecamatan;
 import syahputro.bimo.projek.dinas.p3a.network.response.artikel.detail_artikel.ResponseDetailArtikel;
 import syahputro.bimo.projek.dinas.p3a.network.response.artikel.list_artikel.ResponseArtikel;
 import syahputro.bimo.projek.dinas.p3a.network.response.artikel.list_berita.ResponseBerita;
@@ -55,6 +56,9 @@ public interface ApiService {
 
     @GET("master/kategori")
     Call<ResponseKategori> kategori();
+
+    @GET("master/kecamatan")
+    Call<ResponseKecamatan> kecamatan();
 
     @GET("history/{id_user}")
     Call<ResponseRiwayat> riwayat(@Path("id_user") int id_user);
