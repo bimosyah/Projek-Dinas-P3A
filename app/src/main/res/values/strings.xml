@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sambat DP3A</string>
+    <string name="app_name">Wadool DP3A</string>
     <string name="title_activity_splash_screen">SplashScreen</string>
     <string name="title_activity_login">ActivityLogin</string>
     <string name="no_telp">No Telp</string>
@@ -27,4 +27,5 @@
     <string name="color_sudah_teratasi">#4CAF50</string>
     <string name="color_tidak_teratasi">#F44336</string>
     <string name="color_tidak_bisa_dihubungi">#777070</string>
+    <string name="color_on_proses">#FF7F00</string>
 </resources>

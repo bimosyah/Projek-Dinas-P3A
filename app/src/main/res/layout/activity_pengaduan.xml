@@ -1,78 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="40dp">
 
-        <Spinner
-            android:id="@+id/spinnerKategori"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Kategori"
-            android:textSize="@dimen/text_view_size_head"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Isi Aduan"
-            android:textSize="@dimen/text_view_size_head"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerKategori" />
-
-        <EditText
-            android:id="@+id/etPengaduan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:hint="aduan"
-            android:inputType="textMultiLine"
-            android:lines="4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView10"
-            app:layout_constraintTop_toBottomOf="@+id/textView10" />
-
-        <Button
-            android:id="@+id/buttonSubmit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/layout_button"
-            android:clickable="true"
-            android:foreground="?attr/selectableItemBackgroundBorderless"
-            android:text="Kirim"
-            android:textColor="@color/colorWhite"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="@+id/etPengaduan"
-            app:layout_constraintTop_toBottomOf="@+id/etPengaduan" />
 
         <libs.mjn.fieldset.FieldSetView
             android:id="@+id/fieldsetview"
             android:layout_width="wrap_content"
-            android:layout_height="400dp"
+            android:layout_height="250dp"
+            android:padding="8dp"
+            app:fsv_legend="Data Pengaduan"
+            app:fsv_legendPosition="left"
+            app:fsv_legendSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="250dp">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kategori"
+                    android:textColor="@color/Black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Spinner
+                    android:id="@+id/spinnerKategori"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView"
+                    app:layout_constraintTop_toTopOf="@+id/textView" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:text="Kronologi"
+                    android:textColor="@color/Black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+                <EditText
+                    android:id="@+id/etPengaduan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="aduan"
+                    android:inputType="textMultiLine"
+                    android:lines="4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </libs.mjn.fieldset.FieldSetView>
+
+        <libs.mjn.fieldset.FieldSetView
+            android:id="@+id/fieldsetview2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
             android:padding="8dp"
             app:fsv_legend="Data Korban"
             app:fsv_legendPosition="left"
             app:fsv_legendSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/etPengaduan"
-            app:layout_constraintTop_toBottomOf="@+id/etPengaduan">
+            app:layout_constraintStart_toStartOf="@+id/fieldsetview"
+            app:layout_constraintTop_toBottomOf="@+id/fieldsetview">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -185,8 +192,8 @@
             android:background="@drawable/layout_button"
             android:text="Kirim"
             android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="@+id/fieldsetview"
-            app:layout_constraintTop_toBottomOf="@+id/fieldsetview"
+            app:layout_constraintStart_toStartOf="@+id/fieldsetview2"
+            app:layout_constraintTop_toBottomOf="@+id/fieldsetview2"
             app:lb_buttonColor="@color/colorPrimary"
             app:lb_isCircular="true"
             app:lb_isShadowEnable="false" />

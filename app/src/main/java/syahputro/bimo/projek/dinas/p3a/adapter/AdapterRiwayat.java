@@ -54,6 +54,9 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.Holder>{
             case "3":
                 color = context.getResources().getString(R.string.color_tidak_bisa_dihubungi);
                 break;
+            case "4":
+                color = context.getResources().getString(R.string.color_on_proses);
+                break;
         }
 
 

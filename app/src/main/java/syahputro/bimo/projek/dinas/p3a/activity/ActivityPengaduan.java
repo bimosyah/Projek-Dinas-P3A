@@ -176,7 +176,6 @@ public class ActivityPengaduan extends AppCompatActivity {
         spinner_kategori = findViewById(R.id.spinnerKategori);
         spinner_jenkel = findViewById(R.id.spinnerJenkel);
         spinner_kecamatan = findViewById(R.id.spinnerKecamatan);
-        btn_submit = findViewById(R.id.buttonSubmit);
         et_pengaduan = findViewById(R.id.etPengaduan);
         et_usia = findViewById(R.id.etUsia);
         et_desa = findViewById(R.id.etDesa);
