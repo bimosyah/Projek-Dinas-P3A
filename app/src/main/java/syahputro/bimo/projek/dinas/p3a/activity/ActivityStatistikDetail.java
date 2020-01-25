@@ -195,9 +195,9 @@ public class ActivityStatistikDetail extends AppCompatActivity {
                         List<DataItemUsia> dataItem = response.body().getData();
                         List<DataEntry> data_chart = new ArrayList<>();
                         for (GrafikItemUsia item : grafikItemUsia) {
-                            data_chart.add(new ValueDataEntry("Usia 19 - 24", Integer.parseInt(item.getUsia1())));
-                            data_chart.add(new ValueDataEntry("Usia 25 - 44", Integer.parseInt(item.getUsia2())));
-                            data_chart.add(new ValueDataEntry("Usia 45+", Integer.parseInt(item.getUsia3())));
+                            data_chart.add(new ValueDataEntry("Usia 0 - 18", Integer.parseInt(item.getUsia1())));
+                            data_chart.add(new ValueDataEntry("Usia 19 - 24", Integer.parseInt(item.getUsia2())));
+                            data_chart.add(new ValueDataEntry("Usia 25+", Integer.parseInt(item.getUsia3())));
                         }
 
                         TableLayout stk = findViewById(R.id.table_statistik);
@@ -208,19 +208,19 @@ public class ActivityStatistikDetail extends AppCompatActivity {
                         tv1.setBackground(getResources().getDrawable(R.drawable.table_header_border));
                         tbrow0.addView(tv1);
                         TextView tv2 = new TextView(getApplicationContext());
-                        tv2.setText(" 19 - 24 ");
+                        tv2.setText(" 0 - 18 ");
                         tv2.setTextColor(Color.BLACK);
                         tv2.setGravity(Gravity.CENTER);
                         tv2.setBackground(getResources().getDrawable(R.drawable.table_header_border));
                         tbrow0.addView(tv2);
                         TextView tv3 = new TextView(getApplicationContext());
-                        tv3.setText(" 25 - 45");
+                        tv3.setText(" 19 - 24");
                         tv3.setTextColor(Color.BLACK);
                         tv3.setGravity(Gravity.CENTER);
                         tv3.setBackground(getResources().getDrawable(R.drawable.table_header_border));
                         tbrow0.addView(tv3);
                         TextView tv4 = new TextView(getApplicationContext());
-                        tv4.setText(" 45+ ");
+                        tv4.setText(" 25+ ");
                         tv4.setTextColor(Color.BLACK);
                         tv4.setGravity(Gravity.CENTER);
                         tv4.setBackground(getResources().getDrawable(R.drawable.table_header_border));

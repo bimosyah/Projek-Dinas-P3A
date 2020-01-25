@@ -53,7 +53,7 @@ public class ActivityRiwayat extends AppCompatActivity {
             public void onResponse(Call<ResponseRiwayat> call, Response<ResponseRiwayat> response) {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
-                        if (response.body().getStatus().equals("0")) {
+                        if (!response.body().getTotal().equals("0")) {
                             List<Data> data_kategori = response.body().getData();
                             adapter = new AdapterRiwayat(data_kategori, getApplicationContext());
                             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
