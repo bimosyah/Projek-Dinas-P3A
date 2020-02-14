@@ -10,7 +10,7 @@ public class ResponseRiwayat {
     @SerializedName("message")
     private String message;
     @SerializedName("total")
-    private Integer total;
+    private int total;
     @SerializedName("data")
     private List<Data> data;
 

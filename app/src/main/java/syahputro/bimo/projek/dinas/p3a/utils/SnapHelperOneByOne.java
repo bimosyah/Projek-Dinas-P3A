@@ -33,10 +33,6 @@ public class SnapHelperOneByOne extends LinearSnapHelper {
             currentPosition = position1;
         }
 
-        if (currentPosition == RecyclerView.NO_POSITION) {
-            return RecyclerView.NO_POSITION;
-        }
-
         return currentPosition;
     }
 }

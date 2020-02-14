@@ -43,7 +43,7 @@ public class DialogPassword extends AppCompatDialogFragment {
 
         builder.setView(view)
                 .setTitle("Ubah Password")
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Batal", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                     }
