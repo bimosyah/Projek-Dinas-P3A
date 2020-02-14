@@ -113,7 +113,12 @@ public class ActivityPengaduan extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 loadingButton.showLoading();
-                savePengaduan();
+                if (!et_pengaduan.getText().toString().isEmpty() && !et_usia.getText().toString().isEmpty() && !et_desa.getText().toString().isEmpty()){
+                    savePengaduan();
+                }else {
+                    loadingButton.hideLoading();
+                    Toast.makeText(getApplicationContext(), "Isikan seluruh data ", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

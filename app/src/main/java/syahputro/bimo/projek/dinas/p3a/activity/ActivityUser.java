@@ -1,12 +1,16 @@
 package syahputro.bimo.projek.dinas.p3a.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
@@ -40,7 +44,7 @@ public class ActivityUser extends AppCompatActivity implements DialogPassword.Di
         gantiPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openDialog();
+                openDialog2();
             }
         });
     }
@@ -83,6 +87,45 @@ public class ActivityUser extends AppCompatActivity implements DialogPassword.Di
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    public void openDialog2(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(ActivityUser.this);
+        View view = getLayoutInflater().inflate(R.layout.layout_change_password, null);
+        final EditText edtpassword1 = view.findViewById(R.id.etPassword);
+        final EditText edtpassword2 = view.findViewById(R.id.etPasswordRetype);
+        builder.setPositiveButton("Ubah", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        builder.setNegativeButton("Batal", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        builder.setView(view);
+
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (edtpassword1.getText().toString().isEmpty() || edtpassword2.getText().toString().isEmpty()){
+                    Toast.makeText(ActivityUser.this, "Password kosong", Toast.LENGTH_LONG).show();
+                }else {
+                    if (edtpassword1.getText().toString().matches(edtpassword2.getText().toString())){
+                        update_password(edtpassword1.getText().toString());
+                        dialog.dismiss();
+                    }else {
+                        Toast.makeText(ActivityUser.this, "Password salah", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
     }
 
     public void openDialog() {
