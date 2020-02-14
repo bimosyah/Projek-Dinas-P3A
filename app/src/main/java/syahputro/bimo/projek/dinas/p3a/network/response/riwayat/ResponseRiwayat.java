@@ -30,7 +30,7 @@ public class ResponseRiwayat {
         this.message = message;
     }
 
-    public Integer getTotal() {
+    public int getTotal() {
         return total;
     }
 

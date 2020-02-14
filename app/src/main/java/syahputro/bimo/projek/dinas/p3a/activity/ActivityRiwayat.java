@@ -53,7 +53,12 @@ public class ActivityRiwayat extends AppCompatActivity {
             public void onResponse(Call<ResponseRiwayat> call, Response<ResponseRiwayat> response) {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
-                        if (!response.body().getTotal().equals("0")) {
+                        if (String.valueOf(response.body().getTotal()).equals("0")) {
+//                            recyclerView.setVisibility(View.GONE);
+//                            tv_riwayat.setVisibility(View.VISIBLE);
+                            Toast.makeText(getApplicationContext(),String.valueOf(response.body().getMessage()),Toast.LENGTH_LONG).show();
+                            loadingRiwayat.setVisibility(View.GONE);
+                        } else {
                             List<Data> data_kategori = response.body().getData();
                             adapter = new AdapterRiwayat(data_kategori, getApplicationContext());
                             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -61,11 +66,8 @@ public class ActivityRiwayat extends AppCompatActivity {
                             recyclerView.setItemAnimator(new DefaultItemAnimator());
                             recyclerView.setAdapter(adapter);
                             loadingRiwayat.setVisibility(View.GONE);
-                        } else {
-                            recyclerView.setVisibility(View.GONE);
-                            tv_riwayat.setVisibility(View.VISIBLE);
-                            loadingRiwayat.setVisibility(View.GONE);
                         }
+//                        Toast.makeText(getApplicationContext(),String.valueOf(response.body().getTotal()),Toast.LENGTH_LONG).show();
                     }
                 }
             }
