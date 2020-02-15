@@ -26,6 +26,7 @@ import com.kusu.loadingbutton.LoadingButton;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,17 +42,17 @@ import syahputro.bimo.projek.dinas.p3a.network.response.pengaduan.ResponsePengad
 import syahputro.bimo.projek.dinas.p3a.utils.Preference;
 
 public class ActivityPengaduan extends AppCompatActivity {
-    private ApiService service;
-    private Button btn_submit;
-    private Spinner spinner_kategori, spinner_jenkel, spinner_kecamatan;
+    private static final int REQUEST_LOCATION = 1;
     private final ArrayList<String> array_kategori = new ArrayList<String>();
     private final ArrayList<String> array_kecamatan = new ArrayList<String>();
     private final ArrayList<String> array_id_kecamatan = new ArrayList<String>();
     private final ArrayList<String> array_id_kategori = new ArrayList<String>();
+    private ApiService service;
+    private Button btn_submit;
+    private Spinner spinner_kategori, spinner_jenkel, spinner_kecamatan;
     private EditText et_pengaduan, et_desa, et_dusun, et_usia;
     private LocationManager locationManager;
-    private String longitude, latitude;
-    private static final int REQUEST_LOCATION = 1;
+    private String longitude = "", latitude = "";
     private LoadingButton loadingButton;
     private int id_kategori;
     private int id_kecamatan;
@@ -113,9 +114,9 @@ public class ActivityPengaduan extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 loadingButton.showLoading();
-                if (!et_pengaduan.getText().toString().isEmpty() && !et_usia.getText().toString().isEmpty() && !et_desa.getText().toString().isEmpty()){
+                if (!et_pengaduan.getText().toString().isEmpty() && !et_usia.getText().toString().isEmpty() && !et_desa.getText().toString().isEmpty()) {
                     savePengaduan();
-                }else {
+                } else {
                     loadingButton.hideLoading();
                     Toast.makeText(getApplicationContext(), "Isikan seluruh data ", Toast.LENGTH_LONG).show();
                 }
@@ -188,51 +189,61 @@ public class ActivityPengaduan extends AppCompatActivity {
         loadingButton = findViewById(R.id.loadingButton);
     }
 
-    private void savePengaduan() {
-        String id_user = Preference.getIdUser(getApplicationContext());
+    private void gpsCheck() {
         locationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
-        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+        if (!Objects.requireNonNull(locationManager).isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             onGPS();
         } else {
             getLocation();
         }
+    }
 
-        Call<ResponsePengaduan> pengaduan = service.pengaduan(
-                Integer.parseInt(id_user),
-                id_kategori,
-                et_pengaduan.getText().toString(),
-                jenkel,
-                Integer.parseInt(et_usia.getText().toString()),
-                id_kecamatan,
-                et_desa.getText().toString(),
-                et_dusun.getText().toString(),
-                latitude,
-                longitude);
-        pengaduan.enqueue(new Callback<ResponsePengaduan>() {
-            @Override
-            public void onResponse(Call<ResponsePengaduan> call, Response<ResponsePengaduan> response) {
-                if (response.isSuccessful()) {
-                    if (response.body() != null) {
-                        if (response.body().getStatus().equals("0")) {
-                            loadingButton.hideLoading();
-                            Intent intent = new Intent(ActivityPengaduan.this, ActivityRiwayat.class);
-                            intent.putExtra("EXIT", true);
-                            startActivity(intent);
-                            Toast.makeText(getApplicationContext(), "Pengaduan Tersimpan", Toast.LENGTH_LONG).show();
-                        } else if (response.body().getStatus().equals("1")) {
-                            loadingButton.hideLoading();
-                            Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();
+    private void savePengaduan() {
+        gpsCheck();
+
+        if (!latitude.equals("") && !longitude.equals("")) {
+            String id_user = Preference.getIdUser(getApplicationContext());
+            Call<ResponsePengaduan> pengaduan = service.pengaduan(
+                    Integer.parseInt(id_user),
+                    id_kategori,
+                    et_pengaduan.getText().toString(),
+                    jenkel,
+                    Integer.parseInt(et_usia.getText().toString()),
+                    id_kecamatan,
+                    et_desa.getText().toString(),
+                    et_dusun.getText().toString(),
+                    latitude,
+                    longitude);
+            pengaduan.enqueue(new Callback<ResponsePengaduan>() {
+                @Override
+                public void onResponse(Call<ResponsePengaduan> call, Response<ResponsePengaduan> response) {
+                    if (response.isSuccessful()) {
+                        if (response.body() != null) {
+                            if (response.body().getStatus().equals("0")) {
+                                loadingButton.hideLoading();
+                                Intent intent = new Intent(ActivityPengaduan.this, ActivityRiwayat.class);
+                                intent.putExtra("EXIT", true);
+                                startActivity(intent);
+                                Toast.makeText(getApplicationContext(), "Pengaduan Tersimpan", Toast.LENGTH_LONG).show();
+                            } else if (response.body().getStatus().equals("1")) {
+                                loadingButton.hideLoading();
+                                Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();
+                            }
                         }
                     }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<ResponsePengaduan> call, Throwable t) {
-                loadingButton.hideLoading();
-                Toast.makeText(getApplicationContext(), "error " + t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
+                @Override
+                public void onFailure(Call<ResponsePengaduan> call, Throwable t) {
+                    loadingButton.hideLoading();
+                    Toast.makeText(getApplicationContext(), "error " + t.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+        } else {
+            gpsCheck();
+            loadingButton.hideLoading();
+        }
+
     }
 
     private void setSpinner() {
