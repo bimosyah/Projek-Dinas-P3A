@@ -170,7 +170,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@drawable/layout_button"
-            android:text="@string/masuk"
+            android:text="@string/daftar"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="@+id/etPassword"
             app:layout_constraintTop_toBottomOf="@+id/etPassword"
