@@ -24,6 +24,7 @@ import androidx.core.app.ActivityCompat;
 import com.kusu.loadingbutton.LoadingButton;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,7 +38,7 @@ public class ActivityRegister extends AppCompatActivity {
     private static final int REQUEST_LOCATION = 1;
     Button btn_register;
     LocationManager locationManager;
-    String longitude, latitude;
+    String longitude = "", latitude = "";
     EditText etNama, etPassword, etNoTelp, etAlamat;
     EditText etTanggalLahir;
     ApiService service;
@@ -86,55 +87,72 @@ public class ActivityRegister extends AppCompatActivity {
         loadingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadingButton.showLoading();
-                String nama = etNama.getText().toString();
-                String password = etPassword.getText().toString();
-                String notelp = etNoTelp.getText().toString();
-                String alamat = etAlamat.getText().toString();
-                String tglLahir = etTanggalLahir.getText().toString();
-                if (nama.equals("") || password.equals("") || notelp.equals("") || alamat.equals("") || tglLahir.equals("")) {
-                    Toast.makeText(getApplicationContext(), "Semua form harus diisi", Toast.LENGTH_LONG).show();
-                    loadingButton.hideLoading();
-                } else {
-                    locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                    if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                        onGPS();
-                    } else {
-                        getLocation();
-                    }
+                gpsCheck();
 
-                    Call<ResponseRegister> registrasi = service.register(
-                            nama,
-                            password,
-                            notelp,
-                            alamat,
-                            tglLahir,
-                            latitude,
-                            longitude
-                    );
-                    registrasi.enqueue(new Callback<ResponseRegister>() {
-                        @Override
-                        public void onResponse(Call<ResponseRegister> call, Response<ResponseRegister> response) {
-                            if (response.isSuccessful()) { // check response suksess or no
-                                if (response.body() != null) {
-                                    loadingButton.hideLoading();
-                                    Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();
-                                    if (!response.body().getStatus().equals("1")) {
-                                        startActivity(new Intent(ActivityRegister.this, ActivityLogin.class));
+                if (!latitude.equals("") && !longitude.equals("")){
+                    loadingButton.showLoading();
+                    String nama = etNama.getText().toString();
+                    String password = etPassword.getText().toString();
+                    String notelp = etNoTelp.getText().toString();
+                    String alamat = etAlamat.getText().toString();
+                    String tglLahir = etTanggalLahir.getText().toString();
+                    if (nama.equals("") || password.equals("") || notelp.equals("") || alamat.equals("") || tglLahir.equals("")) {
+                        Toast.makeText(getApplicationContext(), "Semua form harus diisi", Toast.LENGTH_LONG).show();
+                        loadingButton.hideLoading();
+                    } else {
+                        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                            onGPS();
+                        } else {
+                            getLocation();
+                        }
+
+                        Call<ResponseRegister> registrasi = service.register(
+                                nama,
+                                password,
+                                notelp,
+                                alamat,
+                                tglLahir,
+                                latitude,
+                                longitude
+                        );
+                        registrasi.enqueue(new Callback<ResponseRegister>() {
+                            @Override
+                            public void onResponse(Call<ResponseRegister> call, Response<ResponseRegister> response) {
+                                if (response.isSuccessful()) { // check response suksess or no
+                                    if (response.body() != null) {
+                                        loadingButton.hideLoading();
+                                        Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();
+                                        if (!response.body().getStatus().equals("1")) {
+                                            startActivity(new Intent(ActivityRegister.this, ActivityLogin.class));
+                                        }
                                     }
                                 }
                             }
-                        }
 
-                        @Override
-                        public void onFailure(Call<ResponseRegister> call, Throwable t) {
-                            loadingButton.hideLoading();
-                            Toast.makeText(getApplicationContext(), "error " + t.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    });
+                            @Override
+                            public void onFailure(Call<ResponseRegister> call, Throwable t) {
+                                loadingButton.hideLoading();
+                                Toast.makeText(getApplicationContext(), "error " + t.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                }else {
+                    gpsCheck();
+                    loadingButton.hideLoading();
                 }
+
             }
         });
+    }
+
+    private void gpsCheck() {
+        locationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+        if (!Objects.requireNonNull(locationManager).isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            onGPS();
+        } else {
+            getLocation();
+        }
     }
 
     private void onGPS() {
