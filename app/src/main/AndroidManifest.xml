@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="syahputro.bimo.projek.dinas.p3a">
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
